@@ -151,7 +151,7 @@ public class GarageHndlr : MonoBehaviour
         Car currentCar = cars[currentIndex];
 
         // Check if the car is already purchased
-        if (PlayerPrefs.GetInt(currentCar.carID) == 0)
+        if (PlayerPrefs.GetInt(currentCar.carID) == 0)// && currentCar.carPrice<=)
         {
             // Simulate purchase logic (you can replace this with real currency handling)
             PlayerPrefs.SetInt(currentCar.carID, 1); // Mark as purchased
