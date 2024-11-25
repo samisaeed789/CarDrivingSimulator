@@ -141,6 +141,9 @@ public class GarageHndlr : MonoBehaviour
 
     public void ShowNextCar()
     {
+
+        if (MySoundManager.instance)
+            MySoundManager.instance.PlayButtonClickSound(1f);
         // Increment the index, loop back if needed
         currentIndex = (currentIndex + 1) % cars.Count;
         UpdateCarUI();
@@ -148,6 +151,9 @@ public class GarageHndlr : MonoBehaviour
     
     public void ShowPrevCar()
     {
+
+        if (MySoundManager.instance)
+            MySoundManager.instance.PlayButtonClickSound(1f);
         // Decrement the index, loop back if needed (handling negative index)
         currentIndex = (currentIndex - 1 + cars.Count) % cars.Count;
         UpdateCarUI();
@@ -155,6 +161,8 @@ public class GarageHndlr : MonoBehaviour
 
     public void PurchaseCar()
     {
+        if (MySoundManager.instance)
+            MySoundManager.instance.PlayButtonClickSound(1f);
         Car currentCar = GetCurrCar();
 
         // Check if the car is already purchased

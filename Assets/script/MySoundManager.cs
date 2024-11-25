@@ -193,8 +193,8 @@ public class MySoundManager : MonoBehaviour {
 
 	public void PlayButtonClickSound(float val)
 	{
-		soundValue = val;
-		Effectsource.volume = soundValue;
+		//soundValue = val;
+		//Effectsource.volume = soundValue;
 		Effectsource.PlayOneShot(click);
 	}
 	
@@ -273,8 +273,12 @@ public class MySoundManager : MonoBehaviour {
 		Effectsource.PlayOneShot(Splash);
 
 	}
-	
 
+    public void OnVolumeChanged(float value)
+    {
+        // Set the volume based on the slider's value
+        BGM.volume = value;
+    }
 
 
 

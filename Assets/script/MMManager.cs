@@ -36,7 +36,20 @@ public class MMManager : MonoBehaviour
     public GameObject cntrl_Arrow;
     public GameObject cntrl_Tilt;
 
-    
+    [Header("Music-Volume")]
+    public Image fillBar;
+    private float volume = 0.5f; // Initial volume (full volume)
+    private float volumeChangeAmount = 0.1f; // How much the volume changes with each 
+
+    [Header("Sound-Volume")]
+    public Image soundfillBar; 
+    private float soundvolume = 0.5f; // Initial volume (full volume)
+
+    [Header("Sound-Volume")]
+    public Image BothfillBar;
+
+
+
 
 
 
@@ -64,24 +77,121 @@ public class MMManager : MonoBehaviour
     [Header("Temp")]
     public bool GiveCoins;
 
-
+    MySoundManager soundmng;
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
-        PlayerPrefs.SetInt("UnlockedLevels", 5);
+
+        //PlayerPrefs.SetInt("UnlockedLevels", 5);
 
         if (PlayerPrefs.GetInt("UnlockedLevels") == 0)
         {
             PlayerPrefs.SetInt("UnlockedLevels", 1);
         }
         CheckUnlocked();
+
+        soundmng = MySoundManager.instance;
+        UpdateVolume();
+
+
     }
+
+    #region volume
+
+    public void DecreaseVolume()
+    {
+        if (volume > 0f) // Ensure the volume doesn't go below 0
+        {
+            volume -= volumeChangeAmount;
+            if (volume < 0f) volume = 0f; // Cap the volume at 0
+            UpdateVolume();
+        }
+    } 
+    public void DecreaseBVolume()
+    {
+        DecreaseVolume();
+        DecreaseSVolume();
+    }
+    public void iNcreaseBVolume()
+    {
+        IncreaseVolume();
+        IncreaseSVolume();
+    }
+    public void IncreaseVolume()
+    {
+        
+        if (volume < 1f) // Ensure the volume doesn't exceed the maximum of 1
+        {
+            volume += volumeChangeAmount;
+            if (volume > 1f) volume = 1f; // Cap the volume at 1
+            UpdateVolume();
+        }
+
+    }
+
+    public void DecreaseSVolume()
+    {
+
+      
+
+        if (soundvolume > 0f) // Ensure the volume doesn't go below 0
+        {
+            soundvolume -= volumeChangeAmount;
+            if (soundvolume < 0f) soundvolume = 0f; // Cap the volume at 0
+            UpdateVolume();
+        }
+    }
+
+    public void IncreaseSVolume()
+    {
+
+       
+
+        if (soundvolume < 1f) // Ensure the volume doesn't exceed the maximum of 1
+        {
+            soundvolume += volumeChangeAmount;
+            if (soundvolume > 1f) soundvolume = 1f; // Cap the volume at 1
+            UpdateVolume();
+        }
+
+    }
+
+    void UpdateVolume()
+    {
+        soundmng.BGM.volume = volume; // Set the global volume
+        soundmng.Effectsource.volume = soundvolume; // Set the global volume
+
+        // Update the fill bar based on the current volume
+        UpdateFillBar();
+
+      
+    }
+    
+    void UpdateFillBar()
+    {
+        if (fillBar != null)
+        {
+            fillBar.fillAmount = volume; // The fill amount should match the volume level (0 to 1)
+        }
+        if (soundfillBar != null)
+        {
+            soundfillBar.fillAmount = soundvolume; // The fill amount should match the volume level (0 to 1)
+        }
+        
+        if (BothfillBar != null)
+        {
+            BothfillBar.fillAmount = soundvolume; // The fill amount should match the volume level (0 to 1)
+        }
+
+        if (MySoundManager.instance)
+            MySoundManager.instance.PlayButtonClickSound(1f);
+    }
+    #endregion
 
     private void Start()
     {
-        //   if (MySoundManager.instance)
-        // MySoundManager.instance.SetMainMenuMusic(true, 0.5f);
+     
 
         if (GiveCoins)
             ValStorage.SetCoins(5000);
@@ -93,63 +203,6 @@ public class MMManager : MonoBehaviour
 
 
     }
-
-    public void GoToModeSelection()
-    {
-       // if (MySoundManager.instance)
-         //   MySoundManager.instance.PlayButtonClickSound(1f);
-
-        StartCoroutine(LoadPanel("ModeSelection"));
-    }
-
-
-
-
-    public void GoToLevelSelection()
-    {
-     //   if (MySoundManager.instance)
-          //  MySoundManager.instance.PlayButtonClickSound(1f);
-        StartCoroutine(LoadPanel("LevelSelection"));
-    }
-
-    public void GoToMainMenu()
-    {
-        //if (MySoundManager.instance)
-       //     MySoundManager.instance.PlayButtonClickSound(1f);
-        StartCoroutine(LoadPanel("MainMenu"));
-    }
-
-
-
-
-    IEnumerator LoadPanel(string sceneName)
-    {
-        mainMenuPanel.SetActive(false);
-        levelSelectionPanel.SetActive(false);
-        modeSelectionPanel.SetActive(false);
-        loadingScreenPanel.SetActive(true);
-
-        yield return new WaitForSeconds(2f);
-        if (sceneName == "MainMenu")
-        {
-
-        }
-        if (sceneName == "LevelSelection")
-        {
-            levelSelectionPanel.SetActive(true);
-        }
-
-        if (sceneName == "ModeSelection")
-        {
-            modeSelectionPanel.SetActive(true);
-        }
-
-        loadingScreenPanel.SetActive(false);
-    }
-   
-
-
-
 
     public void BackBtn(string S) 
     {
@@ -205,13 +258,15 @@ public class MMManager : MonoBehaviour
     }
 
 
+    public void OnVolumeChanged(float value)
+    {
+        if (MySoundManager.instance)
+            MySoundManager.instance.OnVolumeChanged(value);
+    }
 
 
     public void LoadNxtScene()
     {
-
-        // if (MySoundManager.instance)
-        //  MySoundManager.instance.PlayButtonClickSound(1f);
         CarsCont.SetActive(false);
         PlayerPrefs.SetString("SelectedCar", garage.GetCurrCarId());
         StartCoroutine(LoadAsyncScene("Gameplay"));
@@ -353,61 +408,39 @@ public class MMManager : MonoBehaviour
         }
  
     }
+
     public void SettngsONOFF(bool State) 
     {
+        if (MySoundManager.instance)
+            MySoundManager.instance.PlayButtonClickSound(1f);
+
         SettingsPanel.SetActive(State);
     }
 
-    //public void BackBtn()
-    //{
-
-    //    if (mainMenuPanel.activeSelf)
-    //    {
-
-    //        exitPanel.SetActive(true);
-    //    }
-
-    //    if (modeSelectionPanel.activeSelf)
-    //    {
-    //        modeSelectionPanel.SetActive(false);
-    //        mainMenuPanel.SetActive(true);
-    //    }
-
-    //    if (levelSelectionPanel.activeSelf)
-    //    {
-    //        levelSelectionPanel.SetActive(false);
-    //        modeSelectionPanel.SetActive(true);
-    //    }
-    //}
-
-
-
-
-
-
+   
 
 
     #region Settings
     public void sttngstab(string S)
     {
+        
         if (S == "SFX")
         {
             SettngsActivity(isSfx: true);
-            //  SettngsBtnActivity(isSfx: true);
+           
         }
         if (S == "Graphics")
         {
             SettngsActivity(isGraphic: true);
-            //  SettngsBtnActivity(isGraphic: true);
-
+           
 
         }
         if (S == "Control")
         {
             SettngsActivity(isControl: true);
-            //   SettngsBtnActivity(isControl: true);
-            //
         }
+        if (MySoundManager.instance)
+            MySoundManager.instance.PlayButtonClickSound(1f);
     }
 
 
@@ -453,6 +486,8 @@ public class MMManager : MonoBehaviour
         {
             GrphicsActivity(isLow: true);
         }
+        if (MySoundManager.instance)
+            MySoundManager.instance.PlayButtonClickSound(1f);
     }
 
     public void GrphicsActivity(bool isLow = false, bool isMed = false, bool isHigh = false)
@@ -493,6 +528,8 @@ public class MMManager : MonoBehaviour
         {
             ControlsActivity(isTilt:true);
         }
+        if (MySoundManager.instance)
+            MySoundManager.instance.PlayButtonClickSound(1f);
     }
 
     public void ControlsActivity(bool isSteer = false, bool isArrow = false, bool isTilt = false)
