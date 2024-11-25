@@ -175,6 +175,8 @@ public class MMManager : MonoBehaviour
         {
             PanelActivity(Garage: true);
         }
+
+        MySoundManager.instance.PlayButtonClickSound(1);
     }
 
     void Disablehildren()
