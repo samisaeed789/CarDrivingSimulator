@@ -175,8 +175,6 @@ public class MMManager : MonoBehaviour
         {
             PanelActivity(Garage: true);
         }
-      
-
     }
 
     void Disablehildren()
@@ -295,25 +293,6 @@ public class MMManager : MonoBehaviour
         }
 
     }
-
-    //public void SettngsBtnActivity(bool isSfx = false, bool isGraphic = false, bool isControl = false)
-    //{
-        
-    //    if (sfx_active)
-    //    {
-           
-    //    }
-    //    if (grphc_active)
-    //    {
-            
-    //    }
-    //    if (cntrl_active)
-    //    {
-    //    }
-
-    //}
-
-
 
    
    
