@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class MMManager : MonoBehaviour
 {
     public static MMManager Instance;
-
+    [Header("GameObjects/Panels")]
     public GameObject mainMenuPanel;
     public GameObject modeSelectionPanel;
     public GameObject levelSelectionPanel;
@@ -15,25 +15,61 @@ public class MMManager : MonoBehaviour
     public GameObject exitPanel;
     public GameObject SettingsPanel;
     public GameObject GaragePanel;
+    public GameObject CarsCont;
 
 
+    [Header("Settings")]
+    public GameObject sfx_pnl;
+    public GameObject cntrl_pnl;
+    public GameObject grphc_pnl;
+    
+    public GameObject sfx_active;
+    public GameObject cntrl_active;
+    public GameObject grphc_active;
+
+    public GameObject grphc_High;
+    public GameObject grphc_Med;
+    public GameObject grphc_Low;
+
+    
+    public GameObject cntrl_Steering;
+    public GameObject cntrl_Arrow;
+    public GameObject cntrl_Tilt;
+
+    
+
+
+
+
+    [Header("Texts")]
+    public Text[] Coins;
+    public Text percentageText;
+
+
+
+    [Header("OtherClasses")]
+    public GarageHndlr garage;
+
+    [Header("OtherClasses")]
     public Button[] LvlCards;
 
 
     private AsyncOperation async;
     public Image loadingBar;
 
-    public Text[] Coins;
-    public Text percentageText;
 
     public static int Levelno;
+
+
+    [Header("Temp")]
+    public bool GiveCoins;
 
 
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
-
+        PlayerPrefs.SetInt("UnlockedLevels", 5);
 
         if (PlayerPrefs.GetInt("UnlockedLevels") == 0)
         {
@@ -44,13 +80,18 @@ public class MMManager : MonoBehaviour
 
     private void Start()
     {
-     //   if (MySoundManager.instance)
-           // MySoundManager.instance.SetMainMenuMusic(true, 0.5f);
+        //   if (MySoundManager.instance)
+        // MySoundManager.instance.SetMainMenuMusic(true, 0.5f);
+
+        if (GiveCoins)
+            ValStorage.SetCoins(5000);
 
         SetCoins();
         Time.timeScale = 1f;
 
         Application.targetFrameRate = 120;
+
+
     }
 
     public void GoToModeSelection()
@@ -109,39 +150,95 @@ public class MMManager : MonoBehaviour
 
 
 
-    public void LevelSel(int i) 
+
+    public void BackBtn(string S) 
+    {
+        if (S == "ModeSel")
+        {
+            PanelActivity(ModeSel: true);
+        }
+        if (S == "LvlSel")
+        {
+            Disablehildren();
+            PanelActivity(LvlSel: true);
+
+        }
+        if (S == "Exit")
+        {
+            PanelActivity(ExitPnl: true);
+        }
+        if (S == "MM")
+        {
+            PanelActivity(MM: true);
+        }
+        if (S == "Garage")
+        {
+            PanelActivity(Garage: true);
+        }
+      
+
+    }
+
+    void Disablehildren()
+    {
+        foreach (Transform child in CarsCont.transform)
+        {
+            // Check if the child game object is active/enabled
+            if (child.gameObject.activeSelf)
+            {
+                // Disable the child game object
+                child.gameObject.SetActive(false);
+            }
+        }
+    }
+    public void SelMode(string Mode) 
+    {
+        ValStorage.modeSel = Mode;
+        BackBtn("LvlSel");
+    }
+
+
+    public void SelLevel(int i)
+    {
+        ValStorage.selLevel = i;
+        BackBtn("Garage");
+    }
+
+
+
+
+    public void LoadNxtScene()
     {
 
-       // if (MySoundManager.instance)
-          //  MySoundManager.instance.PlayButtonClickSound(1f);
-
-
-    
+        // if (MySoundManager.instance)
+        //  MySoundManager.instance.PlayButtonClickSound(1f);
+        CarsCont.SetActive(false);
+        PlayerPrefs.SetString("SelectedCar", garage.GetCurrCarId());
         StartCoroutine(LoadAsyncScene("Gameplay"));
     }
 
 
     IEnumerator LoadAsyncScene(string sceneName)
     {
-        PanelActivity(IsLoading:true); // Assuming this method hides/unhides panels
+        PanelActivity(IsLoading: true); // Assuming this method hides/unhides panels
 
 
         //// Start loading the scene asynchronously
         async = SceneManager.LoadSceneAsync(sceneName);
         async.allowSceneActivation = false; // Prevent the scene from activating immediately
-        
-        
+
+
 
         //// Loop while the scene is loading
-         while (!async.isDone)
-         {
-       
+        while (!async.isDone)
+        {
+
             percentageText.text = Mathf.FloorToInt(loadingBar.fillAmount * 100) + "%";
 
 
 
             // When the async load reaches 90%, show 100% and allow the scene to activate
-            if (async.progress >= 0.9f && loadingBar.fillAmount>=1f)
+            if (async.progress >= 0.9f && loadingBar.fillAmount >= 1f)
             {
                 // Ensure the loading bar is filled to 100% after 5 seconds
                 loadingBar.fillAmount = 1f;  // Fill the bar to 100%
@@ -152,35 +249,10 @@ public class MMManager : MonoBehaviour
             }
 
             yield return null; // Wait for the next frame
-         }
+        }
 
-       
+
     }
-
-
-    public void BackBtn(string S) 
-    {
-
-        Debug.Log("asdasd"+S);
-        if (S == "ModeSel")
-        {
-            PanelActivity(ModeSel: true);
-        }
-        if (S == "LvlSel")
-        {
-            PanelActivity(LvlSel: true);
-        }
-        if (S == "Exit")
-        {
-            PanelActivity(ExitPnl: true);
-        }
-        if (S == "MM")
-        {
-            PanelActivity(MM: true);
-        }
-    }
-
-
 
 
 
@@ -224,9 +296,31 @@ public class MMManager : MonoBehaviour
 
     }
 
-    void SetCoins() 
+    //public void SettngsBtnActivity(bool isSfx = false, bool isGraphic = false, bool isControl = false)
+    //{
+        
+    //    if (sfx_active)
+    //    {
+           
+    //    }
+    //    if (grphc_active)
+    //    {
+            
+    //    }
+    //    if (cntrl_active)
+    //    {
+    //    }
+
+    //}
+
+
+
+   
+   
+
+    public void SetCoins() 
     {
-        foreach (Text txt in Coins) 
+        foreach (Text txt in Coins)
         {
             txt.text = PlayerPrefs.GetInt("Coins").ToString();
         }
@@ -283,26 +377,171 @@ public class MMManager : MonoBehaviour
         SettingsPanel.SetActive(State);
     }
 
-    public void BackBtn()
+    //public void BackBtn()
+    //{
+
+    //    if (mainMenuPanel.activeSelf)
+    //    {
+
+    //        exitPanel.SetActive(true);
+    //    }
+
+    //    if (modeSelectionPanel.activeSelf)
+    //    {
+    //        modeSelectionPanel.SetActive(false);
+    //        mainMenuPanel.SetActive(true);
+    //    }
+
+    //    if (levelSelectionPanel.activeSelf)
+    //    {
+    //        levelSelectionPanel.SetActive(false);
+    //        modeSelectionPanel.SetActive(true);
+    //    }
+    //}
+
+
+
+
+
+
+
+
+    #region Settings
+    public void sttngstab(string S)
     {
-
-        if (mainMenuPanel.activeSelf)
+        if (S == "SFX")
         {
-
-            exitPanel.SetActive(true);
+            SettngsActivity(isSfx: true);
+            //  SettngsBtnActivity(isSfx: true);
         }
-
-        if (modeSelectionPanel.activeSelf)
+        if (S == "Graphics")
         {
-            modeSelectionPanel.SetActive(false);
-            mainMenuPanel.SetActive(true);
+            SettngsActivity(isGraphic: true);
+            //  SettngsBtnActivity(isGraphic: true);
+
+
         }
-
-        if (levelSelectionPanel.activeSelf)
+        if (S == "Control")
         {
-            levelSelectionPanel.SetActive(false);
-            modeSelectionPanel.SetActive(true);
+            SettngsActivity(isControl: true);
+            //   SettngsBtnActivity(isControl: true);
+            //
         }
     }
+
+
+
+    public void SettngsActivity(bool isSfx = false, bool isGraphic = false, bool isControl = false)
+    {
+        if (sfx_pnl)
+        {
+            sfx_pnl.SetActive(isSfx);
+            sfx_active.SetActive(isSfx);
+        }
+        if (grphc_pnl)
+        {
+            grphc_pnl.SetActive(isGraphic);
+            grphc_active.SetActive(isGraphic);
+        }
+        if (cntrl_pnl)
+        {
+            cntrl_pnl.SetActive(isControl);
+            cntrl_active.SetActive(isControl);
+
+        }
+    }
+
+
+
+    #region Graphics
+
+
+    public void SetGraphics(string s)
+    {
+        if (s == "High")
+        {
+            GrphicsActivity(isHigh: true);
+        }
+
+        if (s == "Med")
+        {
+            GrphicsActivity(isMed: true);
+        }
+
+        if (s == "Low")
+        {
+            GrphicsActivity(isLow: true);
+        }
+    }
+
+    public void GrphicsActivity(bool isLow = false, bool isMed = false, bool isHigh = false)
+    {
+        if (grphc_Low)
+        {
+            grphc_Low.SetActive(isLow);
+        }
+        if (grphc_Med)
+        {
+            grphc_Med.SetActive(isMed);
+        }
+        if (grphc_High)
+        {
+            grphc_High.SetActive(isHigh);
+        }
+    }
+
+
+    #endregion
+
+    #region Controls
+
+
+    public void SetControls(string s)
+    {
+        if (s == "Steer")
+        {
+            ControlsActivity(isSteer: true); ;
+        }
+
+        if (s == "Arrow")
+        {
+            ControlsActivity(isArrow:true);
+        }
+
+        if (s == "Tilt")
+        {
+            ControlsActivity(isTilt:true);
+        }
+    }
+
+    public void ControlsActivity(bool isSteer = false, bool isArrow = false, bool isTilt = false)
+    {
+        if (cntrl_Steering)
+        {
+            cntrl_Steering.SetActive(isSteer);
+        }
+        if (cntrl_Arrow)
+        {
+            cntrl_Arrow.SetActive(isArrow);
+        }
+        if (cntrl_Tilt)
+        {
+            cntrl_Tilt.SetActive(isTilt);
+        }
+    }
+
+
+    #endregion
+
+
+
+
+    #endregion
+
+
+
+
+
+
 
 }

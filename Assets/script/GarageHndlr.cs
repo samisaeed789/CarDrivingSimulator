@@ -17,7 +17,7 @@ public class GarageHndlr : MonoBehaviour
         public float Brake;
         public float Handling;
         public float Durabilty;
-        public float carPrice;
+        public int carPrice;
     }
 
 
@@ -27,6 +27,10 @@ public class GarageHndlr : MonoBehaviour
     public GameObject purchaseButton;
     public GameObject NextBtn;
     public GameObject Locked;
+    public GameObject purchasesuccess;
+    public GameObject NotenoughCoin;
+    public Button arrownxt;
+    public Button arrowbck;
     private int currentIndex = 0;
 
 
@@ -38,12 +42,15 @@ public class GarageHndlr : MonoBehaviour
     public Image Handling;
     public Image Durabilty;
 
+
+    private void OnEnable()
+    {
+        UpdateCarUI();
+
+    }
     private void Start()
     {
         InitializeCarData();
-        UpdateCarUI();
-       // nextButton.onClick.AddListener(ShowNextCar);
-      //  purchaseButton.onClick.AddListener(PurchaseCar);
     }
 
     private void InitializeCarData()
@@ -69,11 +76,11 @@ public class GarageHndlr : MonoBehaviour
         }
 
         // Show current car model
-        Car currentCar = cars[currentIndex];
+        Car currentCar = GetCurrCar();
         currentCar.carModel.SetActive(true);
 
-        
-  
+
+
 
         // Check if the car is purchased
         bool isPurchased = PlayerPrefs.GetInt(currentCar.carID) == 1;
@@ -84,6 +91,8 @@ public class GarageHndlr : MonoBehaviour
             carPrice.SetActive(false);
             purchaseButton.SetActive(false);
             NextBtn.SetActive(true);
+            carPrice.SetActive(false);
+
         }
         else
         {
@@ -135,28 +144,47 @@ public class GarageHndlr : MonoBehaviour
         // Increment the index, loop back if needed
         currentIndex = (currentIndex + 1) % cars.Count;
         UpdateCarUI();
-
-        
     }
     
     public void ShowPrevCar()
     {
-        // Increment the index, loop back if needed
-        currentIndex = (currentIndex - 1) % cars.Count;
+        // Decrement the index, loop back if needed (handling negative index)
+        currentIndex = (currentIndex - 1 + cars.Count) % cars.Count;
         UpdateCarUI();
     }
 
-    private void PurchaseCar()
+    public void PurchaseCar()
     {
-        Car currentCar = cars[currentIndex];
+        Car currentCar = GetCurrCar();
 
         // Check if the car is already purchased
-        if (PlayerPrefs.GetInt(currentCar.carID) == 0)// && currentCar.carPrice<=)
+        if (PlayerPrefs.GetInt(currentCar.carID) == 0 && currentCar.carPrice<=ValStorage.GetCoins())
         {
+            purchasesuccess.SetActive(true);
+
+            ValStorage.SetCoins(ValStorage.GetCoins()- currentCar.carPrice);
+            MMManager.Instance.SetCoins();
+
             // Simulate purchase logic (you can replace this with real currency handling)
             PlayerPrefs.SetInt(currentCar.carID, 1); // Mark as purchased
             PlayerPrefs.Save(); // Save PlayerPrefs data
             UpdateCarUI();
         }
+        else 
+        {
+            NotenoughCoin.SetActive(true);
+        }
+    }
+
+    public Car GetCurrCar() 
+    {
+        Car currentCar = cars[currentIndex];
+        return currentCar;
+    }
+
+    public string GetCurrCarId()
+    {
+        Car currCar = GetCurrCar();
+        return currCar.carID;
     }
 }
