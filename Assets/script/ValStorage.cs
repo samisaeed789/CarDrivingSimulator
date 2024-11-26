@@ -6,6 +6,7 @@ public static class ValStorage
 {
     public static string modeSel;
     public static int selLevel;
+    public static int TrnsparVal;
 
    public static int GetCoins() 
    {
@@ -14,6 +15,73 @@ public static class ValStorage
 
     public static void SetCoins(int coin)
     {
+
         PlayerPrefs.SetInt("Coins",coin);
     }
+
+    public static void SetTransparency(int val) 
+    {
+       
+        PlayerPrefs.SetInt("TransparentVal",val);
+    }
+
+    public static int GetTransparency()
+    {
+        if (!PlayerPrefs.HasKey("TransparentVal"))
+        {
+            PlayerPrefs.SetInt("TransparentVal", 5);
+        }
+        return  PlayerPrefs.GetInt("TransparentVal");
+    }
+    
+    public static float GetSVolume()
+    {
+        if (!PlayerPrefs.HasKey("SoundVol"))
+        {
+            PlayerPrefs.SetFloat("SoundVol", 0.5f);
+        }
+        return  PlayerPrefs.GetFloat("SoundVol");
+    }
+    
+    public static void SetSVolume(float val)
+    {
+
+        PlayerPrefs.SetFloat("SoundVol",val);
+    }
+    public static float GetMVolume()
+    {
+
+        if (!PlayerPrefs.HasKey("MusicVol"))
+        {
+            PlayerPrefs.SetFloat("MusicVol", 0.5f);
+        }
+        return  PlayerPrefs.GetFloat("MusicVol");
+    }
+    
+    public static void SetMVolume(float val)
+    {
+         PlayerPrefs.SetFloat("MusicVol",val);
+    }
+    
+    public static int GetControls()
+    {
+        return  PlayerPrefs.GetInt("Controls");
+    }
+   
+    public static void SetControls(int val)
+    {
+        PlayerPrefs.SetInt("Controls", val);
+    }
+    public static int GetGQuality()
+    {
+        return  PlayerPrefs.GetInt("GQuality");
+    }
+   
+    public static void SetGQuality(int val)
+    {
+        PlayerPrefs.SetInt("GQuality", val);
+    }
+
+
+
 }

@@ -1731,6 +1731,10 @@ GameObject:
   - component: {fileID: 199284643}
   - component: {fileID: 199284645}
   - component: {fileID: 199284644}
+  - component: {fileID: 199284646}
+  - component: {fileID: 199284649}
+  - component: {fileID: 199284648}
+  - component: {fileID: 199284647}
   m_Layer: 5
   m_Name: 'grphc-scrn '
   m_TagString: Untagged
@@ -1798,6 +1802,283 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 199284642}
   m_CullTransparentMesh: 1
+--- !u!114 &199284646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199284642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce038cdb30583464a80edda1c76a515a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_playOnEnableAMD:
+    m_enabled: 1
+    m_animType: 0
+    m_delay: 0
+  m_startPoseAMD:
+    m_enabled: 1
+    m_animType: 0
+    m_delay: 0
+  m_afterIntroAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_afterLoopAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_onPointerEnterAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_onPointerExitAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_timeMode: 1
+  m_animationSetups:
+  - m_animationStages:
+    - m_animationInstances:
+      - m_targetObjects:
+        - {fileID: 0}
+        m_animationSteps: []
+        m_targetStepIndexes: 00000000
+        m_uiAnimatorSubModule: {fileID: 0}
+        m_startDelay: 0
+        m_inspectorToggleState: 1
+      - m_targetObjects:
+        - {fileID: 452426145}
+        m_animationSteps:
+        - {fileID: 199284648}
+        m_targetStepIndexes: 01000000
+        m_uiAnimatorSubModule: {fileID: 0}
+        m_startDelay: 0
+        m_inspectorToggleState: 1
+      - m_targetObjects:
+        - {fileID: 575075103}
+        m_animationSteps:
+        - {fileID: 199284647}
+        m_targetStepIndexes: 01000000
+        m_uiAnimatorSubModule: {fileID: 0}
+        m_startDelay: 0
+        m_inspectorToggleState: 1
+      - m_targetObjects:
+        - {fileID: 2062303130}
+        m_animationSteps:
+        - {fileID: 199284649}
+        m_targetStepIndexes: 01000000
+        m_uiAnimatorSubModule: {fileID: 0}
+        m_startDelay: 0
+        m_inspectorToggleState: 1
+      m_startDelay: 0
+      m_endDelay: 0
+      m_inspectorToggleState: 1
+    m_onStartAction:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onFinishedAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - m_animationStages:
+    - m_animationInstances: []
+      m_startDelay: 0
+      m_endDelay: 0
+      m_inspectorToggleState: 1
+    m_onStartAction:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onFinishedAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - m_animationStages:
+    - m_animationInstances: []
+      m_startDelay: 0
+      m_endDelay: 0
+      m_inspectorToggleState: 1
+    m_onStartAction:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onFinishedAction:
+      m_PersistentCalls:
+        m_Calls: []
+  m_timer: 0.34218022
+  m_currentAnimSetupIndex: 0
+  m_audioSourceContainer: {fileID: 0}
+  m_audioSources: []
+  m_playLoopAnimInfinitely: 1
+  m_numLoopIterations: 0
+  m_showExtraSettings: 0
+--- !u!114 &199284647
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199284642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7ce344bdbf44c759e49900e2c1f754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_delay:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0
+    m_to: 0
+    m_masterValues: []
+    m_numTargets: 1
+  m_duration:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.1
+    m_to: 1
+    m_masterValues:
+    - 1
+    m_numTargets: 1
+  m_easing: 0
+  m_audioClipDatas: []
+  m_numTargets: 1
+  m_waitForPreviousComplete: 0
+  m_grabbedInitialDefaultStateData: 1
+  m_inspectorToggleState: 1
+  m_position:
+    m_type: 0
+    m_offsettingEnabled: 1
+    m_from: {x: -35.8, y: -180.5, z: 0}
+    m_to: {x: -35.8, y: 123, z: 0}
+    m_masterValues:
+    - {x: -35.8, y: 123, z: 0}
+  m_scale:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: 1, y: 1, z: 1}
+    m_to: {x: 1, y: 1, z: 1}
+    m_masterValues:
+    - {x: 1, y: 1, z: 1}
+  m_rotation:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: -0, y: 0, z: 0}
+    m_to: {x: -0, y: 0, z: 0}
+    m_masterValues:
+    - {x: -0, y: 0, z: 0}
+  m_targetTransforms:
+  - {fileID: 575075104}
+--- !u!114 &199284648
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199284642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7ce344bdbf44c759e49900e2c1f754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_delay:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0
+    m_to: 0
+    m_masterValues: []
+    m_numTargets: 1
+  m_duration:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.1
+    m_to: 1
+    m_masterValues:
+    - 1
+    m_numTargets: 1
+  m_easing: 0
+  m_audioClipDatas: []
+  m_numTargets: 1
+  m_waitForPreviousComplete: 0
+  m_grabbedInitialDefaultStateData: 1
+  m_inspectorToggleState: 1
+  m_position:
+    m_type: 0
+    m_offsettingEnabled: 1
+    m_from: {x: -494.71, y: -706.96, z: 0}
+    m_to: {x: -203.5, y: -123, z: 0}
+    m_masterValues:
+    - {x: -203.5, y: -123, z: 0}
+  m_scale:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: 1, y: 1, z: 1}
+    m_to: {x: 1, y: 1, z: 1}
+    m_masterValues:
+    - {x: 1, y: 1, z: 1}
+  m_rotation:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: -0, y: 0, z: 0}
+    m_to: {x: -0, y: 0, z: 0}
+    m_masterValues:
+    - {x: -0, y: 0, z: 0}
+  m_targetTransforms:
+  - {fileID: 452426146}
+--- !u!114 &199284649
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199284642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7ce344bdbf44c759e49900e2c1f754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_delay:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0
+    m_to: 0
+    m_masterValues: []
+    m_numTargets: 1
+  m_duration:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.2
+    m_to: 1
+    m_masterValues:
+    - 1
+    m_numTargets: 1
+  m_easing: 0
+  m_audioClipDatas: []
+  m_numTargets: 1
+  m_waitForPreviousComplete: 0
+  m_grabbedInitialDefaultStateData: 1
+  m_inspectorToggleState: 1
+  m_position:
+    m_type: 0
+    m_offsettingEnabled: 1
+    m_from: {x: 421.91998, y: -713.25, z: 0}
+    m_to: {x: 203.5, y: -123, z: 0}
+    m_masterValues:
+    - {x: 203.5, y: -123, z: 0}
+  m_scale:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: 1, y: 1, z: 1}
+    m_to: {x: 1, y: 1, z: 1}
+    m_masterValues:
+    - {x: 1, y: 1, z: 1}
+  m_rotation:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: -0, y: 0, z: 0}
+    m_to: {x: -0, y: 0, z: 0}
+    m_masterValues:
+    - {x: -0, y: 0, z: 0}
+  m_targetTransforms:
+  - {fileID: 2062303131}
 --- !u!1 &213554794
 GameObject:
   m_ObjectHideFlags: 0
@@ -1966,6 +2247,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Arrow
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2084883760}
+        m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
+        m_MethodName: SetControlVal
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &223454161
@@ -5494,6 +5787,18 @@ MonoBehaviour:
           m_StringArgument: Med
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2084883760}
+        m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
+        m_MethodName: SetQuality
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &452426148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5919,7 +6224,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 490963308}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2084883760}
+        m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
+        m_MethodName: IncreaseTransparency
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &490963308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6126,7 +6443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &498733343
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7932,6 +8249,18 @@ MonoBehaviour:
           m_StringArgument: High
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2084883760}
+        m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
+        m_MethodName: SetQuality
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &575075106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9131,7 +9460,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2084883760}
         m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
-        m_MethodName: DecreaseVolume
+        m_MethodName: DecreaseMusicVolume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9734,7 +10063,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2084883760}
         m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
-        m_MethodName: DecreaseSVolume
+        m_MethodName: DecreaseSoundVolume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10150,6 +10479,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Tilt
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2084883760}
+        m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
+        m_MethodName: SetControlVal
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &817145074
@@ -10856,7 +11197,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a3ae3068865b0f443b581a6aa2917f6a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84edfa8421387fc42ab28847dd9f85ee, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10885,13 +11226,17 @@ GameObject:
   - component: {fileID: 917604987}
   - component: {fileID: 917604989}
   - component: {fileID: 917604988}
+  - component: {fileID: 917604990}
+  - component: {fileID: 917604993}
+  - component: {fileID: 917604992}
+  - component: {fileID: 917604991}
   m_Layer: 5
   m_Name: 'ctrl-scrn '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &917604987
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10952,6 +11297,219 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 917604986}
   m_CullTransparentMesh: 1
+--- !u!114 &917604990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917604986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce038cdb30583464a80edda1c76a515a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_playOnEnableAMD:
+    m_enabled: 1
+    m_animType: 0
+    m_delay: 0
+  m_startPoseAMD:
+    m_enabled: 1
+    m_animType: 0
+    m_delay: 0
+  m_afterIntroAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_afterLoopAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_onPointerEnterAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_onPointerExitAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_timeMode: 1
+  m_animationSetups:
+  - m_animationStages:
+    - m_animationInstances:
+      - m_targetObjects:
+        - {fileID: 223454158}
+        m_animationSteps:
+        - {fileID: 917604993}
+        m_targetStepIndexes: 01000000
+        m_uiAnimatorSubModule: {fileID: 0}
+        m_startDelay: 0
+        m_inspectorToggleState: 1
+      - m_targetObjects:
+        - {fileID: 1713188097}
+        m_animationSteps:
+        - {fileID: 917604992}
+        m_targetStepIndexes: 01000000
+        m_uiAnimatorSubModule: {fileID: 0}
+        m_startDelay: 0
+        m_inspectorToggleState: 1
+      - m_targetObjects:
+        - {fileID: 817145071}
+        m_animationSteps:
+        - {fileID: 917604991}
+        m_targetStepIndexes: 01000000
+        m_uiAnimatorSubModule: {fileID: 0}
+        m_startDelay: 0
+        m_inspectorToggleState: 1
+      m_startDelay: 0
+      m_endDelay: 0
+      m_inspectorToggleState: 1
+    m_onStartAction:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onFinishedAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - m_animationStages:
+    - m_animationInstances: []
+      m_startDelay: 0
+      m_endDelay: 0
+      m_inspectorToggleState: 1
+    m_onStartAction:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onFinishedAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - m_animationStages:
+    - m_animationInstances: []
+      m_startDelay: 0
+      m_endDelay: 0
+      m_inspectorToggleState: 1
+    m_onStartAction:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onFinishedAction:
+      m_PersistentCalls:
+        m_Calls: []
+  m_timer: 0.5267648
+  m_currentAnimSetupIndex: 0
+  m_audioSourceContainer: {fileID: 0}
+  m_audioSources: []
+  m_playLoopAnimInfinitely: 1
+  m_numLoopIterations: 0
+  m_showExtraSettings: 0
+--- !u!114 &917604991
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917604986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3dc3c7834bb461cbaa44d45c0dcf85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_delay:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0
+    m_to: 0
+    m_masterValues: []
+    m_numTargets: 1
+  m_duration:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.5
+    m_to: 0.5
+    m_masterValues:
+    - 0.5
+    m_numTargets: 1
+  m_easing: 0
+  m_audioClipDatas: []
+  m_numTargets: 1
+  m_waitForPreviousComplete: 0
+  m_grabbedInitialDefaultStateData: 1
+  m_inspectorToggleState: 1
+  m_masterScales:
+  - {x: 1, y: 1, z: 1}
+  m_targetTransforms:
+  - {fileID: 817145072}
+--- !u!114 &917604992
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917604986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3dc3c7834bb461cbaa44d45c0dcf85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_delay:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0
+    m_to: 0
+    m_masterValues: []
+    m_numTargets: 1
+  m_duration:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.5
+    m_to: 0.5
+    m_masterValues:
+    - 0.5
+    m_numTargets: 1
+  m_easing: 0
+  m_audioClipDatas: []
+  m_numTargets: 1
+  m_waitForPreviousComplete: 0
+  m_grabbedInitialDefaultStateData: 1
+  m_inspectorToggleState: 1
+  m_masterScales:
+  - {x: 1, y: 1, z: 1}
+  m_targetTransforms:
+  - {fileID: 1713188098}
+--- !u!114 &917604993
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917604986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3dc3c7834bb461cbaa44d45c0dcf85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_delay:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0
+    m_to: 0
+    m_masterValues: []
+    m_numTargets: 1
+  m_duration:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.5
+    m_to: 0.5
+    m_masterValues:
+    - 0.5
+    m_numTargets: 1
+  m_easing: 0
+  m_audioClipDatas: []
+  m_numTargets: 1
+  m_waitForPreviousComplete: 0
+  m_grabbedInitialDefaultStateData: 1
+  m_inspectorToggleState: 1
+  m_masterScales:
+  - {x: 1, y: 1, z: 1}
+  m_targetTransforms:
+  - {fileID: 223454159}
 --- !u!1 &922195932
 GameObject:
   m_ObjectHideFlags: 0
@@ -11423,7 +11981,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &981573489
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14453,7 +15011,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2084883760}
         m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
-        m_MethodName: DecreaseBVolume
+        m_MethodName: DecreaseBothVolume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14814,13 +15372,16 @@ GameObject:
   - component: {fileID: 1388740484}
   - component: {fileID: 1388740486}
   - component: {fileID: 1388740485}
+  - component: {fileID: 1388740489}
+  - component: {fileID: 1388740488}
+  - component: {fileID: 1388740487}
   m_Layer: 5
   m_Name: sfx-scrn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1388740484
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14880,6 +15441,193 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388740483}
   m_CullTransparentMesh: 1
+--- !u!114 &1388740487
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388740483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3dc3c7834bb461cbaa44d45c0dcf85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_delay:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0
+    m_to: 0
+    m_masterValues: []
+    m_numTargets: 1
+  m_duration:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.5
+    m_to: 0.5
+    m_masterValues:
+    - 0.5
+    m_numTargets: 1
+  m_easing: 0
+  m_audioClipDatas: []
+  m_numTargets: 1
+  m_waitForPreviousComplete: 0
+  m_grabbedInitialDefaultStateData: 1
+  m_inspectorToggleState: 1
+  m_masterScales:
+  - {x: 1, y: 1, z: 1}
+  m_targetTransforms:
+  - {fileID: 1202470379}
+--- !u!114 &1388740488
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388740483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7ce344bdbf44c759e49900e2c1f754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_delay:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0
+    m_to: 0
+    m_masterValues: []
+    m_numTargets: 1
+  m_duration:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.1
+    m_to: 1
+    m_masterValues:
+    - 1
+    m_numTargets: 1
+  m_easing: 0
+  m_audioClipDatas: []
+  m_numTargets: 1
+  m_waitForPreviousComplete: 0
+  m_grabbedInitialDefaultStateData: 1
+  m_inspectorToggleState: 1
+  m_position:
+    m_type: 0
+    m_offsettingEnabled: 1
+    m_from: {x: 5.6314697, y: -214.0082, z: 0}
+    m_to: {x: 5.6314697, y: 182.6418, z: 0}
+    m_masterValues:
+    - {x: 5.6314697, y: 182.6418, z: 0}
+  m_scale:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: 1, y: 1, z: 1}
+    m_to: {x: 1, y: 1, z: 1}
+    m_masterValues:
+    - {x: 1, y: 1, z: 1}
+  m_rotation:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: -0, y: 0, z: 0}
+    m_to: {x: -0, y: 0, z: 0}
+    m_masterValues:
+    - {x: -0, y: 0, z: 0}
+  m_targetTransforms:
+  - {fileID: 1663877285}
+--- !u!114 &1388740489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388740483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce038cdb30583464a80edda1c76a515a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_playOnEnableAMD:
+    m_enabled: 1
+    m_animType: 0
+    m_delay: 0
+  m_startPoseAMD:
+    m_enabled: 1
+    m_animType: 0
+    m_delay: 0
+  m_afterIntroAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_afterLoopAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_onPointerEnterAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_onPointerExitAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_timeMode: 1
+  m_animationSetups:
+  - m_animationStages:
+    - m_animationInstances:
+      - m_targetObjects:
+        - {fileID: 1202470378}
+        m_animationSteps:
+        - {fileID: 1388740487}
+        m_targetStepIndexes: 01000000
+        m_uiAnimatorSubModule: {fileID: 0}
+        m_startDelay: 0
+        m_inspectorToggleState: 1
+      - m_targetObjects:
+        - {fileID: 1663877284}
+        m_animationSteps:
+        - {fileID: 1388740488}
+        m_targetStepIndexes: 01000000
+        m_uiAnimatorSubModule: {fileID: 0}
+        m_startDelay: 0
+        m_inspectorToggleState: 1
+      m_startDelay: 0
+      m_endDelay: 0
+      m_inspectorToggleState: 1
+    m_onStartAction:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onFinishedAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - m_animationStages:
+    - m_animationInstances: []
+      m_startDelay: 0
+      m_endDelay: 0
+      m_inspectorToggleState: 1
+    m_onStartAction:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onFinishedAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - m_animationStages:
+    - m_animationInstances: []
+      m_startDelay: 0
+      m_endDelay: 0
+      m_inspectorToggleState: 1
+    m_onStartAction:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onFinishedAction:
+      m_PersistentCalls:
+        m_Calls: []
+  m_timer: 0.56211597
+  m_currentAnimSetupIndex: 0
+  m_audioSourceContainer: {fileID: 0}
+  m_audioSources: []
+  m_playLoopAnimInfinitely: 1
+  m_numLoopIterations: 0
+  m_showExtraSettings: 0
 --- !u!1 &1455688490
 GameObject:
   m_ObjectHideFlags: 0
@@ -15228,7 +15976,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2084883760}
         m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
-        m_MethodName: iNcreaseBVolume
+        m_MethodName: IncreaseBothVolume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18595,6 +19343,8 @@ GameObject:
   - component: {fileID: 1670512124}
   - component: {fileID: 1670512126}
   - component: {fileID: 1670512125}
+  - component: {fileID: 1670512128}
+  - component: {fileID: 1670512127}
   m_Layer: 5
   m_Name: bg
   m_TagString: Untagged
@@ -18640,7 +19390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.44705883}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -18648,13 +19398,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 5fa9f20d2e6603f4f8cc8c2366907442, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1670512126
@@ -18665,6 +19415,129 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670512123}
   m_CullTransparentMesh: 1
+--- !u!114 &1670512127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670512123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0390bd8b8ffd640b34fe25065ff1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateType: 0
+  isSpeedBased: 0
+  hasOnStart: 0
+  hasOnPlay: 0
+  hasOnUpdate: 0
+  hasOnStepComplete: 0
+  hasOnComplete: 0
+  hasOnTweenCreated: 0
+  hasOnRewind: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onTweenCreated:
+    m_PersistentCalls:
+      m_Calls: []
+  onRewind:
+    m_PersistentCalls:
+      m_Calls: []
+  targetIsSelf: 1
+  targetGO: {fileID: 0}
+  tweenTargetIsTargetGO: 1
+  delay: 0
+  duration: 0.5
+  easeType: 6
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loopType: 0
+  loops: 1
+  id: 
+  isRelative: 0
+  isFrom: 1
+  isIndependentUpdate: 1
+  autoKill: 0
+  autoGenerate: 1
+  isActive: 1
+  isValid: 1
+  target: {fileID: 1670512125}
+  animationType: 22
+  targetType: 3
+  forcedTargetType: 0
+  autoPlay: 1
+  useTargetAsV3: 0
+  endValueFloat: 0
+  endValueV3: {x: 0, y: 0, z: 0}
+  endValueV2: {x: 0, y: 0}
+  endValueColor: {r: 1, g: 1, b: 1, a: 1}
+  endValueString: 
+  endValueRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  endValueTransform: {fileID: 0}
+  optionalBool0: 0
+  optionalBool1: 0
+  optionalFloat0: 0
+  optionalInt0: 0
+  optionalRotationMode: 0
+  optionalScrambleMode: 0
+  optionalShakeRandomnessMode: 0
+  optionalString: 
+--- !u!114 &1670512128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670512123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 40306178, guid: aa0b1eebb5db27a419fa4564bbe5c9c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preset: 0
+  onEnableBehaviour: 1
+  onDisableBehaviour: 2
 --- !u!1 &1672319841
 GameObject:
   m_ObjectHideFlags: 0
@@ -19191,7 +20064,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2084883760}
         m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
-        m_MethodName: IncreaseVolume
+        m_MethodName: IncreaseMusicVolume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19490,6 +20363,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Steer
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2084883760}
+        m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
+        m_MethodName: SetControlVal
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1713188100
@@ -20135,7 +21020,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1779431848}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2084883760}
+        m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
+        m_MethodName: DecreaseTransparency
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1779431848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21236,8 +22133,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2084883760}
         m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
-        m_MethodName: LevelSel
-        m_Mode: 3
+        m_MethodName: LoadNxtScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -22149,6 +23046,7 @@ MonoBehaviour:
   fillBar: {fileID: 0}
   soundfillBar: {fileID: 0}
   BothfillBar: {fileID: 0}
+  transparencyChange: {fileID: 0}
   Coins:
   - {fileID: 0}
   - {fileID: 0}
@@ -22601,7 +23499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1939503467
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24163,6 +25061,18 @@ MonoBehaviour:
           m_StringArgument: Low
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2084883760}
+        m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
+        m_MethodName: SetQuality
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2062303133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24581,6 +25491,7 @@ MonoBehaviour:
   fillBar: {fileID: 1793500041}
   soundfillBar: {fileID: 983077628}
   BothfillBar: {fileID: 1614941627}
+  transparencyChange: {fileID: 1075337964}
   Coins:
   - {fileID: 2084316718}
   - {fileID: 1297795324}
@@ -25496,7 +26407,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2084883760}
         m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
-        m_MethodName: IncreaseSVolume
+        m_MethodName: IncreaseSoundVolume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -48,8 +48,8 @@ public class RCC_CameraConfig : MonoBehaviour {
 	public IEnumerator SetCameraSettings () {
 
 		yield return new WaitForSeconds(0f);
-		Debug.LogError("called");
-		RCC_Camera cam = RCC_SceneManager.Instance.activePlayerCamera;
+        
+        RCC_Camera cam = RCC_SceneManager.Instance.activePlayerCamera;
 		 
 		//if(!cam)
 		//	return;

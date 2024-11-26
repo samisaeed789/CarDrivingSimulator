@@ -47,6 +47,7 @@ public class MySoundManager : MonoBehaviour {
     public AudioClip Applaud;
     public AudioClip GreatJob;
     public AudioClip Splash;
+    public AudioClip PlayEngine;
   
 
 	[Header("Booleans")]
@@ -157,11 +158,9 @@ public class MySoundManager : MonoBehaviour {
 		}
 	}
 
-    public void PlayPopUpSound(float val)
+    public void PlayEngineSound()
 	{
-		soundValue = val;
-		Effectsource.volume = soundValue;
-		Effectsource.PlayOneShot(popup);
+		Effectsource.PlayOneShot(PlayEngine);
 	} 
 	
 	public void PlayUIPopSound(float val)
