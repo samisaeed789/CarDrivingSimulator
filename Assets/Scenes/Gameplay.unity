@@ -37529,7 +37529,7 @@ GameObject:
   - component: {fileID: 568634353}
   - component: {fileID: 568634355}
   - component: {fileID: 568634354}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: iNDICATOR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41542,15 +41542,15 @@ MonoBehaviour:
   Effectsource: {fileID: 888062557}
   ss: {fileID: 0}
   mm: {fileID: 0}
-  bgm: {fileID: 0}
+  bgm: {fileID: 8300000, guid: 34bc5762f00078c419fcb1abda61a4f6, type: 3}
   click: {fileID: 8300000, guid: 8bec39ff7567f9142bd5e752229fa917, type: 3}
   complete: {fileID: 0}
   fail: {fileID: 0}
   popup: {fileID: 0}
   pop: {fileID: 0}
   emoji: {fileID: 0}
-  cash: {fileID: 0}
-  coin: {fileID: 8300000, guid: e226b348b860d774892a461c777180c8, type: 3}
+  cash: {fileID: 8300000, guid: 22212a5c3892af2438820c0f87a9802e, type: 3}
+  coin: {fileID: 8300000, guid: 4d7153ed2e930674ea02c4f90bd1c570, type: 3}
   CP: {fileID: 0}
   RampSound: {fileID: 0}
   parkedSound: {fileID: 0}
@@ -41559,6 +41559,8 @@ MonoBehaviour:
   GreatJob: {fileID: 0}
   Splash: {fileID: 0}
   PlayEngine: {fileID: 8300000, guid: 418e0619b278be4458bce3d463ad00fb, type: 3}
+  Collect: {fileID: 8300000, guid: f4b6e633894821b439e102d4f256e507, type: 3}
+  CollectCoin: {fileID: 8300000, guid: 22212a5c3892af2438820c0f87a9802e, type: 3}
   levelcompleted: 0
   levelfailed: 0
 --- !u!82 &671552941
@@ -41575,7 +41577,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -42178,7 +42180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &699181955
 RectTransform:
   m_ObjectHideFlags: 0
@@ -72240,7 +72242,7 @@ GameObject:
   - component: {fileID: 1431421186}
   - component: {fileID: 1431421185}
   - component: {fileID: 1431421187}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: iNDICATOR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76156,6 +76158,7 @@ MonoBehaviour:
   Ignition: {fileID: 1305434674}
   Appreciate: {fileID: 1698091043}
   Discourage: {fileID: 1409840927}
+  MusicOff: {fileID: 699181954}
   Cam: {fileID: 1076305557}
   Car: {fileID: 2952087092085967829}
   trafficSpawner: {fileID: 75160183}
@@ -85298,7 +85301,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1765901400}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1526574092}
+        m_TargetAssemblyTypeName: GameMngr, Assembly-CSharp
+        m_MethodName: PlayStopMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1765901400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105151,7 +105166,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  Indi: []
+  Indilft: {fileID: 0}
+  Indirght: {fileID: 0}
 --- !u!1 &919132147706530100
 GameObject:
   m_ObjectHideFlags: 0
@@ -111490,11 +111506,11 @@ MonoBehaviour:
   launched: 0
   audioType: 1
   autoCreateEngineOffSounds: 1
-  engineStartClip: {fileID: 8300000, guid: 463e0e0c6cf511e43885c75a4639a677, type: 3}
-  engineClipHigh: {fileID: 8300000, guid: 1fed2aa14547dc54f9024e3dd893c8b7, type: 3}
+  engineStartClip: {fileID: 0}
+  engineClipHigh: {fileID: 8300000, guid: 741fe6118c3d0f242bd071735ed0c719, type: 3}
   engineClipMed: {fileID: 0}
-  engineClipLow: {fileID: 8300000, guid: d49d23caac81ff5448552dc3faba0667, type: 3}
-  engineClipIdle: {fileID: 8300000, guid: 463e0e0c6cf511e43885c75a4639a677, type: 3}
+  engineClipLow: {fileID: 8300000, guid: 741fe6118c3d0f242bd071735ed0c719, type: 3}
+  engineClipIdle: {fileID: 8300000, guid: 741fe6118c3d0f242bd071735ed0c719, type: 3}
   engineClipHighOff: {fileID: 0}
   engineClipMedOff: {fileID: 0}
   engineClipLowOff: {fileID: 0}
@@ -111651,9 +111667,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  Indi:
-  - {fileID: 1040245565}
-  - {fileID: 2129530050}
+  Indilft: {fileID: 1040245565}
+  Indirght: {fileID: 2129530050}
 --- !u!1 &2952087092447682775
 GameObject:
   m_ObjectHideFlags: 0

@@ -48,6 +48,10 @@ public class MySoundManager : MonoBehaviour {
     public AudioClip GreatJob;
     public AudioClip Splash;
     public AudioClip PlayEngine;
+    public AudioClip Collect;
+    public AudioClip CollectCoin;
+
+
   
 
 	[Header("Booleans")]
@@ -56,7 +60,7 @@ public class MySoundManager : MonoBehaviour {
 
 	void Awake()
 	{
-
+		
 		if(instance==null)
 			instance=this;
 
@@ -146,12 +150,10 @@ public class MySoundManager : MonoBehaviour {
 		}
 	}
 
-	public void SetBGM(bool check, float val)
+	public void SetBGM(bool check)
 	{
 		if (check) {
 			BGM.clip = bgm;
-			musicValue = val;
-			BGM.volume = musicValue;
 			BGM.Play ();
 		} else {
 			BGM.Pause ();
@@ -169,6 +171,18 @@ public class MySoundManager : MonoBehaviour {
 		Effectsource.volume = soundValue;
 		Effectsource.PlayOneShot(pop);
 	}
+
+	public void PlayCollectSound()
+	{
+		
+		Effectsource.PlayOneShot(Collect);
+	}
+
+	public void PlayCollectCoin()
+	{
+	
+		Effectsource.PlayOneShot(CollectCoin);
+	}
 	 public void PlayEmojiSound(float val)
 	{
 		soundValue = val;
@@ -183,11 +197,18 @@ public class MySoundManager : MonoBehaviour {
 		Effectsource.PlayOneShot(cash);
 	}
 
-	public void PlaycoinSound(float val)
+	public void PlaycoinSound()
 	{
-		//soundValue = val;
-		//Effectsource.volume = soundValue;
+	
 		Effectsource.PlayOneShot (coin);
+		Effectsource.loop=true;
+	}
+
+	public void StopcoinSound()
+	{
+		
+		Effectsource.Stop();
+		Effectsource.loop=false;
 	}
 
 	public void PlayButtonClickSound(float val)

@@ -44,6 +44,8 @@ public class GameMngr : MonoBehaviour
     public GameObject Ignition;
     public GameObject Appreciate;
     public GameObject Discourage;
+    public GameObject MusicOff;
+
 
     [Header("Camera")]
     public Camera Cam;
@@ -141,12 +143,16 @@ public class GameMngr : MonoBehaviour
         if (isCash) 
         {
             CollectbleCash.Play();
+            if(soundmgr)
+                soundmgr.PlayCollectSound();
 
         }
 
         if (isCoin) 
         {
             CollectbleCoin.Play();
+             if(soundmgr)
+                soundmgr.PlayCollectCoin();
 
         }
     }
@@ -188,69 +194,48 @@ public class GameMngr : MonoBehaviour
 
         yield return new WaitForSeconds(8f);
         Complete.SetActive(true);
-        CalculateTotalCoins();
+        SetCoinsinPanel();
     }
 
-    public void CalculateTotalCoins()
-    {
 
-        Timetxt.text = Mathf.FloorToInt(elapsedTime).ToString();
+    void SetCoinsinPanel()
+    {
+        if(CoinsEarnedInLvl<0)
+            CoinsEarnedInLvl=0;
+
+        
+        Timetxt.text = Mathf.FloorToInt(elapsedTime*2).ToString();
         CoinsEarnedlvltxt.text = CoinsEarnedInLvl.ToString();
 
-
-
-        float timeMultiplier;
-       
-        if (elapsedTime <= 300 / 2) // If completed in half the time or less, give a bonus.
-        {
-            timeMultiplier = 1.5f; // Example multiplier for fast completion.
-        }
-        else if (elapsedTime <= 300) // If completed within time limit, normal multiplier.
-        {
-            timeMultiplier = 1.2f; // Example multiplier for normal time.
-        }
-        else // If exceeded time limit, no bonus multiplier.
-        {
-            timeMultiplier = 1.0f; // No extra reward for going over time.
-        }
-
-        // Calculate total coins including the time multiplier.
-        int finalCoins = Mathf.FloorToInt(CoinsEarnedInLvl * timeMultiplier);
-
-        // Display the total coins and time taken on the success panel.
-        TotalCompltxt.text = "Total Coins: " + finalCoins;
-        StartCoroutine(AnimateCoinCounter(finalCoins));
+        StartCoroutine(CounterAnimation(CalculateTotalCoins()));
     }
 
-    IEnumerator AnimateCoinCounter(int finalCoins)
+    private IEnumerator CounterAnimation(int totalCoins)
     {
-
-        yield return new WaitForSeconds(0.6f);
-        int currentCoins = 0; // Start from 0 coins
-        float timetaken = 0f; // To track the time for the animation
-
-        while (elapsedTime < 1f) // Animate for 1 second (you can adjust this duration)
+        yield return new WaitForSeconds(1f);
+        int currentCoins = 0;
+        if(soundmgr)
+            soundmgr.PlaycoinSound();
+        while (currentCoins < totalCoins)
         {
-            if (soundmgr)
-                soundmgr.PlaycoinSound(1f);
-            // Smoothly increment the current coin count
-            currentCoins = Mathf.FloorToInt(Mathf.Lerp(0, finalCoins, elapsedTime));
-
-            // Update the UI text with the current coin count
+            currentCoins += Mathf.CeilToInt(2 * Time.deltaTime);
+            currentCoins = Mathf.Min(currentCoins, totalCoins);
             TotalCompltxt.text = currentCoins.ToString();
-
-
-            // Increment elapsed time based on speed
-            elapsedTime += Time.deltaTime * 2;
-
-            yield return null; // Wait until the next frame
+            yield return null;
         }
 
-        // Ensure that the final count is set correctly at the end
-        TotalCompltxt.text = finalCoins.ToString();
+         if(soundmgr)
+            soundmgr.StopcoinSound();
     }
 
+    private int CalculateTotalCoins()
+    {
+        int coinsFromTime = Mathf.FloorToInt(elapsedTime*2); 
+        if(CoinsEarnedInLvl<0)
+            CoinsEarnedInLvl=0;
 
+        return  CoinsEarnedInLvl+ coinsFromTime;
+    }
     #endregion
 
 
@@ -269,6 +254,22 @@ public class GameMngr : MonoBehaviour
 
     }
    
+
+   public void PlayStopMusic()
+   {
+        if(MusicOff)
+        {
+            MusicOff.SetActive(false);
+            if(soundmgr)
+                soundmgr.SetBGM(true);
+        }
+        else
+        {
+            MusicOff.SetActive(true);
+            if(soundmgr)
+                soundmgr.SetBGM(false);
+        }
+   }
 
 
     public void Enablegearactv(string s)
@@ -319,6 +320,8 @@ public class GameMngr : MonoBehaviour
         Ignition.SetActive(false);
         Car.StartEngine();
         IsTimerRunning = true;
+        if(soundmgr)
+            soundmgr.SetBGM(true);
     }
     public void ShakeCamera()
     {
