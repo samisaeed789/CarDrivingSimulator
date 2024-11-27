@@ -185,8 +185,8 @@ public class MySoundManager : MonoBehaviour {
 
 	public void PlaycoinSound(float val)
 	{
-		soundValue = val;
-		Effectsource.volume = soundValue;
+		//soundValue = val;
+		//Effectsource.volume = soundValue;
 		Effectsource.PlayOneShot (coin);
 	}
 

@@ -685,8 +685,8 @@ namespace UIAnimatorCore
 			// Play the clip
 			audioSource.clip = a_audioClipData.Clip;
 			audioSource.playOnAwake = false;
-			audioSource.spatialBlend = 0;	// 2D Sound
-			audioSource.volume = a_audioClipData.Volume.GetValue(a_targetIndex);
+			audioSource.spatialBlend = 0;   // 2D Sound
+			audioSource.volume =  ValStorage.GetSVolume(); // a_audioClipData.Volume.GetValue(a_targetIndex);
 			audioSource.pitch = a_audioClipData.Pitch.GetValue (a_targetIndex);
 			audioSource.time = a_audioClipData.OffsetTime.GetValue(a_targetIndex);
 			audioSource.mute = !s_isAudioEnabled;

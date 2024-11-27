@@ -13,6 +13,18 @@ public static class ValStorage
       return  PlayerPrefs.GetInt("Coins");
    }
 
+
+    public static void SetCar(string val)
+    {
+        PlayerPrefs.SetString("SelectedCar", val);
+    }
+    
+    public static string GetCar()
+    {
+
+       return PlayerPrefs.GetString("SelectedCar");
+    }
+
     public static void SetCoins(int coin)
     {
 

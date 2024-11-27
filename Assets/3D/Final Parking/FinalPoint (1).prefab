@@ -83,6 +83,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3512030333463752164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7434051705794293973}
+  m_Layer: 2
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7434051705794293973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3512030333463752164}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 1.1641531e-10, w: 1}
+  m_LocalPosition: {x: 0.0015002375, y: -0.0131028155, z: 0.008743326}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5582755437493601112}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3537111948740832509
 GameObject:
   m_ObjectHideFlags: 0
@@ -4912,6 +4943,7 @@ GameObject:
   - component: {fileID: 5457232135335528898}
   - component: {fileID: 2381649703828317107}
   - component: {fileID: 1507542925224529483}
+  - component: {fileID: 7684266487942740577}
   m_Layer: 2
   m_Name: FinalPoint (1)
   m_TagString: Parking
@@ -4927,14 +4959,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9195615656089558382}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5012768, y: -0.5012594, z: -0.49871993, w: 0.4987374}
+  m_LocalRotation: {x: -0.5012812, y: -0.501255, z: -0.49871555, w: 0.49874175}
   m_LocalPosition: {x: 586.42, y: -0.02, z: 968.3}
-  m_LocalScale: {x: 28.700075, y: 16.786125, z: 28.700068}
+  m_LocalScale: {x: 47.25984, y: 27.641375, z: 47.259827}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7434051705794293973}
   - {fileID: 6014872810725689798}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -179.60664, y: 89.709, z: -89.6061}
+  m_LocalEulerAnglesHint: {x: -90.291, y: 0.0019989014, z: -89.99899}
 --- !u!33 &5457232135335528898
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5006,3 +5039,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.08287518, y: 0.028488364, z: 0.050655704}
   m_Center: {x: -0.00039743527, y: 0.051601112, z: 0.02515028}
+--- !u!114 &7684266487942740577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9195615656089558382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30bc7284d96be943bce5c065218c122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -199,7 +199,8 @@ public class MMManager : MonoBehaviour
     public void LoadNxtScene()
     {
         CarsCont.SetActive(false);
-        PlayerPrefs.SetString("SelectedCar", garage.GetCurrCarId());
+
+        ValStorage.SetCar(garage.GetCurrCarId());
         StartCoroutine(LoadAsyncScene("Gameplay"));
     }
 
