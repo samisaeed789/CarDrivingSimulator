@@ -8,6 +8,8 @@ public static class ValStorage
     public static int selLevel;
     public static int TrnsparVal;
 
+    public static float timerforlane;
+
    public static int GetCoins() 
    {
       return  PlayerPrefs.GetInt("Coins");

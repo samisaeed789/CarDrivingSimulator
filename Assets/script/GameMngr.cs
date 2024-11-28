@@ -45,6 +45,7 @@ public class GameMngr : MonoBehaviour
     public GameObject Appreciate;
     public GameObject Discourage;
     public GameObject MusicOff;
+    public RCC_UIController Brake;
 
 
     [Header("Camera")]
@@ -65,7 +66,7 @@ public class GameMngr : MonoBehaviour
     public WaypointsTraveler[] TrafficCars;
     GameObject Indilft;
     GameObject IndiRght;
-    [HideInInspector] Transform dancingchar;
+    [SerializeField] Transform dancingchar;
     [SerializeField] GameObject Conftti;
     [SerializeField] ParticleSystem CollectbleCash;
     [SerializeField] ParticleSystem CollectbleCoin;
@@ -97,6 +98,13 @@ public class GameMngr : MonoBehaviour
     GameObject FinalPoint;
     bool IsTimerRunning = false;
     static int CoinsEarnedInLvl;
+    MeshRenderer brakelght;
+    [SerializeField] GameObject[] greenred;
+    Color color;
+    bool isBrakePressed;
+    [HideInInspector] public bool IsCorrectLane;
+    [HideInInspector] public bool IsWrongLane;
+
 
     IEnumerator Start()
     {
@@ -111,6 +119,8 @@ public class GameMngr : MonoBehaviour
         ControllerBtns.alpha = 0f;
         yield return new WaitForSeconds(2); // fixed delay
         Loading.SetActive(false);
+        if (soundmgr)
+            soundmgr.SetBGM(true);
     }
 
 
@@ -121,15 +131,37 @@ public class GameMngr : MonoBehaviour
 
     public void OnLevelStatsLoadedHandler(LevelData levelStats)
     {
-      //  string str = ValStorage.GetCar();
-       // int ind = int.Parse(str);
+        //  string str = ValStorage.GetCar();
+        // int ind = int.Parse(str);
         Car = PlayerCars[0].GetComponent<RCC_CarControllerV3>();  //PlayerCars[ind - 1].GetComponent<RCC_CarControllerV3>();
         car = Car.gameObject.GetComponent<CarData>();
+       
+        Rigidbody rb = Car.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.MovePosition(levelStats.SpawnPoint.position);
+            rb.MoveRotation(levelStats.SpawnPoint.rotation);
+        }
+
+        Car.gameObject.SetActive(true);
+        dancingchar.SetPositionAndRotation(levelStats.dancetrans.position, levelStats.dancetrans.rotation);
+
         Indilft = car.Indilft;
         IndiRght = car.Indirght;
-        dancingchar = levelStats.Dancing;
+
         CinematicCam.target = Car.transform;
-        FinalPoint = levelStats.FinalP;
+        brakelght = car.BrakeLight;
+
+        if (levelStats.greenred != null)
+        {
+            greenred = new GameObject[levelStats.greenred.Length];
+            Array.Copy(levelStats.greenred, greenred, levelStats.greenred.Length);
+        }
+
+        Debug.Log("car======" + car.gameObject.name);
+        Debug.Log("spawnpoint======" + levelStats.SpawnPoint.gameObject.name);
+
+      
     }
 
     #endregion
@@ -140,24 +172,77 @@ public class GameMngr : MonoBehaviour
 
     public void CollectablePlay(bool isCash = false, bool isCoin = false)
     {
-        if (isCash) 
+        if (isCash)
         {
             CollectbleCash.Play();
-            if(soundmgr)
+            if (soundmgr)
                 soundmgr.PlayCollectSound();
 
         }
 
-        if (isCoin) 
+        if (isCoin)
         {
             CollectbleCoin.Play();
-             if(soundmgr)
+            if (soundmgr)
                 soundmgr.PlayCollectCoin();
 
         }
     }
 
+    public void PlayStopMusic()
+    {
+        Debug.Log("MusicOff active state: " + MusicOff.activeSelf);
 
+        // If the MusicOff button is active (meaning music is currently off)
+        if (MusicOff.activeSelf)
+        {
+            Debug.Log("Turning music on...");
+            MusicOff.SetActive(false);  // Hide the "Music Off" button
+            if (soundmgr)
+            {
+                soundmgr.SetBGM(true);  // Start playing background music
+                Debug.Log("Music is now ON");
+            }
+        }
+        else
+        {
+            Debug.Log("Turning music off...");
+            MusicOff.SetActive(true);  // Show the "Music Off" button
+            if (soundmgr)
+            {
+                soundmgr.SetBGM(false);  // Stop playing background music
+                Debug.Log("Music is now OFF");
+            }
+        }
+    }
+
+    public void PlayHorn()
+    {
+        if (soundmgr)
+        {
+            soundmgr.SetBGM(true);  // Start playing background music
+            Debug.Log("Music is now ON");
+        }
+    }
+
+    public void OnButtonPressed()
+    {
+
+        if (soundmgr)
+        {
+            soundmgr.PlayHorn();
+        }
+
+    }
+
+    public void OnButtonReleased()
+    {
+
+        if (soundmgr)
+        {
+            soundmgr.StopHorn();
+        }
+    }
     #endregion
 
     #region Complete
@@ -165,6 +250,13 @@ public class GameMngr : MonoBehaviour
 
     public void Celeb()
     {
+        if (soundmgr)
+            soundmgr.PlayCompleteSound(true);
+
+
+        // Car.audioType = RCC_CarControllerV3.AudioType.Off;
+
+
         trafficSpawner.DisableAllCars();
         StartDance();
         ControllerBtns.alpha = 0f;
@@ -177,7 +269,8 @@ public class GameMngr : MonoBehaviour
 
     public void StartDance()
     {
-        foreach (Transform child in dancingchar)
+        Transform dancechar = dancingchar.transform.GetChild(0);
+        foreach (Transform child in dancechar)
         {
             Animator animator = child.GetComponent<Animator>();
 
@@ -193,18 +286,22 @@ public class GameMngr : MonoBehaviour
     {
 
         yield return new WaitForSeconds(8f);
+        if (soundmgr)
+            soundmgr.PlayCompleteSound(false);
         Complete.SetActive(true);
         SetCoinsinPanel();
+        car.gameObject.SetActive(false);
+
     }
 
 
     void SetCoinsinPanel()
     {
-        if(CoinsEarnedInLvl<0)
-            CoinsEarnedInLvl=0;
+        if (CoinsEarnedInLvl < 0)
+            CoinsEarnedInLvl = 0;
 
-        
-        Timetxt.text = Mathf.FloorToInt(elapsedTime*2).ToString();
+
+        Timetxt.text = Mathf.FloorToInt(elapsedTime * 2).ToString();
         CoinsEarnedlvltxt.text = CoinsEarnedInLvl.ToString();
 
         StartCoroutine(CounterAnimation(CalculateTotalCoins()));
@@ -214,7 +311,7 @@ public class GameMngr : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         int currentCoins = 0;
-        if(soundmgr)
+        if (soundmgr)
             soundmgr.PlaycoinSound();
         while (currentCoins < totalCoins)
         {
@@ -224,23 +321,59 @@ public class GameMngr : MonoBehaviour
             yield return null;
         }
 
-         if(soundmgr)
+        if (soundmgr)
             soundmgr.StopcoinSound();
     }
 
     private int CalculateTotalCoins()
     {
-        int coinsFromTime = Mathf.FloorToInt(elapsedTime*2); 
-        if(CoinsEarnedInLvl<0)
-            CoinsEarnedInLvl=0;
+        int coinsFromTime = Mathf.FloorToInt(elapsedTime * 2);
+        if (CoinsEarnedInLvl < 0)
+            CoinsEarnedInLvl = 0;
 
-        return  CoinsEarnedInLvl+ coinsFromTime;
+        return CoinsEarnedInLvl + coinsFromTime;
     }
     #endregion
 
 
+    #region startlvl
+
+    public void EngineRun()
+    {
+        if (soundmgr)
+            soundmgr.PlayEngineSound();
+
+        ShakeCamera();
+
+        Ignition.SetActive(false);
+        Car.StartEngine();
+        IsTimerRunning = true;
+
+    }
+    public void ShakeCamera()
+    {
+        if (Cam != null)
+        {
+            Cam.DOShakePosition(0.5f, 0.5f, 10, 90f).OnKill(() => OnShakeComplete());
+        }
+
+    }
+    void OnShakeComplete()
+    {
+        OnEnableUI();
+    }
+
+    private void OnEnableUI()
+    {
+        ControllerBtns.alpha = 1;
+        ControllerBtns.gameObject.GetComponent<UIAnimator>().PlayAnimation(AnimSetupType.Intro);
+
+    }
 
 
+    #endregion
+
+    #region UIBtnFunc
 
     public void ChangeControl()
     {
@@ -253,23 +386,9 @@ public class GameMngr : MonoBehaviour
         ValStorage.SetControls(currentind);
 
     }
-   
 
-   public void PlayStopMusic()
-   {
-        if(MusicOff)
-        {
-            MusicOff.SetActive(false);
-            if(soundmgr)
-                soundmgr.SetBGM(true);
-        }
-        else
-        {
-            MusicOff.SetActive(true);
-            if(soundmgr)
-                soundmgr.SetBGM(false);
-        }
-   }
+
+
 
 
     public void Enablegearactv(string s)
@@ -310,47 +429,23 @@ public class GameMngr : MonoBehaviour
     }
 
 
-    public void EngineRun()
-    {
-        if (soundmgr)
-            soundmgr.PlayEngineSound();
-
-        ShakeCamera();
-
-        Ignition.SetActive(false);
-        Car.StartEngine();
-        IsTimerRunning = true;
-        if(soundmgr)
-            soundmgr.SetBGM(true);
-    }
-    public void ShakeCamera()
-    {
-        if (Cam != null)
-        {
-            Cam.DOShakePosition(0.5f, 0.5f, 10, 90f).OnKill(() => OnShakeComplete());
-        }
-
-    }
-    void OnShakeComplete()
-    {
-        OnEnableUI();
-    }
-
-    private void OnEnableUI()
-    {
-        ControllerBtns.alpha = 1;
-        ControllerBtns.gameObject.GetComponent<UIAnimator>().PlayAnimation(AnimSetupType.Intro);
-
-    }
-
-
     public void IndiLft()
     {
-        if (LeftIndActv.activeSelf) 
+        // Check if the right indicator is active, and deactivate it if necessary
+        if (RightIndActv.activeSelf)
+        {
+            RightIndActv.SetActive(false);
+            IndiRght.SetActive(false);
+        }
+
+        // Toggle the left indicator
+        if (LeftIndActv.activeSelf)
         {
             LeftIndActv.SetActive(false);
             Indilft.SetActive(false);
             car.currentState = PlayerState.None;
+            if (soundmgr)
+                soundmgr.playindiSound(false);
         }
         else
         {
@@ -358,16 +453,31 @@ public class GameMngr : MonoBehaviour
             Indilft.SetActive(true);
             car.currentState = PlayerState.LeftIndicator;
 
+            // Optionally play sound for left indicator here
+            if (soundmgr)
+                soundmgr.playindiSound(true);
         }
     }
-    
+
     public void IndiRight()
     {
-        if (RightIndActv.activeSelf) 
+        // Check if the left indicator is active, and deactivate it if necessary
+        if (LeftIndActv.activeSelf)
+        {
+            LeftIndActv.SetActive(false);
+            Indilft.SetActive(false);
+        }
+
+        // Toggle the right indicator
+        if (RightIndActv.activeSelf)
         {
             RightIndActv.SetActive(false);
             IndiRght.SetActive(false);
             car.currentState = PlayerState.None;
+
+            if (soundmgr)
+                soundmgr.playindiSound(false);
+
         }
         else
         {
@@ -375,47 +485,174 @@ public class GameMngr : MonoBehaviour
             IndiRght.SetActive(true);
             car.currentState = PlayerState.RightIndicator;
 
+            // Optionally play sound for right indicator here
+            if (soundmgr)
+                soundmgr.playindiSound(true);
         }
     }
 
-    public void AppreciateCoinAdd() 
+    #endregion
+
+
+
+
+
+    public void EnableGreen()
     {
+        if (greenred[0] != null)
+            greenred[0].SetActive(false);
+
+        StartCoroutine(delayenablegreen());
+    }
+
+    IEnumerator delayenablegreen()
+    {
+        yield return new WaitForSeconds(0.3f);
+        if (greenred[1] != null)
+            greenred[1].SetActive(true);
+
+        yield return new WaitForSeconds(0.3f);
+
+        AppreciateCoinAdd("You Followed Traffic Signal Rule");
+    }
+
+
+    public void AppreciateCoinAdd(string s)
+    {
+        Appreciate.transform.GetChild(0).gameObject.GetComponent<Text>().text = s;// "You Followed Turn Rule";
+        StartCoroutine(DelayedAppreciateCoinAdd(1f));
+    }
+
+
+    private IEnumerator DelayedAppreciateCoinAdd(float delay)
+    {
+
+        yield return new WaitForSeconds(delay); // Wait for the specified delay
+
         Appreciate.SetActive(true);
         AddCoins(15);
-        CoinsEarnedInLvl= CoinsEarnedInLvl + 15;
+        CoinsEarnedInLvl = CoinsEarnedInLvl + 15;
 
+        if (soundmgr)
+            soundmgr.ExcellentSound();
     }
-    
-    public void DiscourageCoinDeduct() 
+
+
+
+
+
+    public void DiscourageCoinDeduct(string s)
     {
+        Discourage.transform.GetChild(0).gameObject.GetComponent<Text>().text = s;
+
+        StartCoroutine(DelayedDiscCoinDed(1f));
+    }
+
+    private IEnumerator DelayedDiscCoinDed(float delay)
+    {
+
+
+        yield return new WaitForSeconds(delay); // Wait for the specified delay
+
         Discourage.SetActive(true);
         AddCoins(-15);
 
-        if(CoinsEarnedInLvl>0)
+        if (CoinsEarnedInLvl > 0)
             CoinsEarnedInLvl = CoinsEarnedInLvl - 15;
 
+        if (soundmgr)
+            soundmgr.DiscourageSound();
     }
 
-    void AddCoins(int val) 
+    void AddCoins(int val)
     {
         ValStorage.SetCoins(ValStorage.GetCoins() + val);
     }
 
 
 
-
-
     void Update()
     {
+        if (brakelght && HasBrakeStateChanged())
+        {
+            UpdateBrakeLightColor(Brake.pressing);
+            isBrakePressed = Brake.pressing;
+            Debug.Log("running");
+        }
 
-        if (IsTimerRunning) 
+        if (IsTimerRunning)
         {
             elapsedTime += Time.deltaTime;
             UpdateTimerText();
-
         }
+
+
+
+        //if (IsCorrectLane)
+        //{
+        //    // Increase the time if in the correct lane
+        //    timeInLane += Time.deltaTime;
+
+        //    // If player stays for 7 seconds in the correct lane
+        //    if (timeInLane >= 7f)
+        //    {
+        //        AppreciateCoinAdd("You Followed Turn Rule");
+        //        timeInLane = 0f;
+        //    }
+        //}
+        //else
+        //{
+        //    // If player is in the wrong lane, reset timer and show warning
+        //    timeInLane = 0f;
+        //    DiscourageCoinDeduct("You Should Followed Turn Rule");
+        //}
+
     }
 
+
+    float timeInLane;
+    public void CheckStayLane() 
+    {
+
+        if (Car.GetComponent<RCC_CarControllerV3>().speed >= 10f)  // Check if car is moving
+            {
+                timeInLane += Time.deltaTime;
+
+                // If player stays in the correct lane for 7 seconds, reward
+                if (timeInLane >= 7f)
+                {
+                    AppreciateCoinAdd("You Followed Turn Rule");
+                    timeInLane = 0f; // Reset timer after reward
+                }
+            }
+       
+    }
+    public void CheckOutLane() 
+    {
+
+        if (Car.GetComponent<RCC_CarControllerV3>().speed >= 10f)  // Car is moving
+        {
+            // Player is out of the correct lane
+            timeInLane = 0f;  // Reset the timer since the player left the lane
+            DiscourageCoinDeduct("You Should Followed Turn Rule");
+        }
+
+    }
+
+
+
+
+
+    private bool HasBrakeStateChanged()
+    {
+        return Brake.pressing != isBrakePressed;
+    }
+
+    private void UpdateBrakeLightColor(bool isPressed)
+    {
+        Color color = isPressed ? Color.red : Color.grey; // Use Unity's predefined colors for clarity
+        brakelght.material.color = color;
+    }
     void UpdateTimerText()
     {
         // Calculate the minutes and seconds
@@ -431,7 +668,11 @@ public class GameMngr : MonoBehaviour
 
 
 
+    public void BrakeLightts(bool isplay)
+    {
 
+
+    }
 
 
 
@@ -471,14 +712,18 @@ public class GameMngr : MonoBehaviour
         float alpha = Mathf.Lerp(0.2f, 1f, (transval - 1) / 4f);
 
 
-        foreach(Image UI in UIgp) 
+        foreach (Image UI in UIgp)
         {
-           // Image buttonImage = UI.GetComponent<Image>();
+            // Image buttonImage = UI.GetComponent<Image>();
             Color buttonColor = UI.color;
             buttonColor.a = alpha;  // Set alpha based on the calculation
             UI.color = buttonColor;
         }
-      
+
     }
     #endregion
+
 }
+
+
+ 

@@ -5,12 +5,13 @@ using WaypointsFree;
 
 public class LevelData : MonoBehaviour
 {
-    public GameObject FinalP;
-    public Transform Dancing;
-    public WaypointsGroup[] WPs;
+    public Transform SpawnPoint;
+    public Transform dancetrans;
+    public GameObject[] greenred;
   
-    void Start()
+    IEnumerator Start()
     {
+        yield return new WaitForSeconds(0f);
         GameMngr.instance.OnLevelStatsLoadedHandler(this);
     }
 

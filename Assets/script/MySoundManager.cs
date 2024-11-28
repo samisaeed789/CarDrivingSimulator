@@ -32,6 +32,10 @@ public class MySoundManager : MonoBehaviour {
     public AudioClip ss;
     public AudioClip mm;
     public AudioClip bgm;
+    public AudioClip Indi;
+    public AudioClip Horn;
+    public AudioClip Excellent;
+    public AudioClip DiscourageS;
     public AudioClip click;
     public AudioClip complete;
     public AudioClip fail;
@@ -100,15 +104,28 @@ public class MySoundManager : MonoBehaviour {
 	{
 		if (check) {
 			//BGM.clip = complete;
-			musicValue = val;
-			BGM.volume = musicValue;
+			//musicValue = val;
+			//BGM.volume = musicValue;
 			BGM.clip = null;
 			BGM.PlayOneShot(complete);
 		} else {
 			BGM.Pause ();
 		}
 	}
-	
+
+	public void PlayCompleteSound(bool check)
+	{
+		if (check)
+		{
+			BGM.clip = complete;
+			BGM.Play();
+		}
+		else
+		{
+			BGM.Pause();
+		}
+	}
+
 	public void PlayLevelFailSound(bool check, float val)
 	{
 		if (check) {
@@ -149,18 +166,50 @@ public class MySoundManager : MonoBehaviour {
 			}
 		}
 	}
-
-	public void SetBGM(bool check)
+	public void SetBGM (bool check)
 	{
 		if (check) {
-			BGM.clip = bgm;
-			BGM.Play ();
-		} else {
-			BGM.Pause ();
+			    BGM.clip = bgm;
+				BGM.Play ();
+			
+		}
+		else {
+			if (BGM) {
+				BGM.Pause ();
+			}
 		}
 	}
 
-    public void PlayEngineSound()
+	public void PlayHorn()
+	{
+		Effectsource.clip = Horn;
+		Effectsource.loop = true;  // Set looping to true while button is held down
+		Effectsource.Play();
+	}
+	
+	public void StopHorn()
+	{
+		if (Effectsource.isPlaying)  // Stop the sound if it's playing
+		{
+		Effectsource.loop = false;
+
+			Effectsource.Stop();
+		}
+	}
+	
+	public void ExcellentSound()
+	{
+		Effectsource.PlayOneShot(Excellent);
+
+	}
+	
+	public void DiscourageSound()
+	{
+		Effectsource.PlayOneShot(DiscourageS);
+
+	}
+
+	public void PlayEngineSound()
 	{
 		Effectsource.PlayOneShot(PlayEngine);
 	} 
@@ -276,7 +325,21 @@ public class MySoundManager : MonoBehaviour {
 	}
 
 
-	
+	public void playindiSound(bool check) 
+	{
+		if (check)
+		{
+			Effectsource.clip = Indi;
+			Effectsource.loop = true;
+			Effectsource.Play();
+		}
+		else
+		{
+		
+			Effectsource.loop = false;
+			Effectsource.Stop();
+		}
+	}
 	public void PlayVO(float val)
 	{
 
