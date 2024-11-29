@@ -8,14 +8,37 @@ public class TriggerChk : MonoBehaviour
     [SerializeField]bool TurnIndi;
     [SerializeField]bool TrafficSignal;
     [SerializeField]bool StayInLane;
+    [SerializeField]bool SpeedLimit;
+    [SerializeField]bool Pedestrian;
+    [SerializeField]bool PoliceChk;
+    [SerializeField]bool LeftIndi;
+    [SerializeField]bool RightIndi;
 
 
     bool isInTrigger;
     float timer;
+    float pedesttimer;
+    bool IsPedestCrossed;
 
 
     CarData plyrcar;
+    RCC_CarControllerV3 Car;
 
+
+    private void OnEnable()
+    {
+        if (GameMngr.instance) 
+        {
+            GameMngr.instance.OnCarSet += HandleCarSet;
+        }
+    }
+    private void HandleCarSet(RCC_CarControllerV3 car)
+    {
+        Car = car;
+
+    }
+
+   
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,7 +46,6 @@ public class TriggerChk : MonoBehaviour
         {
 
             plyrcar = other.transform.GetComponentInParent<CarData>();    //other.gameObject.GetComponent<CarData>();
-            Debug.Log("plyrcar==" + plyrcar.gameObject.name);
             if (TurnIndi)
             {
                 if (plyrcar.currentState == PlayerState.LeftIndicator || plyrcar.currentState == PlayerState.RightIndicator)
@@ -44,8 +66,51 @@ public class TriggerChk : MonoBehaviour
 
             if (StayInLane)
             {
+                GameMngr.instance.LaneTimer = 0f;
                 GameMngr.instance.DiscourageCoinDeduct("You Should Stay in your Lane");
             }
+            
+            if (Pedestrian)
+            {
+                GameMngr.instance.PlayWalk();
+            }
+
+            if (PoliceChk) 
+            {
+                if (!GameMngr.instance.IsStoppedAtPolice) 
+                {
+                    GameMngr.instance.DiscourageCoinDeduct("You Should Stop At CheckPoint");
+                }
+            }  
+            
+            
+            if (LeftIndi) 
+            {
+                if (plyrcar.currentState == PlayerState.LeftIndicator)
+                {
+                    GameMngr.instance.AppreciateCoinAdd("You Followed Indicator Rule");
+                }
+                else
+                {
+                    GameMngr.instance.DiscourageCoinDeduct("You Should Follow Indicator Rule");
+                }
+            }
+
+            if (RightIndi)
+            {
+                if (plyrcar.currentState == PlayerState.RightIndicator)
+                {
+                    GameMngr.instance.AppreciateCoinAdd("You Followed Indicator Rule");
+                }
+                else
+                {
+                    GameMngr.instance.DiscourageCoinDeduct("You Should Follow Indicator Rule");
+                }
+            }
+
+
+
+
         }
     }
 
@@ -65,9 +130,19 @@ public class TriggerChk : MonoBehaviour
 
         if (StayInLane) 
         {
+          //  GameMngr.instance.CheckStayLane();
+        }
 
-          //  GameMngr.instance.IsCorrectLane = true;
-            GameMngr.instance.CheckStayLane();
+        if (Pedestrian)
+        {
+            if (!IsPedestCrossed) // Only track if player hasn't already been flagged
+            {
+                pedesttimer += Time.deltaTime; // Increment the timer
+                if (pedesttimer >= 17f) // If the player waits for 17 seconds
+                {
+                    IsPedestCrossed = true; // Player followed the rule
+                }
+            }
         }
     }
 
@@ -86,15 +161,54 @@ public class TriggerChk : MonoBehaviour
             }
         }
 
-        if (StayInLane)
+       
+   
+
+        if (SpeedLimit)
         {
+            if (Car.speed <= 40f)
+            {
+                GameMngr.instance.AppreciateCoinAdd("Speed Limit Rule Followed");
+            }
+            else
+            {
+                GameMngr.instance.AppreciateCoinAdd("You Should Follow Speed Limit Rule");
 
-           
-                //GameMngr.instance.IsCorrectLane = false;
-                GameMngr.instance.CheckOutLane();
-
-
+            }
         }
+
+
+        if (Pedestrian) // Ensure we're dealing with the player or correct object
+        {
+            // Debugging
+            Debug.LogError("PedestTimer: " + pedesttimer);
+            Debug.LogError("IsPedestCrossed: " + IsPedestCrossed);
+
+            // Check the result of the player's behavior
+            if (IsPedestCrossed)
+            {
+                // The player stayed for 17 seconds, appreciate them
+                GameMngr.instance.AppreciateCoinAdd("You Followed Pedestrian Rule");
+            }
+            else
+            {
+                // The player didn't stay for 17 seconds, discourage them
+                GameMngr.instance.DiscourageCoinDeduct("You Should Follow Pedestrian Rule");
+            }
+
+            // Reset timer and flags when player exits the trigger area
+            pedesttimer = 0f;
+            IsPedestCrossed = false; // Reset the crossing state
+        }
+
+
+    }
+
+
+    private void OnDisable()
+    {
+        GameMngr.instance.OnCarSet -= HandleCarSet;
+
     }
 }
 

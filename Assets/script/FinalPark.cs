@@ -28,8 +28,6 @@ public class FinalPark : MonoBehaviour
 
     private IEnumerator MoveCarSmoothly()
     {
-
-
         // Set the car to kinematic so physics won't interfere with the movement
         Car.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 

@@ -54,6 +54,7 @@ public class GameMngr : MonoBehaviour
 
     [Header("Player")]
     public RCC_CarControllerV3 Car;
+    
 
 
 
@@ -70,6 +71,7 @@ public class GameMngr : MonoBehaviour
     [SerializeField] GameObject Conftti;
     [SerializeField] ParticleSystem CollectbleCash;
     [SerializeField] ParticleSystem CollectbleCoin;
+
 
 
     [Header("Canvas")]
@@ -104,6 +106,15 @@ public class GameMngr : MonoBehaviour
     bool isBrakePressed;
     [HideInInspector] public bool IsCorrectLane;
     [HideInInspector] public bool IsWrongLane;
+    [HideInInspector]public bool IsStoppedAtPolice;
+    [HideInInspector]public bool IsStayinginLane;
+    [HideInInspector] public float LaneTimer;
+
+
+
+
+    public delegate void CarSetEventHandler(RCC_CarControllerV3 car);
+    public event CarSetEventHandler OnCarSet;
 
 
     IEnumerator Start()
@@ -126,16 +137,21 @@ public class GameMngr : MonoBehaviour
 
 
 
-
+    LevelData lvlstats;
     #region loading/settinglvl
+
+
 
     public void OnLevelStatsLoadedHandler(LevelData levelStats)
     {
+
+        lvlstats = levelStats;
         //  string str = ValStorage.GetCar();
         // int ind = int.Parse(str);
-        Car = PlayerCars[0].GetComponent<RCC_CarControllerV3>();  //PlayerCars[ind - 1].GetComponent<RCC_CarControllerV3>();
         car = Car.gameObject.GetComponent<CarData>();
-       
+        Car = PlayerCars[0].GetComponent<RCC_CarControllerV3>(); 
+        OnCarSet?.Invoke(Car);  // Invoke the event when car is set
+
         Rigidbody rb = Car.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -158,8 +174,12 @@ public class GameMngr : MonoBehaviour
             Array.Copy(levelStats.greenred, greenred, levelStats.greenred.Length);
         }
 
-        Debug.Log("car======" + car.gameObject.name);
-        Debug.Log("spawnpoint======" + levelStats.SpawnPoint.gameObject.name);
+        if (lvlstats.IsDisabledTraffic)
+            trafficSpawner.DisableAllCars();
+
+        IsStayinginLane = lvlstats.IsStayinLane;
+
+       
 
       
     }
@@ -569,15 +589,12 @@ public class GameMngr : MonoBehaviour
         ValStorage.SetCoins(ValStorage.GetCoins() + val);
     }
 
-
-
     void Update()
     {
         if (brakelght && HasBrakeStateChanged())
         {
             UpdateBrakeLightColor(Brake.pressing);
             isBrakePressed = Brake.pressing;
-            Debug.Log("running");
         }
 
         if (IsTimerRunning)
@@ -587,56 +604,15 @@ public class GameMngr : MonoBehaviour
         }
 
 
-
-        //if (IsCorrectLane)
-        //{
-        //    // Increase the time if in the correct lane
-        //    timeInLane += Time.deltaTime;
-
-        //    // If player stays for 7 seconds in the correct lane
-        //    if (timeInLane >= 7f)
-        //    {
-        //        AppreciateCoinAdd("You Followed Turn Rule");
-        //        timeInLane = 0f;
-        //    }
-        //}
-        //else
-        //{
-        //    // If player is in the wrong lane, reset timer and show warning
-        //    timeInLane = 0f;
-        //    DiscourageCoinDeduct("You Should Followed Turn Rule");
-        //}
-
-    }
-
-
-    float timeInLane;
-    public void CheckStayLane() 
-    {
-
-        if (Car.GetComponent<RCC_CarControllerV3>().speed >= 10f)  // Check if car is moving
-            {
-                timeInLane += Time.deltaTime;
-
-                // If player stays in the correct lane for 7 seconds, reward
-                if (timeInLane >= 7f)
-                {
-                    AppreciateCoinAdd("You Followed Turn Rule");
-                    timeInLane = 0f; // Reset timer after reward
-                }
-            }
-       
-    }
-    public void CheckOutLane() 
-    {
-
-        if (Car.GetComponent<RCC_CarControllerV3>().speed >= 10f)  // Car is moving
+        if (IsStayinginLane && Car.speed>=10f) 
         {
-            // Player is out of the correct lane
-            timeInLane = 0f;  // Reset the timer since the player left the lane
-            DiscourageCoinDeduct("You Should Followed Turn Rule");
+            LaneTimer += Time.fixedDeltaTime;
+            if (LaneTimer >= 25f) 
+            {
+                AppreciateCoinAdd("You Followed Lane Rule");
+                IsStayinginLane = false;
+            }
         }
-
     }
 
 
@@ -723,7 +699,115 @@ public class GameMngr : MonoBehaviour
     }
     #endregion
 
+
+
+
+    public void PlayWalk() 
+    {
+        Transform Pedestrians = lvlstats.Pedestians;
+        foreach (Transform child in Pedestrians)
+        {
+            // Get the Animator component from each child
+            Animator animator = child.GetComponent<Animator>();
+            WaypointsTraveler traveler = child.GetComponent<WaypointsTraveler>();
+
+            // If an Animator is attached to the child, set the "IsWalk" bool to true
+            if (animator != null)
+            {
+                animator.SetBool("IsWalk", true);
+            }
+            
+            if (traveler != null)
+            {
+                traveler.enabled = true;
+            }
+        }
+
+        StartCoroutine(DelayStopWalk(Pedestrians));
+
+    }
+    IEnumerator DelayStopWalk(Transform Ped) 
+    {
+
+        yield return new WaitForSeconds(17f);
+        foreach (Transform child in Ped)
+        {
+            // Get the Animator component from each child
+            Animator animator = child.GetComponent<Animator>();
+            WaypointsTraveler traveler = child.GetComponent<WaypointsTraveler>();
+
+            // If an Animator is attached to the child, set the "IsWalk" bool to true
+            if (animator != null)
+            {
+                animator.SetBool("IsWalk", false);
+                animator.SetBool("IsWait", true);
+            }
+
+            if (traveler != null)
+            {
+                traveler.enabled = false;
+            }
+        }
+    }
+
+    public void ShowOtherCam() 
+    {
+        IsStoppedAtPolice = true;
+        Cam.enabled = false;
+      
+        if (lvlstats.Cam) 
+        {
+            lvlstats.Cam.SetActive(true);
+        }
+        if (lvlstats.Filler) 
+        {
+            ControllerBtns.alpha = 0f;
+            GameObject filer = lvlstats.Filler;
+            filer.SetActive(true);
+            StartCoroutine(FillImageOverTime(filer.transform.GetChild(0).gameObject.GetComponent<Image>()));
+        }
+    }
+
+    private IEnumerator FillImageOverTime(Image fillerimg)
+    {
+        float elapsedTime = 0f;  // Track the elapsed time
+
+        // While the elapsed time is less than the fill duration
+        while (elapsedTime < 4f)
+        {
+            // Increment elapsed time based on the frame time
+            elapsedTime += Time.deltaTime;
+
+            // Set the fillAmount of the image, clamped between 0 and 1
+            fillerimg.fillAmount = Mathf.Clamp01(elapsedTime / 4);
+
+            // Wait for the next frame
+            yield return null;
+        }
+
+        // Ensure the fillAmount is set to 1 at the end (to handle precision issues)
+        fillerimg.fillAmount = 1f;
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(OffCam()); 
+    }
+    IEnumerator OffCam() 
+    {
+        lvlstats.Filler.SetActive(false);
+        Cam.enabled = true;
+        lvlstats.Cam.SetActive(false);
+        Car.GetComponent<Rigidbody>().isKinematic = false;
+        ControllerBtns.alpha = 1f;
+        yield return new WaitForSeconds(1f);
+        AppreciateCoinAdd("You Stopped At Police CheckPoint");
+
+    }
+
 }
 
 
- 
+//Boundary to all levels
+//Polishing all levels,adding props
+//Integrate All Cars 
+// Streamline LVLsEL
+//StreamlineCarSel
+// Set Lighting
