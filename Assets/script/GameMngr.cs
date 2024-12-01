@@ -1,10 +1,9 @@
 using DG.Tweening;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UIAnimatorCore;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using WaypointsFree;
 
@@ -21,6 +20,16 @@ public enum PlayerState
 public class GameMngr : MonoBehaviour
 {
 
+    [System.Serializable]
+    public class LevlsCs
+    {
+        public GameObject Cs;
+        public GameObject Levls;
+        public float CsTime;
+        public String Appreciatetxt;
+        public String CSObjtxt;
+    }
+
 
     public static GameMngr instance;
     MySoundManager soundmgr;
@@ -32,6 +41,7 @@ public class GameMngr : MonoBehaviour
     public GameObject Fail;
     public GameObject Pause;
     public GameObject Loading;
+    public GameObject CSBlckPnl;
     public GameObject BlckPnl;
 
     [Header("GP UI")]
@@ -43,13 +53,21 @@ public class GameMngr : MonoBehaviour
     public CanvasGroup ControllerBtns;
     public GameObject Ignition;
     public GameObject Appreciate;
+    public GameObject CSAppreciate;
     public GameObject Discourage;
     public GameObject MusicOff;
     public RCC_UIController Brake;
+    public GameObject IgnitBtn;
+
+
+    [Header("Levels")]
+    [SerializeField]
+    public LevlsCs[] lvlcs;
 
 
     [Header("Camera")]
     public Camera Cam;
+    public Camera CsCam;
 
 
     [Header("Player")]
@@ -60,6 +78,7 @@ public class GameMngr : MonoBehaviour
 
     [Header("OtherScripts")]
     [SerializeField] TSTrafficSpawner trafficSpawner;
+    [SerializeField] TypingEffect CSObjtxt;
 
 
     [Header("Data")]
@@ -127,43 +146,100 @@ public class GameMngr : MonoBehaviour
         soundmgr = MySoundManager.instance;
         SetButtonTransparency(ValStorage.GetTransparency());
         Controls.SetMobileController(ValStorage.GetControls());
-        ControllerBtns.alpha = 0f;
         yield return new WaitForSeconds(2); // fixed delay
         Loading.SetActive(false);
+        
         if (soundmgr)
             soundmgr.SetBGM(true);
+
+        StartCoroutine(PlayCs());
     }
-
-
+    [SerializeField]int levelnumber;
+  
+    
+    IEnumerator PlayCs() 
+    {
+        int currentlvl = levelnumber;//1;//ValStorage.selLevel; 
+        float CSLength = lvlcs[currentlvl - 1].CsTime;
+        lvlcs[currentlvl-1].Cs.gameObject.SetActive(true);
+        CSAppreciate.transform.GetChild(0).gameObject.GetComponent<Text>().text = lvlcs[currentlvl - 1].Appreciatetxt.ToString();
+        CSObjtxt.fullText = lvlcs[currentlvl - 1].CSObjtxt;
+        CsCam.gameObject.SetActive(true);
+        yield return new WaitForSeconds(CSLength);
+        lvlcs[currentlvl-1].Cs.gameObject.SetActive(false);
+        Cam.transform.parent.parent.gameObject.SetActive(true);
+        CsCam.gameObject.SetActive(false);
+        IgnitBtn.SetActive(true);
+        lvlcs[currentlvl-1].Levls.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        CSBlckPnl.SetActive(false);
+    }
 
 
     LevelData lvlstats;
     #region loading/settinglvl
 
+    GameObject SetCar() 
+    {
+        string carIdString = ValStorage.GetCar();
 
+        // Parse CarId to an integer
+        if (int.TryParse(carIdString, out int carId))
+        {
+            // Adjust carId to be 0-based index (if necessary)
+            carId -= 1;
+
+            // Ensure the carId is within the valid range of PlayerCars array
+            if (carId >= 0 && carId < PlayerCars.Length)
+            {
+                GameObject CarObj = PlayerCars[carId];
+              //  CarObj?.SetActive(true);
+
+                // Assign the components
+                Car = CarObj.GetComponent<RCC_CarControllerV3>();
+                car = CarObj.GetComponent<CarData>();
+
+                OnCarSet?.Invoke(Car);  // Invoke the event when car is set
+                return CarObj;
+            }
+            else
+            {
+                return null;
+
+                Debug.LogError("CarId is out of bounds of the PlayerCars array.");
+            }
+
+
+        }
+        else
+        {
+            Debug.LogError("Failed to parse CarId as an integer.");
+            return null;
+
+        }
+
+    }
 
     public void OnLevelStatsLoadedHandler(LevelData levelStats)
     {
 
         lvlstats = levelStats;
-        //  string str = ValStorage.GetCar();
-        // int ind = int.Parse(str);
-        car = Car.gameObject.GetComponent<CarData>();
-        Car = PlayerCars[0].GetComponent<RCC_CarControllerV3>(); 
-        OnCarSet?.Invoke(Car);  // Invoke the event when car is set
-
-        Rigidbody rb = Car.GetComponent<Rigidbody>();
+        GameObject CarObj= SetCar();
+        CarObj.SetActive(true);
+        Rigidbody rb = CarObj.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.MovePosition(levelStats.SpawnPoint.position);
             rb.MoveRotation(levelStats.SpawnPoint.rotation);
         }
-
-        Car.gameObject.SetActive(true);
-        dancingchar.SetPositionAndRotation(levelStats.dancetrans.position, levelStats.dancetrans.rotation);
+       
 
         Indilft = car.Indilft;
         IndiRght = car.Indirght;
+
+
+        dancingchar.SetPositionAndRotation(levelStats.dancetrans.position, levelStats.dancetrans.rotation);
+
 
         CinematicCam.target = Car.transform;
         brakelght = car.BrakeLight;
@@ -173,7 +249,7 @@ public class GameMngr : MonoBehaviour
             greenred = new GameObject[levelStats.greenred.Length];
             Array.Copy(levelStats.greenred, greenred, levelStats.greenred.Length);
         }
-
+        
         if (lvlstats.IsDisabledTraffic)
             trafficSpawner.DisableAllCars();
 
@@ -305,6 +381,8 @@ public class GameMngr : MonoBehaviour
     private IEnumerator CompletePanel()
     {
 
+        UnlckNxtLvl();
+
         yield return new WaitForSeconds(8f);
         if (soundmgr)
             soundmgr.PlayCompleteSound(false);
@@ -352,6 +430,31 @@ public class GameMngr : MonoBehaviour
             CoinsEarnedInLvl = 0;
 
         return CoinsEarnedInLvl + coinsFromTime;
+    }
+
+
+
+    void UnlckNxtLvl() 
+    {
+        int currlvl = ValStorage.selLevel;
+        int unlockdlvls = ValStorage.GetUnlockedLevels();
+
+        if (currlvl == unlockdlvls) 
+        {
+            ValStorage.SetUnlockedLevels(unlockdlvls + 1);
+        }
+    }
+
+    public void NextLvlBtn() 
+    {
+
+        int currentLevelIndex = ValStorage.selLevel;
+
+        if (currentLevelIndex < lvlcs.Length)
+        {
+            ValStorage.selLevel += 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
     #endregion
 
@@ -523,6 +626,8 @@ public class GameMngr : MonoBehaviour
             greenred[0].SetActive(false);
 
         StartCoroutine(delayenablegreen());
+
+        
     }
 
     IEnumerator delayenablegreen()
@@ -811,3 +916,5 @@ public class GameMngr : MonoBehaviour
 // Streamline LVLsEL
 //StreamlineCarSel
 // Set Lighting
+//integrate garage
+//streamline CS and playlvl

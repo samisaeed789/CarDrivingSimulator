@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - TrafficCar
+  - SaveCheckpoint
+  - CheckPoint
+  - Parking
   layers:
   - Default
   - TransparentFX
@@ -21,7 +24,7 @@ TagManager:
   - RCC_Crasher
   - Player
   - Traffic AI
-  - 
+  - Ground
   - 
   - 
   - 

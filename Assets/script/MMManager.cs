@@ -91,7 +91,7 @@ public class MMManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("UnlockedLevels") == 0)
         {
-            PlayerPrefs.SetInt("UnlockedLevels", 1);
+           PlayerPrefs.SetInt("UnlockedLevels", 1);
         }
         CheckUnlocked();
 
@@ -165,15 +165,17 @@ public class MMManager : MonoBehaviour
 
     void Disablehildren()
     {
-        foreach (Transform child in CarsCont.transform)
-        {
-            // Check if the child game object is active/enabled
-            if (child.gameObject.activeSelf)
-            {
-                // Disable the child game object
-                child.gameObject.SetActive(false);
-            }
-        }
+
+        CarsCont.SetActive(false);
+        //foreach (Transform child in CarsCont.transform)
+        //{
+        //    // Check if the child game object is active/enabled
+        //    if (child.gameObject.activeSelf)
+        //    {
+        //        // Disable the child game object
+        //        child.gameObject.SetActive(false);
+        //    }
+        //}
     }
     public void SelMode(string Mode)
     {
@@ -185,6 +187,7 @@ public class MMManager : MonoBehaviour
     public void SelLevel(int i)
     {
         ValStorage.selLevel = i;
+        CarsCont.SetActive(true);
         BackBtn("Garage");
     }
 
@@ -199,6 +202,7 @@ public class MMManager : MonoBehaviour
     public void LoadNxtScene()
     {
         CarsCont.SetActive(false);
+        PanelActivity(IsLoading: true);
 
         ValStorage.SetCar(garage.GetCurrCarId());
         StartCoroutine(LoadAsyncScene("Gameplay"));
@@ -207,7 +211,6 @@ public class MMManager : MonoBehaviour
 
     IEnumerator LoadAsyncScene(string sceneName)
     {
-        PanelActivity(IsLoading: true); // Assuming this method hides/unhides panels
 
 
         //// Start loading the scene asynchronously
@@ -296,7 +299,7 @@ public class MMManager : MonoBehaviour
 
     void CheckUnlocked()
     {
-        int numUnlockedLevels = PlayerPrefs.GetInt("UnlockedLevels", 0);
+        int numUnlockedLevels = ValStorage.GetUnlockedLevels();
         // Loop through all the level buttons in your UI
         for (int i = 1; i <= LvlCards.Length; i++)
         {
@@ -320,7 +323,6 @@ public class MMManager : MonoBehaviour
                 }
             }
         }
-
     }
 
 

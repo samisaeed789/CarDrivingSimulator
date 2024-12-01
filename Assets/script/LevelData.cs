@@ -18,6 +18,7 @@ public class LevelData : MonoBehaviour
     {
         yield return new WaitForSeconds(0f);
         GameMngr.instance.OnLevelStatsLoadedHandler(this);
+        
     }
 
    

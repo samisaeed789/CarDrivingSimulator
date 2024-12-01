@@ -96,6 +96,19 @@ public static class ValStorage
         PlayerPrefs.SetInt("GQuality", val);
     }
 
+    public static void SetUnlockedLevels(int val)
+    {
+        PlayerPrefs.SetInt("UnlockedLevels", val);
+    }
+
+    public static int GetUnlockedLevels()
+    {
+       return PlayerPrefs.GetInt("UnlockedLevels", 0);
+    } 
+    
+   
+ 
+
 
 
 }

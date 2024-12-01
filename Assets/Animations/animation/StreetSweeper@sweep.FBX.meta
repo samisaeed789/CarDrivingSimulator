@@ -1,0 +1,678 @@
+fileFormatVersion: 2
+guid: baaf8c011363605438b0a7cfb10e61a8
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: sweep
+      takeName: StreetSweeper@sweep
+      internalID: -7826840743054591036
+      firstFrame: 0
+      lastFrame: 35
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Street Sweeper Pelvis
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper L Thigh
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper R Thigh
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper L Calf
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper R Calf
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper L Foot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper R Foot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper Spine1
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper L Clavicle
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper R Clavicle
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper L UpperArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper R UpperArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper L Forearm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper R Forearm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper L Hand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper R Hand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper L Toe0
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper R Toe0
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper L Finger0
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper L Finger01
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper L Finger1
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper L Finger11
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper R Finger0
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper R Finger01
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper R Finger1
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper R Finger11
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Street Sweeper Bip01 Spine2
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: StreetSweeper@sweep(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0.01648084, y: -0.4060481, z: -0.007348054, w: 0.9136736}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Street Sweeper Bip01
+      parentName: StreetSweeper@sweep(Clone)
+      position: {x: -0.0601819, y: 0.89377964, z: -0.14117774}
+      rotation: {x: -0.25206226, y: 0.65927726, z: 0.6606547, w: 0.25564328}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Street Sweeper Pelvis
+      parentName: Street Sweeper Bip01
+      position: {x: 0.007762748, y: 0.06449652, z: 0.032580394}
+      rotation: {x: 0.5, y: -0.5, z: -0.5, w: -0.5}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Street Sweeper Spine
+      parentName: Street Sweeper Pelvis
+      position: {x: -0.028730163, y: -0.00013271332, z: 0.000000076293944}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: Street Sweeper Spine1
+      parentName: Street Sweeper Spine
+      position: {x: -0.16911925, y: -0.00015888213, z: 0.000026807784}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.9999999, y: 1.0000001, z: 0.9999999}
+    - name: Street Sweeper Bip01 Spine2
+      parentName: Street Sweeper Spine1
+      position: {x: -0.20254341, y: -0.00019266127, z: -0.000000019073486}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Street Sweeper Neck
+      parentName: Street Sweeper Bip01 Spine2
+      position: {x: -0.2612719, y: -0.030895766, z: -0.000000009536743}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.9999998, y: 0.9999998, z: 0.99999976}
+    - name: Street Sweeper Head
+      parentName: Street Sweeper Neck
+      position: {x: -0.07193527, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: Street Sweeper HeadNub
+      parentName: Street Sweeper Head
+      position: {x: -0.21165909, y: -0.000000076293944, z: -0.000000009536743}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: Street Sweeper Z_l01
+      parentName: Street Sweeper Head
+      position: {x: -0.091463774, y: 0.060984954, z: 0.034166098}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.90362823, y: 0.99999994, z: 1.0000002}
+    - name: Street Sweeper Z_l02
+      parentName: Street Sweeper Z_l01
+      position: {x: -0.03463192, y: -0.00000045776366, z: -0.000000057220458}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.54988, y: 1, z: 1}
+    - name: Street Sweeper Z_r01
+      parentName: Street Sweeper Head
+      position: {x: -0.09148193, y: 0.060978774, z: -0.033934277}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.90362793, y: 0.99999994, z: 0.9999998}
+    - name: Street Sweeper Z_r02
+      parentName: Street Sweeper Z_r01
+      position: {x: -0.034631692, y: -0.00000061035155, z: -0.000000019073486}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.54988, y: 0.99999994, z: 1.0000001}
+    - name: Street Sweeper X_r01
+      parentName: Street Sweeper Head
+      position: {x: -0.10571411, y: 0.02004158, z: -0.025440587}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.99999994, y: 1.0000001, z: 0.9999998}
+    - name: Street Sweeper X_r02
+      parentName: Street Sweeper X_r01
+      position: {x: -0.07308334, y: 0.00000045776366, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Street Sweeper X_l01
+      parentName: Street Sweeper Head
+      position: {x: -0.10571411, y: 0.02004158, z: 0.018815279}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 0.9999999, z: 0.99999994}
+    - name: Street Sweeper X_l02
+      parentName: Street Sweeper X_l01
+      position: {x: -0.07308334, y: 0.00000045776366, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: Street Sweeper talk chin
+      parentName: Street Sweeper Head
+      position: {x: -0.04590515, y: 0.009378738, z: -0.00038122176}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.96593416, y: 0.9093088, z: 0.9365706}
+    - name: Street Sweeper talk lower lip01
+      parentName: Street Sweeper talk chin
+      position: {x: -0.10765686, y: 0.0000015258788, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.728163, y: 0.6717846, z: 0.9999998}
+    - name: Street Sweeper talk lower lip02
+      parentName: Street Sweeper talk lower lip01
+      position: {x: -0.04208679, y: -0.00000015258789, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Street Sweeper talk mouth l01
+      parentName: Street Sweeper Head
+      position: {x: -0.07000671, y: 0.049388655, z: 0.0517405}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Street Sweeper talk mouth l02
+      parentName: Street Sweeper talk mouth l01
+      position: {x: -0.064173274, y: 0.000000076293944, z: -0.000000076293944}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Street Sweeper talk mouth r01
+      parentName: Street Sweeper Head
+      position: {x: -0.07000656, y: 0.049388885, z: -0.05173133}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: -1.0000001, y: -1.0000001, z: -1.0000004}
+    - name: Street Sweeper talk mouth r02
+      parentName: Street Sweeper talk mouth r01
+      position: {x: -0.064173274, y: 0.000000076293944, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1.0000001}
+    - name: Street Sweeper talk upper lip01
+      parentName: Street Sweeper Head
+      position: {x: -0.048719175, y: 0.10568256, z: 0.0006360912}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.7209615, y: 0.7209616, z: 0.7209614}
+    - name: Street Sweeper talk upper lip02
+      parentName: Street Sweeper talk upper lip01
+      position: {x: -0.02138321, y: -0.00000015258789, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 0.9999999}
+    - name: Street Sweeper L Clavicle
+      parentName: Street Sweeper Neck
+      position: {x: 0.04370674, y: 0.010579376, z: 0.06329729}
+      rotation: {x: 0.7071068, y: -0.000000030908623, z: -0.7071068, w: 0.000000030908623}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Street Sweeper L UpperArm
+      parentName: Street Sweeper L Clavicle
+      position: {x: -0.1291613, y: -0.000000038146972, z: -0.000000076293944}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Street Sweeper L Forearm
+      parentName: Street Sweeper L UpperArm
+      position: {x: -0.28900167, y: -0.000000019073486, z: 0.000000038146972}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Street Sweeper L Hand
+      parentName: Street Sweeper L Forearm
+      position: {x: -0.2475932, y: 0, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: -0.7071068}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Street Sweeper L Finger0
+      parentName: Street Sweeper L Hand
+      position: {x: -0.05872402, y: 0.034131125, z: -0.036342163}
+      rotation: {x: 0, y: 0.3826835, z: 0, w: -0.9238795}
+      scale: {x: 1, y: 1, z: 0.9999999}
+    - name: Street Sweeper L Finger01
+      parentName: Street Sweeper L Finger0
+      position: {x: -0.031305313, y: 0.000000038146972, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Street Sweeper L Finger0Nub
+      parentName: Street Sweeper L Finger01
+      position: {x: -0.029867476, y: 0, z: -0.000000038146972}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Street Sweeper L Finger1
+      parentName: Street Sweeper L Hand
+      position: {x: -0.10276691, y: -0.0058421516, z: -0.0022507475}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: Street Sweeper L Finger11
+      parentName: Street Sweeper L Finger1
+      position: {x: -0.038304538, y: 0, z: 0.000000076293944}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Street Sweeper L Finger1Nub
+      parentName: Street Sweeper L Finger11
+      position: {x: -0.056294553, y: -0.000000038146972, z: -0.000000076293944}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+    - name: Street Sweeper R Clavicle
+      parentName: Street Sweeper Neck
+      position: {x: 0.043706816, y: 0.01057991, z: -0.06329739}
+      rotation: {x: 0.7071068, y: -0.000000030908623, z: 0.7071068, w: -0.000000030908623}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+    - name: Street Sweeper R UpperArm
+      parentName: Street Sweeper R Clavicle
+      position: {x: -0.12916115, y: 0.000000076293944, z: -0.000000076293944}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 0.9999999}
+    - name: Street Sweeper R Forearm
+      parentName: Street Sweeper R UpperArm
+      position: {x: -0.28900167, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Street Sweeper R Hand
+      parentName: Street Sweeper R Forearm
+      position: {x: -0.26123434, y: 0, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Street Sweeper R Finger0
+      parentName: Street Sweeper R Hand
+      position: {x: -0.054415166, y: 0.034131125, z: 0.036342084}
+      rotation: {x: 0, y: 0.38268346, z: 0, w: 0.9238795}
+      scale: {x: 1.0000001, y: 0.99999976, z: 0.9999998}
+    - name: Street Sweeper R Finger01
+      parentName: Street Sweeper R Finger0
+      position: {x: -0.03130533, y: 0.000000076293944, z: 0.000000076293944}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Street Sweeper R Finger0Nub
+      parentName: Street Sweeper R Finger01
+      position: {x: -0.029867515, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: -1.0000001, y: -1.0000001, z: -1.0000001}
+    - name: Street Sweeper R Finger1
+      parentName: Street Sweeper R Hand
+      position: {x: -0.095226474, y: -0.0058421707, z: 0.0022506714}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Street Sweeper R Finger11
+      parentName: Street Sweeper R Finger1
+      position: {x: -0.03830452, y: -0.000000038146972, z: 0.00000015258789}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Street Sweeper R Finger1Nub
+      parentName: Street Sweeper R Finger11
+      position: {x: -0.056294553, y: -0.000000009536743, z: -0.00000015258789}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: -1, y: -0.99999994, z: -0.9999999}
+    - name: Street Sweeper L Thigh
+      parentName: Street Sweeper Spine
+      position: {x: 0.02829483, y: 0.004984741, z: 0.104785055}
+      rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+      scale: {x: 0.9999999, y: 0.99999994, z: 1}
+    - name: Street Sweeper L Calf
+      parentName: Street Sweeper L Thigh
+      position: {x: -0.42609218, y: -0.000000009536743, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Street Sweeper L Foot
+      parentName: Street Sweeper L Calf
+      position: {x: -0.36854872, y: 0.000000019073486, z: -0.000000009536743}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: Street Sweeper L Toe0
+      parentName: Street Sweeper L Foot
+      position: {x: -0.10482761, y: 0.13279818, z: 0.000000019073486}
+      rotation: {x: 0, y: 0, z: 0.7071068, w: -0.7071068}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: Street Sweeper L Toe0Nub
+      parentName: Street Sweeper L Toe0
+      position: {x: -0.09430392, y: -1.4901161e-10, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: -1, y: -0.99999994, z: -1}
+    - name: Street Sweeper R Thigh
+      parentName: Street Sweeper Spine
+      position: {x: 0.02829483, y: 0.0049853134, z: -0.10478502}
+      rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+      scale: {x: 0.99999976, y: 0.99999994, z: 1}
+    - name: Street Sweeper R Calf
+      parentName: Street Sweeper R Thigh
+      position: {x: -0.42609218, y: 0, z: -0.000000038146972}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+    - name: Street Sweeper R Foot
+      parentName: Street Sweeper R Calf
+      position: {x: -0.36854872, y: 0.000000009536743, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 0.99999994, y: 0.9999999, z: 0.9999999}
+    - name: Street Sweeper R Toe0
+      parentName: Street Sweeper R Foot
+      position: {x: -0.10482759, y: 0.1327982, z: -0.000000019073486}
+      rotation: {x: 0, y: 0, z: 0.7071068, w: -0.7071068}
+      scale: {x: 0.9999999, y: 0.9999999, z: 1}
+    - name: Street Sweeper R Toe0Nub
+      parentName: Street Sweeper R Toe0
+      position: {x: -0.0943039, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Street Sweeper Broom Contrl
+      parentName: StreetSweeper@sweep(Clone)
+      position: {x: 0.3376838, y: 1.0702773, z: 0.0627774}
+      rotation: {x: 0.075172834, y: 0.062060177, z: 0.7191128, w: 0.6880221}
+      scale: {x: 0.9999998, y: 0.9999996, z: 0.99999994}
+    - name: Street Sweeper Broom Bone01_
+      parentName: Street Sweeper Broom Contrl
+      position: {x: 0.46685424, y: 0.0010061264, z: 0.000000019073486}
+      rotation: {x: 0.0000069061352, y: 0.0000000027941476, z: 0.000000026077009, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: Street Sweeper Broom Bone02
+      parentName: Street Sweeper Broom Bone01_
+      position: {x: -1.1306399, y: -0.000000076293944, z: 0.0000000667572}
+      rotation: {x: 0.000054367094, y: -0.05067052, z: 0.0010762553, w: 0.99871486}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: Street Sweeper Broom Bone03
+      parentName: Street Sweeper Broom Bone02
+      position: {x: -0.22417583, y: 0, z: -0.0000000047683715}
+      rotation: {x: 0.000000035529048, y: -0.17829947, z: -0.00000007111399, w: 0.9839763}
+      scale: {x: 0.9999999, y: 1, z: 0.99999994}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 1
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

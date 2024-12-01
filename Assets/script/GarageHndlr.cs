@@ -91,15 +91,14 @@ public class GarageHndlr : MonoBehaviour
             carPrice.SetActive(false);
             purchaseButton.SetActive(false);
             NextBtn.SetActive(true);
-            carPrice.SetActive(false);
 
         }
         else
         {
             carPriceText.text = $"{currentCar.carPrice}";
             carPrice.SetActive(true);
-            purchaseButton.SetActive(true);
             Locked.SetActive(true);
+            purchaseButton.SetActive(true);
             NextBtn.SetActive(false);
         }
 
