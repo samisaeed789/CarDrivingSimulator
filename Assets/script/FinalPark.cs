@@ -5,14 +5,19 @@ using UnityEngine;
 public class FinalPark : MonoBehaviour
 {
     // Start is called before the first frame update
-    Transform Car;
+    [SerializeField]RCC_CarControllerV3 Car;
     public Transform targetpoint;
     public float lerpDuration = 2.0f;
+
+
+  
+    
     IEnumerator Start()
     {
-        targetpoint= transform.GetChild(0);
+        
+
+        targetpoint = transform.GetChild(0);
         yield return new WaitForSeconds(1f);
-        Car = GameMngr.instance.Car.transform;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,6 +33,7 @@ public class FinalPark : MonoBehaviour
 
     private IEnumerator MoveCarSmoothly()
     {
+        Car = GameMngr.instance.Car;
         // Set the car to kinematic so physics won't interfere with the movement
         Car.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -62,4 +68,8 @@ public class FinalPark : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         this.transform.GetChild(1).gameObject.SetActive(false);
     }
+
+
+
+  
 }

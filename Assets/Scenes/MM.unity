@@ -475,8 +475,8 @@ RectTransform:
   m_GameObject: {fileID: 46798912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1178368566}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -554,7 +554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3949,6 +3949,10 @@ GameObject:
   - component: {fileID: 342254251}
   - component: {fileID: 342254253}
   - component: {fileID: 342254252}
+  - component: {fileID: 342254257}
+  - component: {fileID: 342254256}
+  - component: {fileID: 342254255}
+  - component: {fileID: 342254254}
   m_Layer: 5
   m_Name: NotEnough
   m_TagString: Untagged
@@ -4014,6 +4018,283 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 342254250}
   m_CullTransparentMesh: 1
+--- !u!114 &342254254
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342254250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7ce344bdbf44c759e49900e2c1f754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_delay:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.5
+    m_to: 0
+    m_masterValues: []
+    m_numTargets: 1
+  m_duration:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.15
+    m_to: 1
+    m_masterValues:
+    - 1
+    m_numTargets: 1
+  m_easing: 0
+  m_audioClipDatas: []
+  m_numTargets: 1
+  m_waitForPreviousComplete: 0
+  m_grabbedInitialDefaultStateData: 1
+  m_inspectorToggleState: 1
+  m_position:
+    m_type: 0
+    m_offsettingEnabled: 1
+    m_from: {x: -1410.19, y: -228, z: 0}
+    m_to: {x: -205, y: -228, z: 0}
+    m_masterValues:
+    - {x: -205, y: -228, z: 0}
+  m_scale:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: 1, y: 1, z: 1}
+    m_to: {x: 1, y: 1, z: 1}
+    m_masterValues:
+    - {x: 1, y: 1, z: 1}
+  m_rotation:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: -0, y: 0, z: 0}
+    m_to: {x: -0, y: 0, z: 0}
+    m_masterValues:
+    - {x: -0, y: 0, z: 0}
+  m_targetTransforms:
+  - {fileID: 1794620190}
+--- !u!114 &342254255
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342254250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f26260995f049b491ac2b1d470a8ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_delay:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.65
+    m_to: 0
+    m_masterValues: []
+    m_numTargets: 1
+  m_duration:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.15
+    m_to: 1
+    m_masterValues:
+    - 1
+    m_numTargets: 1
+  m_easing: 0
+  m_audioClipDatas: []
+  m_numTargets: 1
+  m_waitForPreviousComplete: 0
+  m_grabbedInitialDefaultStateData: 1
+  m_inspectorToggleState: 1
+  m_position:
+    m_type: 0
+    m_offsettingEnabled: 1
+    m_from: {x: -33, y: 118, z: 0}
+    m_to: {x: -33, y: 118, z: 0}
+    m_masterValues:
+    - {x: -33, y: 118, z: 0}
+  m_scale:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: 10, y: 10, z: 10}
+    m_to: {x: 1, y: 1, z: 1}
+    m_masterValues:
+    - {x: 1, y: 1, z: 1}
+  m_rotation:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: -0, y: 0, z: 0}
+    m_to: {x: -0, y: 0, z: 0}
+    m_masterValues:
+    - {x: -0, y: 0, z: 0}
+  m_targetTransforms:
+  - {fileID: 46798913}
+  m_targetGraphicsData:
+  - m_masterAlphas:
+    - 1
+    m_activeStates: 01
+    m_graphics:
+    - {fileID: 46798915}
+  m_animatedAlpha: 0
+--- !u!114 &342254256
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342254250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7ce344bdbf44c759e49900e2c1f754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_delay:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.55
+    m_to: 0
+    m_masterValues: []
+    m_numTargets: 1
+  m_duration:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.15
+    m_to: 1
+    m_masterValues:
+    - 1
+    m_numTargets: 1
+  m_easing: 0
+  m_audioClipDatas: []
+  m_numTargets: 1
+  m_waitForPreviousComplete: 0
+  m_grabbedInitialDefaultStateData: 1
+  m_inspectorToggleState: 1
+  m_position:
+    m_type: 0
+    m_offsettingEnabled: 1
+    m_from: {x: -1150.0801, y: -104, z: 0}
+    m_to: {x: -471, y: -104, z: 0}
+    m_masterValues:
+    - {x: -471, y: -104, z: 0}
+  m_scale:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: 1, y: 1, z: 1}
+    m_to: {x: 1, y: 1, z: 1}
+    m_masterValues:
+    - {x: 1, y: 1, z: 1}
+  m_rotation:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: -0, y: 0, z: 0}
+    m_to: {x: -0, y: 0, z: 0}
+    m_masterValues:
+    - {x: -0, y: 0, z: 0}
+  m_targetTransforms:
+  - {fileID: 1763343501}
+--- !u!114 &342254257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342254250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce038cdb30583464a80edda1c76a515a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_playOnEnableAMD:
+    m_enabled: 1
+    m_animType: 0
+    m_delay: 0
+  m_startPoseAMD:
+    m_enabled: 1
+    m_animType: 0
+    m_delay: 0
+  m_afterIntroAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_afterLoopAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_onPointerEnterAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_onPointerExitAMD:
+    m_enabled: 0
+    m_animType: 0
+    m_delay: 0
+  m_timeMode: 1
+  m_animationSetups:
+  - m_animationStages:
+    - m_animationInstances:
+      - m_targetObjects:
+        - {fileID: 1763343500}
+        m_animationSteps:
+        - {fileID: 342254256}
+        m_targetStepIndexes: 01000000
+        m_uiAnimatorSubModule: {fileID: 0}
+        m_startDelay: 0
+        m_inspectorToggleState: 1
+      - m_targetObjects:
+        - {fileID: 1794620189}
+        m_animationSteps:
+        - {fileID: 342254254}
+        m_targetStepIndexes: 01000000
+        m_uiAnimatorSubModule: {fileID: 0}
+        m_startDelay: 0
+        m_inspectorToggleState: 1
+      - m_targetObjects:
+        - {fileID: 46798912}
+        m_animationSteps:
+        - {fileID: 342254255}
+        m_targetStepIndexes: 01000000
+        m_uiAnimatorSubModule: {fileID: 0}
+        m_startDelay: 0
+        m_inspectorToggleState: 1
+      m_startDelay: 0
+      m_endDelay: 0
+      m_inspectorToggleState: 1
+    m_onStartAction:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onFinishedAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - m_animationStages:
+    - m_animationInstances: []
+      m_startDelay: 0
+      m_endDelay: 0
+      m_inspectorToggleState: 1
+    m_onStartAction:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onFinishedAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - m_animationStages:
+    - m_animationInstances: []
+      m_startDelay: 0
+      m_endDelay: 0
+      m_inspectorToggleState: 1
+    m_onStartAction:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onFinishedAction:
+      m_PersistentCalls:
+        m_Calls: []
+  m_timer: 0.84244764
+  m_currentAnimSetupIndex: 0
+  m_audioSourceContainer: {fileID: 0}
+  m_audioSources: []
+  m_playLoopAnimInfinitely: 1
+  m_numLoopIterations: 0
+  m_showExtraSettings: 0
 --- !u!1 &370131585
 GameObject:
   m_ObjectHideFlags: 0
@@ -8858,7 +9139,10 @@ GameObject:
   - component: {fileID: 571217932}
   - component: {fileID: 571217935}
   - component: {fileID: 571217934}
+  - component: {fileID: 571217937}
   - component: {fileID: 571217936}
+  - component: {fileID: 571217939}
+  - component: {fileID: 571217938}
   m_Layer: 5
   m_Name: Congratulate
   m_TagString: Untagged
@@ -9051,6 +9335,69 @@ MonoBehaviour:
   onDisableBehaviour: 2
 --- !u!114 &571217936
 MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571217930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f26260995f049b491ac2b1d470a8ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_delay:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.65
+    m_to: 0
+    m_masterValues: []
+    m_numTargets: 1
+  m_duration:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.15
+    m_to: 1
+    m_masterValues:
+    - 1
+    m_numTargets: 1
+  m_easing: 0
+  m_audioClipDatas: []
+  m_numTargets: 1
+  m_waitForPreviousComplete: 0
+  m_grabbedInitialDefaultStateData: 1
+  m_inspectorToggleState: 1
+  m_position:
+    m_type: 0
+    m_offsettingEnabled: 1
+    m_from: {x: -33, y: 118, z: 0}
+    m_to: {x: -33, y: 118, z: 0}
+    m_masterValues:
+    - {x: -33, y: 118, z: 0}
+  m_scale:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: 10, y: 10, z: 10}
+    m_to: {x: 1, y: 1, z: 1}
+    m_masterValues:
+    - {x: 1, y: 1, z: 1}
+  m_rotation:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: -0, y: 0, z: 0}
+    m_to: {x: -0, y: 0, z: 0}
+    m_masterValues:
+    - {x: -0, y: 0, z: 0}
+  m_targetTransforms:
+  - {fileID: 412220386}
+  m_targetGraphicsData:
+  - m_masterAlphas:
+    - 1
+    m_activeStates: 01
+    m_graphics:
+    - {fileID: 412220388}
+  m_animatedAlpha: 0.2
+--- !u!114 &571217937
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -9090,9 +9437,9 @@ MonoBehaviour:
   - m_animationStages:
     - m_animationInstances:
       - m_targetObjects:
-        - {fileID: 412220385}
+        - {fileID: 1290073493}
         m_animationSteps:
-        - {fileID: 0}
+        - {fileID: 571217938}
         m_targetStepIndexes: 01000000
         m_uiAnimatorSubModule: {fileID: 0}
         m_startDelay: 0
@@ -9100,15 +9447,15 @@ MonoBehaviour:
       - m_targetObjects:
         - {fileID: 1387159524}
         m_animationSteps:
-        - {fileID: 0}
+        - {fileID: 571217939}
         m_targetStepIndexes: 01000000
         m_uiAnimatorSubModule: {fileID: 0}
         m_startDelay: 0
         m_inspectorToggleState: 1
       - m_targetObjects:
-        - {fileID: 1290073493}
+        - {fileID: 412220385}
         m_animationSteps:
-        - {fileID: 0}
+        - {fileID: 571217936}
         m_targetStepIndexes: 01000000
         m_uiAnimatorSubModule: {fileID: 0}
         m_startDelay: 0
@@ -9144,13 +9491,125 @@ MonoBehaviour:
     m_onFinishedAction:
       m_PersistentCalls:
         m_Calls: []
-  m_timer: 0.920571
+  m_timer: 0.8327968
   m_currentAnimSetupIndex: 0
   m_audioSourceContainer: {fileID: 0}
   m_audioSources: []
   m_playLoopAnimInfinitely: 1
   m_numLoopIterations: 0
   m_showExtraSettings: 0
+--- !u!114 &571217938
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571217930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7ce344bdbf44c759e49900e2c1f754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_delay:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.55
+    m_to: 0
+    m_masterValues: []
+    m_numTargets: 1
+  m_duration:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.15
+    m_to: 1
+    m_masterValues:
+    - 1
+    m_numTargets: 1
+  m_easing: 0
+  m_audioClipDatas: []
+  m_numTargets: 1
+  m_waitForPreviousComplete: 0
+  m_grabbedInitialDefaultStateData: 1
+  m_inspectorToggleState: 1
+  m_position:
+    m_type: 0
+    m_offsettingEnabled: 1
+    m_from: {x: -1345.72, y: -104, z: 0}
+    m_to: {x: -261.8, y: -104, z: 0}
+    m_masterValues:
+    - {x: -261.8, y: -104, z: 0}
+  m_scale:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: 1, y: 1, z: 1}
+    m_to: {x: 1, y: 1, z: 1}
+    m_masterValues:
+    - {x: 1, y: 1, z: 1}
+  m_rotation:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: -0, y: 0, z: 0}
+    m_to: {x: -0, y: 0, z: 0}
+    m_masterValues:
+    - {x: -0, y: 0, z: 0}
+  m_targetTransforms:
+  - {fileID: 1290073494}
+--- !u!114 &571217939
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571217930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7ce344bdbf44c759e49900e2c1f754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_delay:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.5
+    m_to: 0
+    m_masterValues: []
+    m_numTargets: 1
+  m_duration:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: 0.15
+    m_to: 1
+    m_masterValues:
+    - 1
+    m_numTargets: 1
+  m_easing: 0
+  m_audioClipDatas: []
+  m_numTargets: 1
+  m_waitForPreviousComplete: 0
+  m_grabbedInitialDefaultStateData: 1
+  m_inspectorToggleState: 1
+  m_position:
+    m_type: 0
+    m_offsettingEnabled: 1
+    m_from: {x: -1351.01, y: -228, z: 0}
+    m_to: {x: -261.8, y: -228, z: 0}
+    m_masterValues:
+    - {x: -261.8, y: -228, z: 0}
+  m_scale:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: 1, y: 1, z: 1}
+    m_to: {x: 1, y: 1, z: 1}
+    m_masterValues:
+    - {x: 1, y: 1, z: 1}
+  m_rotation:
+    m_type: 1
+    m_offsettingEnabled: 0
+    m_from: {x: -0, y: 0, z: 0}
+    m_to: {x: -0, y: 0, z: 0}
+    m_masterValues:
+    - {x: -0, y: 0, z: 0}
+  m_targetTransforms:
+  - {fileID: 1387159525}
 --- !u!1 &575075103
 GameObject:
   m_ObjectHideFlags: 0
@@ -14834,7 +15293,6 @@ GameObject:
   - component: {fileID: 1178368567}
   - component: {fileID: 1178368571}
   - component: {fileID: 1178368570}
-  - component: {fileID: 1178368569}
   m_Layer: 5
   m_Name: Congratulate
   m_TagString: Untagged
@@ -14902,108 +15360,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178368565}
   m_CullTransparentMesh: 1
---- !u!114 &1178368569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1178368565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce038cdb30583464a80edda1c76a515a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_playOnEnableAMD:
-    m_enabled: 1
-    m_animType: 0
-    m_delay: 0
-  m_startPoseAMD:
-    m_enabled: 1
-    m_animType: 0
-    m_delay: 0
-  m_afterIntroAMD:
-    m_enabled: 0
-    m_animType: 0
-    m_delay: 0
-  m_afterLoopAMD:
-    m_enabled: 0
-    m_animType: 0
-    m_delay: 0
-  m_onPointerEnterAMD:
-    m_enabled: 0
-    m_animType: 0
-    m_delay: 0
-  m_onPointerExitAMD:
-    m_enabled: 0
-    m_animType: 0
-    m_delay: 0
-  m_timeMode: 1
-  m_animationSetups:
-  - m_animationStages:
-    - m_animationInstances:
-      - m_targetObjects:
-        - {fileID: 46798912}
-        m_animationSteps:
-        - {fileID: 0}
-        m_targetStepIndexes: 01000000
-        m_uiAnimatorSubModule: {fileID: 0}
-        m_startDelay: 0
-        m_inspectorToggleState: 1
-      - m_targetObjects:
-        - {fileID: 1794620189}
-        m_animationSteps:
-        - {fileID: 0}
-        m_targetStepIndexes: 01000000
-        m_uiAnimatorSubModule: {fileID: 0}
-        m_startDelay: 0
-        m_inspectorToggleState: 1
-      - m_targetObjects:
-        - {fileID: 1763343500}
-        m_animationSteps:
-        - {fileID: 0}
-        m_targetStepIndexes: 01000000
-        m_uiAnimatorSubModule: {fileID: 0}
-        m_startDelay: 0
-        m_inspectorToggleState: 1
-      m_startDelay: 0
-      m_endDelay: 0
-      m_inspectorToggleState: 1
-    m_onStartAction:
-      m_PersistentCalls:
-        m_Calls: []
-    m_onFinishedAction:
-      m_PersistentCalls:
-        m_Calls: []
-  - m_animationStages:
-    - m_animationInstances: []
-      m_startDelay: 0
-      m_endDelay: 0
-      m_inspectorToggleState: 1
-    m_onStartAction:
-      m_PersistentCalls:
-        m_Calls: []
-    m_onFinishedAction:
-      m_PersistentCalls:
-        m_Calls: []
-  - m_animationStages:
-    - m_animationInstances: []
-      m_startDelay: 0
-      m_endDelay: 0
-      m_inspectorToggleState: 1
-    m_onStartAction:
-      m_PersistentCalls:
-        m_Calls: []
-    m_onFinishedAction:
-      m_PersistentCalls:
-        m_Calls: []
-  m_timer: 0
-  m_currentAnimSetupIndex: 0
-  m_audioSourceContainer: {fileID: 0}
-  m_audioSources: []
-  m_playLoopAnimInfinitely: 1
-  m_numLoopIterations: 0
-  m_showExtraSettings: 0
 --- !u!114 &1178368570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23059,8 +23415,8 @@ RectTransform:
   m_GameObject: {fileID: 1763343500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1178368566}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23506,7 +23862,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -1393.02, y: -228}
+  m_AnchoredPosition: {x: -205, y: -228}
   m_SizeDelta: {x: 836, y: 112}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1794620191

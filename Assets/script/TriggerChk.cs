@@ -22,7 +22,7 @@ public class TriggerChk : MonoBehaviour
 
 
     CarData plyrcar;
-    RCC_CarControllerV3 Car;
+    [SerializeField]RCC_CarControllerV3 Car;
 
 
     private void OnEnable()

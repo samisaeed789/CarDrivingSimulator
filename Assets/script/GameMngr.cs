@@ -189,15 +189,16 @@ public class GameMngr : MonoBehaviour
             // Adjust carId to be 0-based index (if necessary)
             carId -= 1;
 
+            Debug.Log("Carid  +"+carId);
             // Ensure the carId is within the valid range of PlayerCars array
             if (carId >= 0 && carId < PlayerCars.Length)
             {
-                GameObject CarObj = PlayerCars[1]; //carId];
+                GameObject CarObj = PlayerCars[carId]; //carId];
 
                 // Assign the components
                 Car = CarObj.GetComponent<RCC_CarControllerV3>();
                 car = CarObj.GetComponent<CarData>();
-
+                Debug.Log("Car      "+Car.gameObject.name);
                 OnCarSet?.Invoke(Car);  // Invoke the event when car is set
                 return CarObj;
             }
@@ -231,9 +232,6 @@ public class GameMngr : MonoBehaviour
             rb.MovePosition(levelStats.SpawnPoint.position);
             rb.MoveRotation(levelStats.SpawnPoint.rotation);
         }
-
-       // Indilft = car.Indilft;
-       // IndiRght = car.Indirght;
 
 
         dancingchar.SetPositionAndRotation(levelStats.dancetrans.position, levelStats.dancetrans.rotation);
