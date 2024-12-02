@@ -299,7 +299,7 @@ public class MMManager : MonoBehaviour
 
     void CheckUnlocked()
     {
-        int numUnlockedLevels = ValStorage.GetUnlockedLevels();
+        int numUnlockedLevels =  ValStorage.GetUnlockedLevels();
         // Loop through all the level buttons in your UI
         for (int i = 1; i <= LvlCards.Length; i++)
         {

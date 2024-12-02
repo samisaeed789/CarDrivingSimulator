@@ -84,8 +84,8 @@ public class GameMngr : MonoBehaviour
     [Header("Data")]
     public GameObject[] PlayerCars;
     public WaypointsTraveler[] TrafficCars;
-    GameObject Indilft;
-    GameObject IndiRght;
+    //GameObject Indilft;
+    //GameObject IndiRght;
     [SerializeField] Transform dancingchar;
     [SerializeField] GameObject Conftti;
     [SerializeField] ParticleSystem CollectbleCash;
@@ -119,7 +119,7 @@ public class GameMngr : MonoBehaviour
     GameObject FinalPoint;
     bool IsTimerRunning = false;
     static int CoinsEarnedInLvl;
-    MeshRenderer brakelght;
+    GameObject[] brakelght;
     [SerializeField] GameObject[] greenred;
     Color color;
     bool isBrakePressed;
@@ -159,7 +159,7 @@ public class GameMngr : MonoBehaviour
     
     IEnumerator PlayCs() 
     {
-        int currentlvl = levelnumber;//1;//ValStorage.selLevel; 
+        int currentlvl = 1;// ValStorage.selLevel; 
         float CSLength = lvlcs[currentlvl - 1].CsTime;
         lvlcs[currentlvl-1].Cs.gameObject.SetActive(true);
         CSAppreciate.transform.GetChild(0).gameObject.GetComponent<Text>().text = lvlcs[currentlvl - 1].Appreciatetxt.ToString();
@@ -192,8 +192,7 @@ public class GameMngr : MonoBehaviour
             // Ensure the carId is within the valid range of PlayerCars array
             if (carId >= 0 && carId < PlayerCars.Length)
             {
-                GameObject CarObj = PlayerCars[carId];
-              //  CarObj?.SetActive(true);
+                GameObject CarObj = PlayerCars[1]; //carId];
 
                 // Assign the components
                 Car = CarObj.GetComponent<RCC_CarControllerV3>();
@@ -232,17 +231,17 @@ public class GameMngr : MonoBehaviour
             rb.MovePosition(levelStats.SpawnPoint.position);
             rb.MoveRotation(levelStats.SpawnPoint.rotation);
         }
-       
 
-        Indilft = car.Indilft;
-        IndiRght = car.Indirght;
+       // Indilft = car.Indilft;
+       // IndiRght = car.Indirght;
 
 
         dancingchar.SetPositionAndRotation(levelStats.dancetrans.position, levelStats.dancetrans.rotation);
 
 
         CinematicCam.target = Car.transform;
-        brakelght = car.BrakeLight;
+        brakelght = new GameObject[car.BrakeLight.Length];
+        Array.Copy(car.BrakeLight, brakelght, car.BrakeLight.Length);
 
         if (levelStats.greenred != null)
         {
@@ -383,7 +382,7 @@ public class GameMngr : MonoBehaviour
 
         UnlckNxtLvl();
 
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(10f);
         if (soundmgr)
             soundmgr.PlayCompleteSound(false);
         Complete.SetActive(true);
@@ -558,14 +557,14 @@ public class GameMngr : MonoBehaviour
         if (RightIndActv.activeSelf)
         {
             RightIndActv.SetActive(false);
-            IndiRght.SetActive(false);
+           // IndiRght.SetActive(false);
         }
 
         // Toggle the left indicator
         if (LeftIndActv.activeSelf)
         {
             LeftIndActv.SetActive(false);
-            Indilft.SetActive(false);
+           // Indilft.SetActive(false);
             car.currentState = PlayerState.None;
             if (soundmgr)
                 soundmgr.playindiSound(false);
@@ -573,7 +572,7 @@ public class GameMngr : MonoBehaviour
         else
         {
             LeftIndActv.SetActive(true);
-            Indilft.SetActive(true);
+          //  Indilft.SetActive(true);
             car.currentState = PlayerState.LeftIndicator;
 
             // Optionally play sound for left indicator here
@@ -588,14 +587,14 @@ public class GameMngr : MonoBehaviour
         if (LeftIndActv.activeSelf)
         {
             LeftIndActv.SetActive(false);
-            Indilft.SetActive(false);
+           // Indilft.SetActive(false);
         }
 
         // Toggle the right indicator
         if (RightIndActv.activeSelf)
         {
             RightIndActv.SetActive(false);
-            IndiRght.SetActive(false);
+          //  IndiRght.SetActive(false);
             car.currentState = PlayerState.None;
 
             if (soundmgr)
@@ -605,7 +604,7 @@ public class GameMngr : MonoBehaviour
         else
         {
             RightIndActv.SetActive(true);
-            IndiRght.SetActive(true);
+           // IndiRght.SetActive(true);
             car.currentState = PlayerState.RightIndicator;
 
             // Optionally play sound for right indicator here
@@ -696,7 +695,7 @@ public class GameMngr : MonoBehaviour
 
     void Update()
     {
-        if (brakelght && HasBrakeStateChanged())
+        if (brakelght!=null && HasBrakeStateChanged())
         {
             UpdateBrakeLightColor(Brake.pressing);
             isBrakePressed = Brake.pressing;
@@ -731,8 +730,13 @@ public class GameMngr : MonoBehaviour
 
     private void UpdateBrakeLightColor(bool isPressed)
     {
-        Color color = isPressed ? Color.red : Color.grey; // Use Unity's predefined colors for clarity
-        brakelght.material.color = color;
+        //Color color = isPressed ? Color.red : Color.grey; // Use Unity's predefined colors for clarity
+
+        foreach(GameObject mesh in brakelght) 
+        {
+            //mesh.material.color = color;
+            mesh.gameObject.SetActive(isPressed);
+        }
     }
     void UpdateTimerText()
     {
@@ -918,3 +922,5 @@ public class GameMngr : MonoBehaviour
 // Set Lighting
 //integrate garage
 //streamline CS and playlvl
+
+//fix indic in all cars.

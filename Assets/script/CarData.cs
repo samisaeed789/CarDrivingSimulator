@@ -5,7 +5,5 @@ using UnityEngine;
 public class CarData : MonoBehaviour
 {
     public PlayerState currentState = PlayerState.None;
-    public GameObject Indilft;
-    public GameObject Indirght;
-    public MeshRenderer BrakeLight;
+    public GameObject[] BrakeLight;
 }

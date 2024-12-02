@@ -81,7 +81,21 @@ namespace RGSK
             reflectionCamera.transform.position = newpos;
             Vector3 euler = cam.transform.eulerAngles;
             reflectionCamera.transform.eulerAngles = new Vector3(0, euler.y, euler.z);
-            reflectionCamera.Render();
+
+            Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam); // Get the object's bounding box (Collider or Renderer bounds)
+            Bounds objectBounds = GetComponent<Renderer>().bounds;
+
+            if (GeometryUtility.TestPlanesAABB(planes, objectBounds))
+            {
+
+                reflectionCamera.Render();
+            }
+            else
+            {
+                // Object is outside the frustum, so skip rendering
+                // You can log something or simply avoid the reflection processing
+            }
+         
             reflectionCamera.transform.position = oldpos;
             GL.invertCulling = false;
             Material[] materials = rend.sharedMaterials;

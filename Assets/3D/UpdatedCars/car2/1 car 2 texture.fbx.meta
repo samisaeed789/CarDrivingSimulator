@@ -3,12 +3,32 @@ guid: 532083934e4c7974abb70972234574e4
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 21475dbb03471c24bbe10ed399c37a9f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MercedesGClass_Base_Color
+    second: {fileID: 2100000, guid: df44eff34b52b684a835471a1436e2f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rims_Atlas___1
+    second: {fileID: 2100000, guid: e20c1baf231824d4c86e0e5f4f5f89be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vehicle_generic_tyrewallblack
+    second: {fileID: 2100000, guid: 06fd3e8c782028e4dafb767621210bc0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

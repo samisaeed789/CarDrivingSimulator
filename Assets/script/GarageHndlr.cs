@@ -84,7 +84,7 @@ public class GarageHndlr : MonoBehaviour
 
         // Check if the car is purchased
         bool isPurchased = PlayerPrefs.GetInt(currentCar.carID) == 1;
-
+        Debug.Log("IsPurchased   "+isPurchased);
         if (isPurchased)
         {
             Locked.SetActive(false);
