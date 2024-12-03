@@ -230,7 +230,7 @@ public class RCC_WheelCollider : RCC_Core {
                 ps.transform.SetParent(transform, false);
                 ps.transform.localPosition = Vector3.zero;
                 ps.transform.localRotation = Quaternion.identity;
-                allWheelParticles.Add(ps.GetComponent<ParticleSystem>());
+               // allWheelParticles.Add(ps.GetComponent<ParticleSystem>());
 
             }
 
@@ -390,8 +390,8 @@ public class RCC_WheelCollider : RCC_Core {
         GroundMaterial();
         Frictions();
         TotalSlip();
-        SkidMarks();
-        Particles();
+      //  SkidMarks();
+      //  Particles();
         Audio();
         CheckDeflate();
 

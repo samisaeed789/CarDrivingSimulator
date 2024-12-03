@@ -312,14 +312,14 @@ public class MMManager : MonoBehaviour
                 if (i <= numUnlockedLevels)
                 {
                     levelButton.interactable = true;
-                    levelButton.transform.GetChild(0).gameObject.SetActive(false);
+                    levelButton.transform.GetChild(1).gameObject.SetActive(false);
 
                 }
                 else
                 {
                     // If this level is locked, make the button not interactable
                     levelButton.interactable = false;
-                    levelButton.transform.GetChild(0).gameObject.SetActive(true);
+                    levelButton.transform.GetChild(1).gameObject.SetActive(true);
                 }
             }
         }

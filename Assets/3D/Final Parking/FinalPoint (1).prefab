@@ -4940,8 +4940,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5582755437493601112}
-  - component: {fileID: 5457232135335528898}
-  - component: {fileID: 2381649703828317107}
   - component: {fileID: 1507542925224529483}
   - component: {fileID: 7684266487942740577}
   m_Layer: 2
@@ -4968,56 +4966,6 @@ Transform:
   - {fileID: 6014872810725689798}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90.291, y: 0.0019989014, z: -89.99899}
---- !u!33 &5457232135335528898
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9195615656089558382}
-  m_Mesh: {fileID: 4300000, guid: 1df89222326eaf2469a4e8bdb64a11f3, type: 2}
---- !u!23 &2381649703828317107
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9195615656089558382}
-  m_Enabled: 0
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 0
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 7d8cef74826a85945aecd3f18a1c158e, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &1507542925224529483
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5051,3 +4999,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30bc7284d96be943bce5c065218c122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Car: {fileID: 0}
+  targetpoint: {fileID: 0}
+  lerpDuration: 2
