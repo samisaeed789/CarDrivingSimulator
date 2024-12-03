@@ -10,14 +10,45 @@ public class FinalPark : MonoBehaviour
     public float lerpDuration = 2.0f;
 
 
-  
-    
-    IEnumerator Start()
-    {
-        
 
-        targetpoint = transform.GetChild(0);
-        yield return new WaitForSeconds(1f);
+   
+    private void HandleCarSet(RCC_CarControllerV3 car)
+    {
+        Car = car;
+
+
+        if (Car.gameObject.name == "Mazda") 
+        {
+            targetpoint = transform.GetChild(0);
+        }
+
+        if (Car.gameObject.name == "Jeep") 
+        {
+            targetpoint = transform.GetChild(1);
+
+        }
+
+
+        if (Car.gameObject.name == "Audi_Etron") 
+        {
+            targetpoint = transform.GetChild(2);
+
+        }
+        if (Car.gameObject.name == "Bugatti") 
+        {
+            targetpoint = transform.GetChild(3);
+        }
+
+    }
+
+
+
+    void Start()
+    {
+        if (GameMngr.instance)
+        {
+            GameMngr.instance.OnCarSet += HandleCarSet;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,8 +57,6 @@ public class FinalPark : MonoBehaviour
         {
             StartCoroutine(MoveCarSmoothly());
             GameMngr.instance.Celeb();
-
-
         }
     }
 
@@ -66,10 +95,17 @@ public class FinalPark : MonoBehaviour
       
 
         yield return new WaitForSeconds(0.5f);
-        this.transform.GetChild(1).gameObject.SetActive(false);
+        this.transform.GetChild(4).gameObject.SetActive(false);
     }
 
 
 
-  
+    private void OnDisable()
+    {
+
+        if (GameMngr.instance)
+        {
+            GameMngr.instance.OnCarSet -= HandleCarSet;
+        }
+    }
 }

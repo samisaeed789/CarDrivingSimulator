@@ -133,17 +133,7 @@ public class TriggerChk : MonoBehaviour
           //  GameMngr.instance.CheckStayLane();
         }
 
-        if (Pedestrian)
-        {
-            if (!IsPedestCrossed) // Only track if player hasn't already been flagged
-            {
-                pedesttimer += Time.deltaTime; // Increment the timer
-                if (pedesttimer >= 17f) // If the player waits for 17 seconds
-                {
-                    IsPedestCrossed = true; // Player followed the rule
-                }
-            }
-        }
+      
     }
 
     // Called when another collider exits the trigger zone
@@ -161,9 +151,6 @@ public class TriggerChk : MonoBehaviour
             }
         }
 
-       
-   
-
         if (SpeedLimit)
         {
             if (Car.speed <= 40f)
@@ -177,31 +164,19 @@ public class TriggerChk : MonoBehaviour
             }
         }
 
-
-        if (Pedestrian) // Ensure we're dealing with the player or correct object
+        if (Pedestrian) 
         {
-            // Debugging
-            Debug.LogError("PedestTimer: " + pedesttimer);
-            Debug.LogError("IsPedestCrossed: " + IsPedestCrossed);
-
-            // Check the result of the player's behavior
-            if (IsPedestCrossed)
+            bool HasCrossed = GameMngr.instance.HasPedestriansCrossed;
+            if (HasCrossed) 
             {
-                // The player stayed for 17 seconds, appreciate them
                 GameMngr.instance.AppreciateCoinAdd("You Followed Pedestrian Rule");
+
             }
-            else
+            else 
             {
-                // The player didn't stay for 17 seconds, discourage them
                 GameMngr.instance.DiscourageCoinDeduct("You Should Follow Pedestrian Rule");
             }
-
-            // Reset timer and flags when player exits the trigger area
-            pedesttimer = 0f;
-            IsPedestCrossed = false; // Reset the crossing state
         }
-
-
     }
 
 

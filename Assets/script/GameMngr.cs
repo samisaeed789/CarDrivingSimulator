@@ -84,12 +84,11 @@ public class GameMngr : MonoBehaviour
     [Header("Data")]
     public GameObject[] PlayerCars;
     public WaypointsTraveler[] TrafficCars;
-    //GameObject Indilft;
-    //GameObject IndiRght;
     [SerializeField] Transform dancingchar;
     [SerializeField] GameObject Conftti;
     [SerializeField] ParticleSystem CollectbleCash;
     [SerializeField] ParticleSystem CollectbleCoin;
+    
 
 
 
@@ -128,6 +127,7 @@ public class GameMngr : MonoBehaviour
     [HideInInspector]public bool IsStoppedAtPolice;
     [HideInInspector]public bool IsStayinginLane;
     [HideInInspector] public float LaneTimer;
+    [HideInInspector] public bool HasPedestriansCrossed;
 
 
 
@@ -136,11 +136,17 @@ public class GameMngr : MonoBehaviour
     public event CarSetEventHandler OnCarSet;
 
 
-    IEnumerator Start()
+
+    private void Awake()
     {
         if (instance == null)
             instance = this;
+    }
 
+    IEnumerator Start()
+    {
+
+        trafficSpawner.gameObject.SetActive(false);
         UpdateTimerText();
         CinematicCam = Cam.transform.parent.parent.gameObject.GetComponent<RCC_CameraCarSelection>();
         soundmgr = MySoundManager.instance;
@@ -159,7 +165,7 @@ public class GameMngr : MonoBehaviour
     
     IEnumerator PlayCs() 
     {
-        int currentlvl = 1;// ValStorage.selLevel; 
+        int currentlvl = 2;// ValStorage.selLevel; 
         float CSLength = lvlcs[currentlvl - 1].CsTime;
         lvlcs[currentlvl-1].Cs.gameObject.SetActive(true);
         CSAppreciate.transform.GetChild(0).gameObject.GetComponent<Text>().text = lvlcs[currentlvl - 1].Appreciatetxt.ToString();
@@ -171,8 +177,11 @@ public class GameMngr : MonoBehaviour
         CsCam.gameObject.SetActive(false);
         IgnitBtn.SetActive(true);
         lvlcs[currentlvl-1].Levls.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         CSBlckPnl.SetActive(false);
+        trafficSpawner.gameObject.SetActive(true);
+
+
     }
 
 
@@ -181,42 +190,46 @@ public class GameMngr : MonoBehaviour
 
     GameObject SetCar() 
     {
-        string carIdString = ValStorage.GetCar();
+        //string carIdString = ValStorage.GetCar();
 
-        // Parse CarId to an integer
-        if (int.TryParse(carIdString, out int carId))
-        {
-            // Adjust carId to be 0-based index (if necessary)
-            carId -= 1;
+        //// Parse CarId to an integer
+        //if (int.TryParse(carIdString, out int carId))
+        //{
+        //    // Adjust carId to be 0-based index (if necessary)
+        //    carId -= 1;
 
-            Debug.Log("Carid  +"+carId);
-            // Ensure the carId is within the valid range of PlayerCars array
-            if (carId >= 0 && carId < PlayerCars.Length)
-            {
-                GameObject CarObj = PlayerCars[carId]; //carId];
+        //    Debug.Log("Carid  +"+carId);
+        //    // Ensure the carId is within the valid range of PlayerCars array
+        //    if (carId >= 0 && carId < PlayerCars.Length)
+        //    {
+        //        GameObject CarObj = PlayerCars[carId]; //carId];
 
-                // Assign the components
-                Car = CarObj.GetComponent<RCC_CarControllerV3>();
-                car = CarObj.GetComponent<CarData>();
-                Debug.Log("Car      "+Car.gameObject.name);
-                OnCarSet?.Invoke(Car);  // Invoke the event when car is set
-                return CarObj;
-            }
-            else
-            {
-                return null;
+        //        // Assign the components
+        //        Car = CarObj.GetComponent<RCC_CarControllerV3>();
+        //        car = CarObj.GetComponent<CarData>();
+        //        Debug.Log("Car      "+Car.gameObject.name);
 
-                Debug.LogError("CarId is out of bounds of the PlayerCars array.");
-            }
+        //        return CarObj;
+        //    }
+        //    else
+        //    {
+        //        return null;
+
+        //        Debug.LogError("CarId is out of bounds of the PlayerCars array.");
+        //    }
 
 
-        }
-        else
-        {
-            Debug.LogError("Failed to parse CarId as an integer.");
-            return null;
+        //}
+        //else
+        //{
+        //    Debug.LogError("Failed to parse CarId as an integer.");
+        //    return null;
 
-        }
+        //}
+        GameObject CarObj = PlayerCars[1];
+        Car = CarObj.GetComponent<RCC_CarControllerV3>();
+        car = CarObj.GetComponent<CarData>();
+        return CarObj;
 
     }
 
@@ -226,6 +239,9 @@ public class GameMngr : MonoBehaviour
         lvlstats = levelStats;
         GameObject CarObj= SetCar();
         CarObj.SetActive(true);
+        
+        OnCarSet?.Invoke(CarObj.GetComponent<RCC_CarControllerV3>());  // Invoke the event when car is set
+
         Rigidbody rb = CarObj.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -855,6 +871,7 @@ public class GameMngr : MonoBehaviour
                 traveler.enabled = false;
             }
         }
+        HasPedestriansCrossed = true;
     }
 
     public void ShowOtherCam() 
