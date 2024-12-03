@@ -165,7 +165,7 @@ public class GameMngr : MonoBehaviour
     
     IEnumerator PlayCs() 
     {
-        int currentlvl = 2;// ValStorage.selLevel; 
+        int currentlvl = 4;// ValStorage.selLevel; 
         float CSLength = lvlcs[currentlvl - 1].CsTime;
         lvlcs[currentlvl-1].Cs.gameObject.SetActive(true);
         CSAppreciate.transform.GetChild(0).gameObject.GetComponent<Text>().text = lvlcs[currentlvl - 1].Appreciatetxt.ToString();
@@ -180,8 +180,6 @@ public class GameMngr : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         CSBlckPnl.SetActive(false);
         trafficSpawner.gameObject.SetActive(true);
-
-
     }
 
 
