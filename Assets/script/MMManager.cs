@@ -87,7 +87,6 @@ public class MMManager : MonoBehaviour
         if (Instance == null)
             Instance = this;
 
-        //PlayerPrefs.SetInt("UnlockedLevels", 5);
 
         if (PlayerPrefs.GetInt("UnlockedLevels") == 0)
         {
@@ -123,14 +122,37 @@ public class MMManager : MonoBehaviour
     private void Start()
     {
 
-
-
         SetCoins();
         Time.timeScale = 1f;
+     
+    }
 
-      //  Application.targetFrameRate = 120;
+    void CheckUnlocked()
+    {
+        int numUnlockedLevels = ValStorage.GetUnlockedLevels();
+        // Loop through all the level buttons in your UI
+        for (int i = 1; i <= LvlCards.Length; i++)
+        {
+            // Get a reference to the button
+            Button levelButton = LvlCards[i - 1];
 
-      //  IsLowEndDevice();
+            if (levelButton != null)
+            {
+                // If this level is unlocked, make the button interactable
+                if (i <= numUnlockedLevels)
+                {
+                    levelButton.interactable = true;
+                    levelButton.transform.GetChild(1).gameObject.SetActive(false);
+
+                }
+                else
+                {
+                    // If this level is locked, make the button not interactable
+                    levelButton.interactable = false;
+                    levelButton.transform.GetChild(1).gameObject.SetActive(true);
+                }
+            }
+        }
     }
 
     public void BackBtn(string S)
@@ -163,17 +185,7 @@ public class MMManager : MonoBehaviour
 
     void Disablehildren()
     {
-
         CarsCont.SetActive(false);
-        //foreach (Transform child in CarsCont.transform)
-        //{
-        //    // Check if the child game object is active/enabled
-        //    if (child.gameObject.activeSelf)
-        //    {
-        //        // Disable the child game object
-        //        child.gameObject.SetActive(false);
-        //    }
-        //}
     }
     public void SelMode(string Mode)
     {
@@ -294,33 +306,7 @@ public class MMManager : MonoBehaviour
         }
     }
 
-    void CheckUnlocked()
-    {
-        int numUnlockedLevels =  ValStorage.GetUnlockedLevels();
-        // Loop through all the level buttons in your UI
-        for (int i = 1; i <= LvlCards.Length; i++)
-        {
-            // Get a reference to the button
-            Button levelButton = LvlCards[i - 1];
-
-            if (levelButton != null)
-            {
-                // If this level is unlocked, make the button interactable
-                if (i <= numUnlockedLevels)
-                {
-                    levelButton.interactable = true;
-                    levelButton.transform.GetChild(1).gameObject.SetActive(false);
-
-                }
-                else
-                {
-                    // If this level is locked, make the button not interactable
-                    levelButton.interactable = false;
-                    levelButton.transform.GetChild(1).gameObject.SetActive(true);
-                }
-            }
-        }
-    }
+  
 
 
     public void Exit(bool val)

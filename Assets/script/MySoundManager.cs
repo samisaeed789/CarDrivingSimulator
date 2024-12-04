@@ -374,6 +374,10 @@ public class MySoundManager : MonoBehaviour {
 	{
 		SetBGM(true);
 
+		bool play = GameMngr.instance.IsIndsiactive();
+		
+		playindiSound(play);
+		
 	}
 
 

@@ -367,7 +367,7 @@ public class GameMngr : MonoBehaviour
             soundmgr.playindiSound(false);
         }
 
-        
+        CarSound(false);
 
 
         trafficSpawner.DisableAllCars();
@@ -591,6 +591,18 @@ public class GameMngr : MonoBehaviour
         if (RightIndActv)
         {
             RightIndActv.SetActive(IsRight);
+        }
+    }
+    
+    public bool IsIndsiactive()
+    {
+       if(LeftIndActv.activeSelf || RightIndActv.activeSelf) 
+        {
+            return true;
+        }
+        else 
+        {
+          return   false;
         }
     }
 
@@ -956,13 +968,32 @@ public class GameMngr : MonoBehaviour
         yield return new WaitForSeconds(1f);
         AppreciateCoinAdd("You Stopped At Police CheckPoint");
     }
+    void CarSound(bool IsActive) 
+    {
 
+        Transform child = Car.transform.Find("All Audio Sources");
+
+
+        if (child != null)
+        {
+            child.gameObject.SetActive(IsActive);
+
+        }
+        else
+        {
+         
+
+            Debug.LogError("Object not found!");
+        }
+    }
   
     public void Pause()
     {
         if(soundmgr)
             soundmgr.PauseSounds();
-
+       
+        CarSound(false);
+   
 
         Time.timeScale = 0f;
         PausePnl.SetActive(true);
@@ -974,6 +1005,7 @@ public class GameMngr : MonoBehaviour
         if (soundmgr)
             soundmgr.ResumeSounds();
 
+        CarSound(true);
         Time.timeScale = 1f;
         PausePnl.SetActive(false);
     }
