@@ -363,7 +363,18 @@ public class MySoundManager : MonoBehaviour {
         BGM.volume = value;
     }
 
+	public void PauseSounds() 
+	{
+		SetBGM(false);
+		playindiSound(false);
 
+	}
+	
+	public void ResumeSounds() 
+	{
+		SetBGM(true);
+
+	}
 
 
 }

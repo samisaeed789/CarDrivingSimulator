@@ -45,8 +45,7 @@ public class GarageHndlr : MonoBehaviour
 
     private void OnEnable()
     {
-        UpdateCarUI();
-
+        
     }
     private void Start()
     {
@@ -65,6 +64,8 @@ public class GarageHndlr : MonoBehaviour
                 PlayerPrefs.SetInt(car.carID, 0); // 0 = not purchased, 1 = purchased
             }
         }
+
+        UpdateCarUI();
     }
 
     private void UpdateCarUI()

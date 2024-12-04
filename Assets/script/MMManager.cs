@@ -60,8 +60,8 @@ public class MMManager : MonoBehaviour
 
     [Header("Texts")]
     public Text[] Coins;
-    public Text percentageText;
-
+    public Text prcnttxt;    
+    [SerializeField] Animator sphere;    
 
 
     [Header("OtherClasses")]
@@ -124,8 +124,6 @@ public class MMManager : MonoBehaviour
     {
 
 
-        if (GiveCoins)
-            ValStorage.SetCoins(5000);
 
         SetCoins();
         Time.timeScale = 1f;
@@ -209,42 +207,41 @@ public class MMManager : MonoBehaviour
     }
 
 
+
+
     IEnumerator LoadAsyncScene(string sceneName)
     {
+        float timer = 0f;
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        asyncLoad.allowSceneActivation = false;
 
-
-        //// Start loading the scene asynchronously
-        async = SceneManager.LoadSceneAsync(sceneName);
-        async.allowSceneActivation = false; // Prevent the scene from activating immediately
-
-
-
-        //// Loop while the scene is loading
-        while (!async.isDone)
+        while (timer < 5f)
         {
-
-            percentageText.text = Mathf.FloorToInt(loadingBar.fillAmount * 100) + "%";
-
-
-
-            // When the async load reaches 90%, show 100% and allow the scene to activate
-            if (async.progress >= 0.9f && loadingBar.fillAmount >= 1f)
+            if (timer < 5f)
             {
-                // Ensure the loading bar is filled to 100% after 5 seconds
-                loadingBar.fillAmount = 1f;  // Fill the bar to 100%
-                percentageText.text = "100%"; // Show 100%
-
-                // Allow scene activation after the progress reaches 90%
-                async.allowSceneActivation = true;
+                timer += Time.deltaTime;
+                float progress = Mathf.Clamp01(timer / 5f);  // Progress from 0 to 1 based on timer
+                loadingBar.fillAmount = progress;
+                prcnttxt.text = $"{Mathf.RoundToInt(progress * 100)}%";
             }
+            else
+            {
+                // Once the timer reaches 5 seconds, start loading the scene
+                // Ensure the progress bar stays at 100% before activation
+                loadingBar.fillAmount = 1f;
+                prcnttxt.text = "100%";
 
-            yield return null; // Wait for the next frame
+                Debug.Log("allow");
+                // Allow the scene to activate
+                asyncLoad.allowSceneActivation = true;
+            }
+            yield return null;
         }
-
-
+        sphere.enabled = false;
+        yield return new WaitForSeconds(0.1f);
+        asyncLoad.allowSceneActivation = true;
     }
-
-
+   
 
     public void PanelActivity(bool MM = false, bool ModeSel = false, bool LvlSel = false, bool ExitPnl = false, bool SettingsPnl = false, bool Garage = false, bool IsLoading = false)
     {

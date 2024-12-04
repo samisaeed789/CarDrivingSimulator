@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using WaypointsFree;
+using UnityEngine.Audio;
 
 
 
@@ -39,7 +40,7 @@ public class GameMngr : MonoBehaviour
     [Header("Panels")]
     public GameObject Complete;
     public GameObject Fail;
-    public GameObject Pause;
+    public GameObject PausePnl;
     public GameObject Loading;
     public GameObject CSBlckPnl;
     public GameObject BlckPnl;
@@ -47,6 +48,7 @@ public class GameMngr : MonoBehaviour
     [Header("GP UI")]
     public Image[] UIgp;
     public GameObject gearup;
+    public GameObject LoadBar;
     public GameObject geardown;
     public GameObject LeftIndActv;
     public GameObject RightIndActv;
@@ -58,6 +60,8 @@ public class GameMngr : MonoBehaviour
     public GameObject MusicOff;
     public RCC_UIController Brake;
     public GameObject IgnitBtn;
+    public Image loadingBar;
+    public Animator sphere;
 
 
     [Header("Levels")]
@@ -102,6 +106,8 @@ public class GameMngr : MonoBehaviour
     public Text TotalCompltxt;
     public Text CoinsEarnedlvltxt;
     public Text Timetxt;
+    public Text percentageText;
+
 
 
 
@@ -128,12 +134,16 @@ public class GameMngr : MonoBehaviour
     [HideInInspector]public bool IsStayinginLane;
     [HideInInspector] public float LaneTimer;
     [HideInInspector] public bool HasPedestriansCrossed;
+    private AsyncOperation async;
+
 
 
 
 
     public delegate void CarSetEventHandler(RCC_CarControllerV3 car);
     public event CarSetEventHandler OnCarSet;
+    
+   
 
 
 
@@ -141,11 +151,14 @@ public class GameMngr : MonoBehaviour
     {
         if (instance == null)
             instance = this;
+
+     
+
     }
 
     IEnumerator Start()
     {
-
+        RCC_Settings.Instance.dontUseAnyParticleEffects = true;
         trafficSpawner.gameObject.SetActive(false);
         UpdateTimerText();
         CinematicCam = Cam.transform.parent.parent.gameObject.GetComponent<RCC_CameraCarSelection>();
@@ -348,11 +361,13 @@ public class GameMngr : MonoBehaviour
 
     public void Celeb()
     {
-        if (soundmgr)
+        if (soundmgr) 
+        {
             soundmgr.PlayCompleteSound(true);
+            soundmgr.playindiSound(false);
+        }
 
-
-        // Car.audioType = RCC_CarControllerV3.AudioType.Off;
+        
 
 
         trafficSpawner.DisableAllCars();
@@ -388,6 +403,8 @@ public class GameMngr : MonoBehaviour
         yield return new WaitForSeconds(10f);
         if (soundmgr)
             soundmgr.PlayCompleteSound(false);
+
+        BlckPnl.SetActive(false);
         Complete.SetActive(true);
         SetCoinsinPanel();
         car.gameObject.SetActive(false);
@@ -409,20 +426,41 @@ public class GameMngr : MonoBehaviour
 
     private IEnumerator CounterAnimation(int totalCoins)
     {
+
         yield return new WaitForSeconds(1f);
+        int duration = 3; // Total duration for the animation
+        float elapsedTime = 0f; // Time elapsed since the start of the animation
         int currentCoins = 0;
+
+        // Play sound if available
         if (soundmgr)
             soundmgr.PlaycoinSound();
-        while (currentCoins < totalCoins)
+
+        // Calculate the number of coins per second
+        int coinsPerSecond = totalCoins / duration;
+
+        // Loop until the animation reaches the total coins
+        while (elapsedTime < duration)
         {
-            currentCoins += Mathf.CeilToInt(2 * Time.deltaTime);
+            elapsedTime += Time.deltaTime; // Accumulate elapsed time
+            currentCoins = Mathf.FloorToInt(coinsPerSecond * elapsedTime); // Increment coins
+
+            // Make sure currentCoins does not exceed totalCoins
             currentCoins = Mathf.Min(currentCoins, totalCoins);
+
+            // Update the UI or text with the current number of coins
             TotalCompltxt.text = currentCoins.ToString();
-            yield return null;
+
+            yield return null; // Wait until the next frame
         }
 
+        // Ensure the final count is exactly totalCoins
+        TotalCompltxt.text = totalCoins.ToString();
+
+        // Stop sound if available
         if (soundmgr)
             soundmgr.StopcoinSound();
+
     }
 
     private int CalculateTotalCoins()
@@ -449,13 +487,16 @@ public class GameMngr : MonoBehaviour
 
     public void NextLvlBtn() 
     {
+        Loading.SetActive(true);
+        LoadBar.SetActive(true);
+       
 
         int currentLevelIndex = ValStorage.selLevel;
 
         if (currentLevelIndex < lvlcs.Length)
         {
             ValStorage.selLevel += 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            StartCoroutine(LoadAsyncScene("GamePlay"));
         }
     }
     #endregion
@@ -620,7 +661,7 @@ public class GameMngr : MonoBehaviour
 
 
 
-
+    [HideInInspector]public bool IsGreenEnabled;
 
     public void EnableGreen()
     {
@@ -638,9 +679,11 @@ public class GameMngr : MonoBehaviour
         if (greenred[1] != null)
             greenred[1].SetActive(true);
 
-        yield return new WaitForSeconds(0.3f);
 
-        AppreciateCoinAdd("You Followed Traffic Signal Rule");
+        IsGreenEnabled = true;
+//        yield return new WaitForSeconds(0.3f);
+
+        //AppreciateCoinAdd("You Followed Traffic Signal Rule");
     }
 
 
@@ -717,7 +760,7 @@ public class GameMngr : MonoBehaviour
             if (LaneTimer >= 25f) 
             {
                 AppreciateCoinAdd("You Followed Lane Rule");
-                IsStayinginLane = false;
+                LaneTimer = 0f;
             }
         }
     }
@@ -912,19 +955,85 @@ public class GameMngr : MonoBehaviour
         ControllerBtns.alpha = 1f;
         yield return new WaitForSeconds(1f);
         AppreciateCoinAdd("You Stopped At Police CheckPoint");
-
     }
 
+  
+    public void Pause()
+    {
+        if(soundmgr)
+            soundmgr.PauseSounds();
+
+
+        Time.timeScale = 0f;
+        PausePnl.SetActive(true);
+    }
+   
+    public void Resume() 
+    {
+
+        if (soundmgr)
+            soundmgr.ResumeSounds();
+
+        Time.timeScale = 1f;
+        PausePnl.SetActive(false);
+    }
+    
+    public void Restart() 
+    {
+        Time.timeScale = 1f;
+        Loading.SetActive(true);
+        LoadBar.SetActive(true);
+        StartCoroutine(LoadAsyncScene("GamePlay"));
+
+    }
+    
+    public void Home() 
+    {
+        Time.timeScale = 1f;
+        Loading.SetActive(true);
+        LoadBar.SetActive(true);
+        StartCoroutine(LoadAsyncScene("MM"));
+    }
+
+   
+
+
+    IEnumerator LoadAsyncScene(string sceneName)
+    {
+        float timer = 0f;
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        asyncLoad.allowSceneActivation = false;
+
+        while (timer < 5f)
+        {
+            if (timer < 5f)
+            {
+                timer += Time.deltaTime;
+                float progress = Mathf.Clamp01(timer / 5f);  // Progress from 0 to 1 based on timer
+                loadingBar.fillAmount = progress;
+                percentageText.text = $"{Mathf.RoundToInt(progress * 100)}%";
+            }
+            else
+            {
+                // Once the timer reaches 5 seconds, start loading the scene
+                // Ensure the progress bar stays at 100% before activation
+                loadingBar.fillAmount = 1f;
+                percentageText.text = "100%";
+
+                // Allow the scene to activate
+                asyncLoad.allowSceneActivation = true;
+            }
+            yield return null;
+        }
+        sphere.enabled = false;
+        yield return new WaitForSeconds(0.1f);
+        asyncLoad.allowSceneActivation = true;
+    }
 }
 
 
-//Boundary to all levels
-//Polishing all levels,adding props
-//Integrate All Cars 
-// Streamline LVLsEL
-//StreamlineCarSel
-// Set Lighting
-//integrate garage
-//streamline CS and playlvl
 
-//fix indic in all cars.
+// add headlights
+//car sound off on complete 
+//indi sound off on complete
+

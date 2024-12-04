@@ -20,6 +20,8 @@ public class TriggerChk : MonoBehaviour
     float pedesttimer;
     bool IsPedestCrossed;
 
+    GameMngr gm;
+
 
     CarData plyrcar;
     [SerializeField]RCC_CarControllerV3 Car;
@@ -38,7 +40,12 @@ public class TriggerChk : MonoBehaviour
 
     }
 
-   
+    private void Start()
+    {
+        gm = GameMngr.instance;
+    }
+
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -50,11 +57,11 @@ public class TriggerChk : MonoBehaviour
             {
                 if (plyrcar.currentState == PlayerState.LeftIndicator || plyrcar.currentState == PlayerState.RightIndicator)
                 {
-                    GameMngr.instance.AppreciateCoinAdd("You Followed Indicator Rule");
+                    gm.AppreciateCoinAdd("You Followed Indicator Rule");
                 }
                 else
                 {
-                    GameMngr.instance.DiscourageCoinDeduct("You Should Follow Indicator Rule");
+                    gm.DiscourageCoinDeduct("You Should Follow Indicator Rule");
                 }
             }
 
@@ -66,20 +73,20 @@ public class TriggerChk : MonoBehaviour
 
             if (StayInLane)
             {
-                GameMngr.instance.LaneTimer = 0f;
-                GameMngr.instance.DiscourageCoinDeduct("You Should Stay in your Lane");
+                gm.LaneTimer = 0f;
+                gm.DiscourageCoinDeduct("You Should Stay in your Lane");
             }
             
             if (Pedestrian)
             {
-                GameMngr.instance.PlayWalk();
+                gm.PlayWalk();
             }
 
             if (PoliceChk) 
             {
-                if (!GameMngr.instance.IsStoppedAtPolice) 
+                if (!gm.IsStoppedAtPolice) 
                 {
-                    GameMngr.instance.DiscourageCoinDeduct("You Should Stop At CheckPoint");
+                    gm.DiscourageCoinDeduct("You Should Stop At CheckPoint");
                 }
             }  
             
@@ -88,11 +95,11 @@ public class TriggerChk : MonoBehaviour
             {
                 if (plyrcar.currentState == PlayerState.LeftIndicator)
                 {
-                    GameMngr.instance.AppreciateCoinAdd("You Followed Indicator Rule");
+                    gm.AppreciateCoinAdd("You Followed Indicator Rule");
                 }
                 else
                 {
-                    GameMngr.instance.DiscourageCoinDeduct("You Should Follow Indicator Rule");
+                    gm.DiscourageCoinDeduct("You Should Follow Indicator Rule");
                 }
             }
 
@@ -100,11 +107,11 @@ public class TriggerChk : MonoBehaviour
             {
                 if (plyrcar.currentState == PlayerState.RightIndicator)
                 {
-                    GameMngr.instance.AppreciateCoinAdd("You Followed Indicator Rule");
+                    gm.AppreciateCoinAdd("You Followed Indicator Rule");
                 }
                 else
                 {
-                    GameMngr.instance.DiscourageCoinDeduct("You Should Follow Indicator Rule");
+                    gm.DiscourageCoinDeduct("You Should Follow Indicator Rule");
                 }
             }
 
@@ -123,17 +130,10 @@ public class TriggerChk : MonoBehaviour
             // If the player stays for the full 5 seconds
             if (timer >= 4)
             {
-                GameMngr.instance.EnableGreen();  // Call the appreciate method
+                gm.EnableGreen();  // Call the appreciate method
                 isInTrigger = false;  // Prevent further calls to appreciate
             }
         }
-
-        if (StayInLane) 
-        {
-          //  GameMngr.instance.CheckStayLane();
-        }
-
-      
     }
 
     // Called when another collider exits the trigger zone
@@ -143,11 +143,20 @@ public class TriggerChk : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
-                if (timer < 4)
+                //if (timer < 4)
+                //{
+                //     GameMngr.instance.DiscourageCoinDeduct("You Should Follow Signal Rule");  // Call the warning method if the player exits early
+                //}
+                //isInTrigger = false;  // Reset trigger state
+                Debug.Log("gm.isgreenenabled    "+gm.IsGreenEnabled);
+                if (gm.IsGreenEnabled) 
                 {
-                     GameMngr.instance.DiscourageCoinDeduct("You Should Follow Signal Rule");  // Call the warning method if the player exits early
+                    gm.AppreciateCoinAdd("You Followed Traffic Signal Rule");
                 }
-                isInTrigger = false;  // Reset trigger state
+                else if(!gm.IsGreenEnabled)
+                {
+                    gm.DiscourageCoinDeduct("You Should Follow Signal Rule");
+                }
             }
         }
 
@@ -155,11 +164,11 @@ public class TriggerChk : MonoBehaviour
         {
             if (Car.speed <= 40f)
             {
-                GameMngr.instance.AppreciateCoinAdd("Speed Limit Rule Followed");
+                gm.AppreciateCoinAdd("Speed Limit Rule Followed");
             }
             else
             {
-                GameMngr.instance.AppreciateCoinAdd("You Should Follow Speed Limit Rule");
+                gm.AppreciateCoinAdd("You Should Follow Speed Limit Rule");
 
             }
         }
@@ -169,12 +178,12 @@ public class TriggerChk : MonoBehaviour
             bool HasCrossed = GameMngr.instance.HasPedestriansCrossed;
             if (HasCrossed) 
             {
-                GameMngr.instance.AppreciateCoinAdd("You Followed Pedestrian Rule");
+                gm.AppreciateCoinAdd("You Followed Pedestrian Rule");
 
             }
             else 
             {
-                GameMngr.instance.DiscourageCoinDeduct("You Should Follow Pedestrian Rule");
+                gm.DiscourageCoinDeduct("You Should Follow Pedestrian Rule");
             }
         }
     }
