@@ -76,13 +76,14 @@ public class GameMngr : MonoBehaviour
 
     [Header("Player")]
     public RCC_CarControllerV3 Car;
-    
+
 
 
 
     [Header("OtherScripts")]
     [SerializeField] TSTrafficSpawner trafficSpawner;
     [SerializeField] TypingEffect CSObjtxt;
+    [SerializeField] LineRenderer Line;
 
 
     [Header("Data")]
@@ -92,7 +93,7 @@ public class GameMngr : MonoBehaviour
     [SerializeField] GameObject Conftti;
     [SerializeField] ParticleSystem CollectbleCash;
     [SerializeField] ParticleSystem CollectbleCoin;
-    
+
 
 
 
@@ -130,8 +131,8 @@ public class GameMngr : MonoBehaviour
     bool isBrakePressed;
     [HideInInspector] public bool IsCorrectLane;
     [HideInInspector] public bool IsWrongLane;
-    [HideInInspector]public bool IsStoppedAtPolice;
-    [HideInInspector]public bool IsStayinginLane;
+    [HideInInspector] public bool IsStoppedAtPolice;
+    [HideInInspector] public bool IsStayinginLane;
     [HideInInspector] public float LaneTimer;
     [HideInInspector] public bool HasPedestriansCrossed;
     private AsyncOperation async;
@@ -142,8 +143,8 @@ public class GameMngr : MonoBehaviour
 
     public delegate void CarSetEventHandler(RCC_CarControllerV3 car);
     public event CarSetEventHandler OnCarSet;
-    
-   
+
+
 
 
 
@@ -152,7 +153,7 @@ public class GameMngr : MonoBehaviour
         if (instance == null)
             instance = this;
 
-     
+
 
     }
 
@@ -167,39 +168,40 @@ public class GameMngr : MonoBehaviour
         Controls.SetMobileController(ValStorage.GetControls());
         yield return new WaitForSeconds(2); // fixed delay
         Loading.SetActive(false);
-        
+
         if (soundmgr)
             soundmgr.SetBGM(true);
 
         StartCoroutine(PlayCs());
     }
-    [SerializeField]int levelnumber;
-  
-    
-    IEnumerator PlayCs() 
+    [SerializeField] int levelnumber;
+
+
+    IEnumerator PlayCs()
     {
-        int currentlvl = ValStorage.selLevel; 
+        int currentlvl = ValStorage.selLevel;
         float CSLength = lvlcs[currentlvl - 1].CsTime;
-        lvlcs[currentlvl-1].Cs.gameObject.SetActive(true);
+        lvlcs[currentlvl - 1].Cs.gameObject.SetActive(true);
         CSAppreciate.transform.GetChild(0).gameObject.GetComponent<Text>().text = lvlcs[currentlvl - 1].Appreciatetxt.ToString();
         CSObjtxt.fullText = lvlcs[currentlvl - 1].CSObjtxt;
         CsCam.gameObject.SetActive(true);
         yield return new WaitForSeconds(CSLength);
-        lvlcs[currentlvl-1].Cs.gameObject.SetActive(false);
+        lvlcs[currentlvl - 1].Cs.gameObject.SetActive(false);
         Cam.transform.parent.parent.gameObject.SetActive(true);
         CsCam.gameObject.SetActive(false);
         IgnitBtn.SetActive(true);
-        lvlcs[currentlvl-1].Levls.gameObject.SetActive(true);
+        lvlcs[currentlvl - 1].Levls.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         CSBlckPnl.SetActive(false);
         trafficSpawner.gameObject.SetActive(true);
+        Line.gameObject.SetActive(true);
     }
 
 
     LevelData lvlstats;
     #region loading/settinglvl
 
-    GameObject SetCar() 
+    GameObject SetCar()
     {
         string carIdString = ValStorage.GetCar();
 
@@ -212,7 +214,7 @@ public class GameMngr : MonoBehaviour
             // Ensure the carId is within the valid range of PlayerCars array
             if (carId >= 0 && carId < PlayerCars.Length)
             {
-                GameObject CarObj = PlayerCars[carId]; 
+                GameObject CarObj = PlayerCars[carId];
 
                 // Assign the components
                 Car = CarObj.GetComponent<RCC_CarControllerV3>();
@@ -235,7 +237,7 @@ public class GameMngr : MonoBehaviour
             return null;
 
         }
-     
+
 
     }
 
@@ -243,9 +245,9 @@ public class GameMngr : MonoBehaviour
     {
 
         lvlstats = levelStats;
-        GameObject CarObj= SetCar();
+        GameObject CarObj = SetCar();
         CarObj.SetActive(true);
-        
+
         OnCarSet?.Invoke(CarObj.GetComponent<RCC_CarControllerV3>());  // Invoke the event when car is set
 
         Rigidbody rb = CarObj.GetComponent<Rigidbody>();
@@ -268,11 +270,29 @@ public class GameMngr : MonoBehaviour
             greenred = new GameObject[levelStats.greenred.Length];
             Array.Copy(levelStats.greenred, greenred, levelStats.greenred.Length);
         }
-        
+
         if (lvlstats.IsDisabledTraffic)
             trafficSpawner.DisableAllCars();
 
         IsStayinginLane = lvlstats.IsStayinLane;
+
+        SetPosLineRenderer();
+    }
+    int currind = 0;
+    void SetPosLineRenderer()
+    {
+
+
+        int lineLength = lvlstats.LineRendPos.Length;
+
+        Line.positionCount = lineLength;
+
+        // Store the original positions of the LineRenderer (excluding the first position)
+        for (int i = 1; i < lineLength; i++)
+        {
+            Transform pos = lvlstats.LineRendPos[i];
+            Line.SetPosition(i, pos.position);
+        }
     }
 
     #endregion
@@ -361,7 +381,7 @@ public class GameMngr : MonoBehaviour
 
     public void Celeb()
     {
-        if (soundmgr) 
+        if (soundmgr)
         {
             soundmgr.PlayCompleteSound(true);
             soundmgr.playindiSound(false);
@@ -419,7 +439,7 @@ public class GameMngr : MonoBehaviour
 
 
         Timetxt.text = Mathf.FloorToInt(elapsedTime * 2).ToString();
-        CoinsEarnedlvltxt.text = CoinsEarnedInLvl.ToString();
+        CoinsEarnedlvltxt.text = 500.ToString();// CoinsEarnedInLvl.ToString();
 
         StartCoroutine(CounterAnimation(CalculateTotalCoins()));
     }
@@ -469,27 +489,29 @@ public class GameMngr : MonoBehaviour
         if (CoinsEarnedInLvl < 0)
             CoinsEarnedInLvl = 0;
 
-        return CoinsEarnedInLvl + coinsFromTime;
+
+        int total= 500 + coinsFromTime;
+        return total;
     }
 
 
 
-    void UnlckNxtLvl() 
+    void UnlckNxtLvl()
     {
         int currlvl = ValStorage.selLevel;
         int unlockdlvls = ValStorage.GetUnlockedLevels();
 
-        if (currlvl == unlockdlvls) 
+        if (currlvl == unlockdlvls)
         {
             ValStorage.SetUnlockedLevels(unlockdlvls + 1);
         }
     }
 
-    public void NextLvlBtn() 
+    public void NextLvlBtn()
     {
         Loading.SetActive(true);
         LoadBar.SetActive(true);
-       
+
 
         int currentLevelIndex = ValStorage.selLevel;
 
@@ -593,16 +615,16 @@ public class GameMngr : MonoBehaviour
             RightIndActv.SetActive(IsRight);
         }
     }
-    
+
     public bool IsIndsiactive()
     {
-       if(LeftIndActv.activeSelf || RightIndActv.activeSelf) 
+        if (LeftIndActv.activeSelf || RightIndActv.activeSelf)
         {
             return true;
         }
-        else 
+        else
         {
-          return   false;
+            return false;
         }
     }
 
@@ -613,14 +635,14 @@ public class GameMngr : MonoBehaviour
         if (RightIndActv.activeSelf)
         {
             RightIndActv.SetActive(false);
-           // IndiRght.SetActive(false);
+            // IndiRght.SetActive(false);
         }
 
         // Toggle the left indicator
         if (LeftIndActv.activeSelf)
         {
             LeftIndActv.SetActive(false);
-           // Indilft.SetActive(false);
+            // Indilft.SetActive(false);
             car.currentState = PlayerState.None;
             if (soundmgr)
                 soundmgr.playindiSound(false);
@@ -628,7 +650,7 @@ public class GameMngr : MonoBehaviour
         else
         {
             LeftIndActv.SetActive(true);
-          //  Indilft.SetActive(true);
+            //  Indilft.SetActive(true);
             car.currentState = PlayerState.LeftIndicator;
 
             // Optionally play sound for left indicator here
@@ -643,14 +665,14 @@ public class GameMngr : MonoBehaviour
         if (LeftIndActv.activeSelf)
         {
             LeftIndActv.SetActive(false);
-           // Indilft.SetActive(false);
+            // Indilft.SetActive(false);
         }
 
         // Toggle the right indicator
         if (RightIndActv.activeSelf)
         {
             RightIndActv.SetActive(false);
-          //  IndiRght.SetActive(false);
+            //  IndiRght.SetActive(false);
             car.currentState = PlayerState.None;
 
             if (soundmgr)
@@ -660,7 +682,7 @@ public class GameMngr : MonoBehaviour
         else
         {
             RightIndActv.SetActive(true);
-           // IndiRght.SetActive(true);
+            // IndiRght.SetActive(true);
             car.currentState = PlayerState.RightIndicator;
 
             // Optionally play sound for right indicator here
@@ -673,7 +695,7 @@ public class GameMngr : MonoBehaviour
 
 
 
-    [HideInInspector]public bool IsGreenEnabled;
+    [HideInInspector] public bool IsGreenEnabled;
 
     public void EnableGreen()
     {
@@ -682,7 +704,7 @@ public class GameMngr : MonoBehaviour
 
         StartCoroutine(delayenablegreen());
 
-        
+
     }
 
     IEnumerator delayenablegreen()
@@ -693,7 +715,7 @@ public class GameMngr : MonoBehaviour
 
 
         IsGreenEnabled = true;
-//        yield return new WaitForSeconds(0.3f);
+        //        yield return new WaitForSeconds(0.3f);
 
         //AppreciateCoinAdd("You Followed Traffic Signal Rule");
     }
@@ -712,13 +734,13 @@ public class GameMngr : MonoBehaviour
         yield return new WaitForSeconds(delay); // Wait for the specified delay
 
         Appreciate.SetActive(true);
-        AddCoins(15);
-        CoinsEarnedInLvl = CoinsEarnedInLvl + 15;
+        AddCoins(50);
+        CoinsEarnedInLvl = CoinsEarnedInLvl + 50;
 
         if (soundmgr)
             soundmgr.ExcellentSound();
     }
-
+    
 
 
 
@@ -753,7 +775,7 @@ public class GameMngr : MonoBehaviour
 
     void Update()
     {
-        if (brakelght!=null && HasBrakeStateChanged())
+        if (brakelght != null && HasBrakeStateChanged())
         {
             UpdateBrakeLightColor(Brake.pressing);
             isBrakePressed = Brake.pressing;
@@ -766,302 +788,309 @@ public class GameMngr : MonoBehaviour
         }
 
 
-        if (IsStayinginLane && Car.speed>=10f) 
+        if (IsStayinginLane && Car.speed >= 10f)
         {
             LaneTimer += Time.fixedDeltaTime;
-            if (LaneTimer >= 25f) 
+            if (LaneTimer >= 25f)
             {
                 AppreciateCoinAdd("You Followed Lane Rule");
                 LaneTimer = 0f;
             }
         }
-    }
 
 
-
-
-
-    private bool HasBrakeStateChanged()
-    {
-        return Brake.pressing != isBrakePressed;
-    }
-
-    private void UpdateBrakeLightColor(bool isPressed)
-    {
-        //Color color = isPressed ? Color.red : Color.grey; // Use Unity's predefined colors for clarity
-
-        foreach(GameObject mesh in brakelght) 
+        if (Car != null)
         {
-            //mesh.material.color = color;
-            mesh.gameObject.SetActive(isPressed);
-        }
-    }
-    void UpdateTimerText()
-    {
-        // Calculate the minutes and seconds
-        int minutes = Mathf.FloorToInt(elapsedTime / 60); // Divide elapsed time by 60 to get minutes
-        int seconds = Mathf.FloorToInt(elapsedTime % 60); // Get the remainder for seconds
-
-        // Format the time as MM:SS
-        string timeFormatted = string.Format("{0:D2}:{1:D2}", minutes, seconds);
-
-        // Update the UI Text
-        timerText.text = timeFormatted;
-    }
-
-
-
-    public void BrakeLightts(bool isplay)
-    {
-
-
-    }
-
-
-
-    #region trnsprncy
-    public void IncreaseTransparency()
-    {
-        int trans = ValStorage.GetTransparency();
-        if (trans < 5)
-        {
-            trans++;
-            ValStorage.SetTransparency(trans);
-            SetButtonTransparency(trans);
-
-        }
-
-    }
-
-    // Decrease the transparency value (if not at minimum)
-    public void DecreaseTransparency()
-    {
-        int trans = ValStorage.GetTransparency();
-        if (trans > 1)
-        {
-            trans--;
-            ValStorage.SetTransparency(trans);
-            SetButtonTransparency(trans);
+            Line.SetPosition(0, Car.transform.position);
         }
     }
 
 
-    public void SetButtonTransparency(int transval)
-    {
-        // Clamp the setting value between 1 and 5 to ensure it stays in the valid range
-        transval = Mathf.Clamp(transval, 1, 5);
 
-        // Calculate the alpha value: 1 -> 0.1 (slightly visible), 5 -> 1 (fully opaque)
-        float alpha = Mathf.Lerp(0.2f, 1f, (transval - 1) / 4f);
+        int currentIndex;
 
-
-        foreach (Image UI in UIgp)
+        private bool HasBrakeStateChanged()
         {
-            // Image buttonImage = UI.GetComponent<Image>();
-            Color buttonColor = UI.color;
-            buttonColor.a = alpha;  // Set alpha based on the calculation
-            UI.color = buttonColor;
+            return Brake.pressing != isBrakePressed;
         }
 
-    }
-    #endregion
-
-
-
-
-    public void PlayWalk() 
-    {
-        Transform Pedestrians = lvlstats.Pedestians;
-        foreach (Transform child in Pedestrians)
+        private void UpdateBrakeLightColor(bool isPressed)
         {
-            // Get the Animator component from each child
-            Animator animator = child.GetComponent<Animator>();
-            WaypointsTraveler traveler = child.GetComponent<WaypointsTraveler>();
+            //Color color = isPressed ? Color.red : Color.grey; // Use Unity's predefined colors for clarity
 
-            // If an Animator is attached to the child, set the "IsWalk" bool to true
-            if (animator != null)
+            foreach (GameObject mesh in brakelght)
             {
-                animator.SetBool("IsWalk", true);
+                //mesh.material.color = color;
+                mesh.gameObject.SetActive(isPressed);
             }
-            
-            if (traveler != null)
+        }
+        void UpdateTimerText()
+        {
+            // Calculate the minutes and seconds
+            int minutes = Mathf.FloorToInt(elapsedTime / 60); // Divide elapsed time by 60 to get minutes
+            int seconds = Mathf.FloorToInt(elapsedTime % 60); // Get the remainder for seconds
+
+            // Format the time as MM:SS
+            string timeFormatted = string.Format("{0:D2}:{1:D2}", minutes, seconds);
+
+            // Update the UI Text
+            timerText.text = timeFormatted;
+        }
+
+
+
+        public void BrakeLightts(bool isplay)
+        {
+
+
+        }
+
+
+
+        #region trnsprncy
+        public void IncreaseTransparency()
+        {
+            int trans = ValStorage.GetTransparency();
+            if (trans < 5)
             {
-                traveler.enabled = true;
+                trans++;
+                ValStorage.SetTransparency(trans);
+                SetButtonTransparency(trans);
+
+            }
+
+        }
+
+        // Decrease the transparency value (if not at minimum)
+        public void DecreaseTransparency()
+        {
+            int trans = ValStorage.GetTransparency();
+            if (trans > 1)
+            {
+                trans--;
+                ValStorage.SetTransparency(trans);
+                SetButtonTransparency(trans);
             }
         }
 
-        StartCoroutine(DelayStopWalk(Pedestrians));
 
-    }
-    IEnumerator DelayStopWalk(Transform Ped) 
-    {
-
-        yield return new WaitForSeconds(17f);
-        foreach (Transform child in Ped)
+        public void SetButtonTransparency(int transval)
         {
-            // Get the Animator component from each child
-            Animator animator = child.GetComponent<Animator>();
-            WaypointsTraveler traveler = child.GetComponent<WaypointsTraveler>();
+            // Clamp the setting value between 1 and 5 to ensure it stays in the valid range
+            transval = Mathf.Clamp(transval, 1, 5);
 
-            // If an Animator is attached to the child, set the "IsWalk" bool to true
-            if (animator != null)
+            // Calculate the alpha value: 1 -> 0.1 (slightly visible), 5 -> 1 (fully opaque)
+            float alpha = Mathf.Lerp(0.2f, 1f, (transval - 1) / 4f);
+
+
+            foreach (Image UI in UIgp)
             {
-                animator.SetBool("IsWalk", false);
-                animator.SetBool("IsWait", true);
+                // Image buttonImage = UI.GetComponent<Image>();
+                Color buttonColor = UI.color;
+                buttonColor.a = alpha;  // Set alpha based on the calculation
+                UI.color = buttonColor;
             }
 
-            if (traveler != null)
+        }
+        #endregion
+
+
+
+
+        public void PlayWalk()
+        {
+            Transform Pedestrians = lvlstats.Pedestians;
+            foreach (Transform child in Pedestrians)
             {
-                traveler.enabled = false;
+                // Get the Animator component from each child
+                Animator animator = child.GetComponent<Animator>();
+                WaypointsTraveler traveler = child.GetComponent<WaypointsTraveler>();
+
+                // If an Animator is attached to the child, set the "IsWalk" bool to true
+                if (animator != null)
+                {
+                    animator.SetBool("IsWalk", true);
+                }
+
+                if (traveler != null)
+                {
+                    traveler.enabled = true;
+                }
+            }
+
+            StartCoroutine(DelayStopWalk(Pedestrians));
+
+        }
+        IEnumerator DelayStopWalk(Transform Ped)
+        {
+
+            yield return new WaitForSeconds(17f);
+            foreach (Transform child in Ped)
+            {
+                // Get the Animator component from each child
+                Animator animator = child.GetComponent<Animator>();
+                WaypointsTraveler traveler = child.GetComponent<WaypointsTraveler>();
+
+                // If an Animator is attached to the child, set the "IsWalk" bool to true
+                if (animator != null)
+                {
+                    animator.SetBool("IsWalk", false);
+                    animator.SetBool("IsWait", true);
+                }
+
+                if (traveler != null)
+                {
+                    traveler.enabled = false;
+                }
+            }
+            HasPedestriansCrossed = true;
+        }
+
+        public void ShowOtherCam()
+        {
+            IsStoppedAtPolice = true;
+            Cam.enabled = false;
+
+            if (lvlstats.Cam)
+            {
+                lvlstats.Cam.SetActive(true);
+            }
+            if (lvlstats.Filler)
+            {
+                ControllerBtns.alpha = 0f;
+                GameObject filer = lvlstats.Filler;
+                filer.SetActive(true);
+                StartCoroutine(FillImageOverTime(filer.transform.GetChild(0).gameObject.GetComponent<Image>()));
             }
         }
-        HasPedestriansCrossed = true;
-    }
 
-    public void ShowOtherCam() 
-    {
-        IsStoppedAtPolice = true;
-        Cam.enabled = false;
-      
-        if (lvlstats.Cam) 
+        private IEnumerator FillImageOverTime(Image fillerimg)
         {
-            lvlstats.Cam.SetActive(true);
-        }
-        if (lvlstats.Filler) 
-        {
-            ControllerBtns.alpha = 0f;
-            GameObject filer = lvlstats.Filler;
-            filer.SetActive(true);
-            StartCoroutine(FillImageOverTime(filer.transform.GetChild(0).gameObject.GetComponent<Image>()));
-        }
-    }
+            float elapsedTime = 0f;  // Track the elapsed time
 
-    private IEnumerator FillImageOverTime(Image fillerimg)
-    {
-        float elapsedTime = 0f;  // Track the elapsed time
-
-        // While the elapsed time is less than the fill duration
-        while (elapsedTime < 4f)
-        {
-            // Increment elapsed time based on the frame time
-            elapsedTime += Time.deltaTime;
-
-            // Set the fillAmount of the image, clamped between 0 and 1
-            fillerimg.fillAmount = Mathf.Clamp01(elapsedTime / 4);
-
-            // Wait for the next frame
-            yield return null;
-        }
-
-        // Ensure the fillAmount is set to 1 at the end (to handle precision issues)
-        fillerimg.fillAmount = 1f;
-        yield return new WaitForSeconds(1f);
-        StartCoroutine(OffCam()); 
-    }
-    IEnumerator OffCam() 
-    {
-        lvlstats.Filler.SetActive(false);
-        Cam.enabled = true;
-        lvlstats.Cam.SetActive(false);
-        Car.GetComponent<Rigidbody>().isKinematic = false;
-        ControllerBtns.alpha = 1f;
-        yield return new WaitForSeconds(1f);
-        AppreciateCoinAdd("You Stopped At Police CheckPoint");
-    }
-    void CarSound(bool IsActive) 
-    {
-
-        Transform child = Car.transform.Find("All Audio Sources");
-
-
-        if (child != null)
-        {
-            child.gameObject.SetActive(IsActive);
-
-        }
-        else
-        {
-         
-
-            Debug.LogError("Object not found!");
-        }
-    }
-  
-    public void Pause()
-    {
-        if(soundmgr)
-            soundmgr.PauseSounds();
-       
-        CarSound(false);
-   
-
-        Time.timeScale = 0f;
-        PausePnl.SetActive(true);
-    }
-   
-    public void Resume() 
-    {
-
-        if (soundmgr)
-            soundmgr.ResumeSounds();
-
-        CarSound(true);
-        Time.timeScale = 1f;
-        PausePnl.SetActive(false);
-    }
-    
-    public void Restart() 
-    {
-        Time.timeScale = 1f;
-        Loading.SetActive(true);
-        LoadBar.SetActive(true);
-        StartCoroutine(LoadAsyncScene("GamePlay"));
-
-    }
-    
-    public void Home() 
-    {
-        Time.timeScale = 1f;
-        Loading.SetActive(true);
-        LoadBar.SetActive(true);
-        StartCoroutine(LoadAsyncScene("MM"));
-    }
-
-   
-
-
-    IEnumerator LoadAsyncScene(string sceneName)
-    {
-        float timer = 0f;
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-        asyncLoad.allowSceneActivation = false;
-
-        while (timer < 5f)
-        {
-            if (timer < 5f)
+            // While the elapsed time is less than the fill duration
+            while (elapsedTime < 4f)
             {
-                timer += Time.deltaTime;
-                float progress = Mathf.Clamp01(timer / 5f);  // Progress from 0 to 1 based on timer
-                loadingBar.fillAmount = progress;
-                percentageText.text = $"{Mathf.RoundToInt(progress * 100)}%";
+                // Increment elapsed time based on the frame time
+                elapsedTime += Time.deltaTime;
+
+                // Set the fillAmount of the image, clamped between 0 and 1
+                fillerimg.fillAmount = Mathf.Clamp01(elapsedTime / 4);
+
+                // Wait for the next frame
+                yield return null;
+            }
+
+            // Ensure the fillAmount is set to 1 at the end (to handle precision issues)
+            fillerimg.fillAmount = 1f;
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(OffCam());
+        }
+        IEnumerator OffCam()
+        {
+            lvlstats.Filler.SetActive(false);
+            Cam.enabled = true;
+            lvlstats.Cam.SetActive(false);
+            Car.GetComponent<Rigidbody>().isKinematic = false;
+            ControllerBtns.alpha = 1f;
+            yield return new WaitForSeconds(1f);
+            AppreciateCoinAdd("You Stopped At Police CheckPoint");
+        }
+        void CarSound(bool IsActive)
+        {
+
+            Transform child = Car.transform.Find("All Audio Sources");
+
+
+            if (child != null)
+            {
+                child.gameObject.SetActive(IsActive);
+
             }
             else
             {
-                // Once the timer reaches 5 seconds, start loading the scene
-                // Ensure the progress bar stays at 100% before activation
-                loadingBar.fillAmount = 1f;
-                percentageText.text = "100%";
 
-                // Allow the scene to activate
-                asyncLoad.allowSceneActivation = true;
+
+                Debug.LogError("Object not found!");
             }
-            yield return null;
         }
-        sphere.enabled = false;
-        yield return new WaitForSeconds(0.1f);
-        asyncLoad.allowSceneActivation = true;
+
+        public void Pause()
+        {
+            if (soundmgr)
+                soundmgr.PauseSounds();
+
+            CarSound(false);
+
+
+            Time.timeScale = 0f;
+            PausePnl.SetActive(true);
+        }
+
+        public void Resume()
+        {
+
+            if (soundmgr)
+                soundmgr.ResumeSounds();
+
+            CarSound(true);
+            Time.timeScale = 1f;
+            PausePnl.SetActive(false);
+        }
+
+        public void Restart()
+        {
+            Time.timeScale = 1f;
+            Loading.SetActive(true);
+            LoadBar.SetActive(true);
+            StartCoroutine(LoadAsyncScene("GamePlay"));
+
+        }
+
+        public void Home()
+        {
+            Time.timeScale = 1f;
+            Loading.SetActive(true);
+            LoadBar.SetActive(true);
+            StartCoroutine(LoadAsyncScene("MM"));
+        }
+
+
+
+
+        IEnumerator LoadAsyncScene(string sceneName)
+        {
+            float timer = 0f;
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+            asyncLoad.allowSceneActivation = false;
+
+            while (timer < 5f)
+            {
+                if (timer < 5f)
+                {
+                    timer += Time.deltaTime;
+                    float progress = Mathf.Clamp01(timer / 5f);  // Progress from 0 to 1 based on timer
+                    loadingBar.fillAmount = progress;
+                    percentageText.text = $"{Mathf.RoundToInt(progress * 100)}%";
+                }
+                else
+                {
+                    // Once the timer reaches 5 seconds, start loading the scene
+                    // Ensure the progress bar stays at 100% before activation
+                    loadingBar.fillAmount = 1f;
+                    percentageText.text = "100%";
+
+                    // Allow the scene to activate
+                    asyncLoad.allowSceneActivation = true;
+                }
+                yield return null;
+            }
+            sphere.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            asyncLoad.allowSceneActivation = true;
+        }
     }
-}
+
 
 
 

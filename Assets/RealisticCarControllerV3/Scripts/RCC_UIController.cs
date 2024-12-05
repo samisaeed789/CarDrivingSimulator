@@ -54,7 +54,8 @@ public class RCC_UIController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     public void OnPointerDown(PointerEventData eventData) {
 
         pressing = true;
-        GameMngr.instance.BrakeLightts(true);
+        if(GameMngr.instance)
+            GameMngr.instance.BrakeLightts(true);
 
     }
 
@@ -65,7 +66,9 @@ public class RCC_UIController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     public void OnPointerUp(PointerEventData eventData) {
 
         pressing = false;
-        GameMngr.instance.BrakeLightts(false);
+        if (GameMngr.instance)
+            GameMngr.instance.BrakeLightts(false);
+
     }
 
     private void LateUpdate() {

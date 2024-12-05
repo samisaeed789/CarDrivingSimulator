@@ -10,7 +10,12 @@ public class LevelData : MonoBehaviour
     public Transform Pedestians;
     public GameObject Cam;
     public GameObject Filler;
+    
     public GameObject[] greenred;
+    public Transform[] LineRendPos;
+
+
+
     public bool IsDisabledTraffic;
     public bool IsStayinLane;
   
