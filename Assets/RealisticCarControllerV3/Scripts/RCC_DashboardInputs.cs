@@ -158,17 +158,24 @@ public class RCC_DashboardInputs : MonoBehaviour {
 
         }
 
-        //  If KMH needle is selected, assign rotation of the needle.
-        if (KMHNeedle) {
+        //If KMH needle is selected, assign rotation of the needle.
+        if (KMHNeedle)
+        {
 
             if (RCC_Settings.Instance.units == RCC_Settings.Units.KMH)
-                KMHNeedleRotation = (vehicle.speed);
+                KMHNeedleRotation = (vehicle.speed);//*2f;//sam custom
             else
                 KMHNeedleRotation = (vehicle.speed * 0.62f);
 
             KMHNeedle.transform.eulerAngles = new Vector3(KMHNeedle.transform.eulerAngles.x, KMHNeedle.transform.eulerAngles.y, -KMHNeedleRotation);
 
         }
+
+
+
+
+
+
 
         //  If turbo needle is selected, assign rotation of the needle.
         if (turboNeedle) {

@@ -110,6 +110,9 @@ public class GameMngr : MonoBehaviour
     public Text percentageText;
 
 
+    public bool Test;
+    [SerializeField] int levelnumber;
+    [SerializeField] int testcarid;
 
 
 
@@ -174,12 +177,21 @@ public class GameMngr : MonoBehaviour
 
         StartCoroutine(PlayCs());
     }
-    [SerializeField] int levelnumber;
 
 
     IEnumerator PlayCs()
     {
-        int currentlvl = ValStorage.selLevel;
+        int currentlvl;
+        if (Test) 
+        {
+            currentlvl = levelnumber;
+        }
+        else 
+        {
+            currentlvl = ValStorage.selLevel;
+        }
+
+
         float CSLength = lvlcs[currentlvl - 1].CsTime;
         lvlcs[currentlvl - 1].Cs.gameObject.SetActive(true);
         CSAppreciate.transform.GetChild(0).gameObject.GetComponent<Text>().text = lvlcs[currentlvl - 1].Appreciatetxt.ToString();
@@ -205,38 +217,54 @@ public class GameMngr : MonoBehaviour
     {
         string carIdString = ValStorage.GetCar();
 
-        // Parse CarId to an integer
-        if (int.TryParse(carIdString, out int carId))
+
+        if (Test) 
         {
-            // Adjust carId to be 0-based index (if necessary)
-            carId -= 1;
 
-            // Ensure the carId is within the valid range of PlayerCars array
-            if (carId >= 0 && carId < PlayerCars.Length)
+            GameObject CarObj = PlayerCars[testcarid];
+
+            // Assign the components
+            Car = CarObj.GetComponent<RCC_CarControllerV3>();
+            car = CarObj.GetComponent<CarData>();
+
+            return CarObj;
+        }
+
+        else 
+        {
+            if (int.TryParse(carIdString, out int carId))
             {
-                GameObject CarObj = PlayerCars[carId];
+                // Adjust carId to be 0-based index (if necessary)
+                carId -= 1;
 
-                // Assign the components
-                Car = CarObj.GetComponent<RCC_CarControllerV3>();
-                car = CarObj.GetComponent<CarData>();
+                // Ensure the carId is within the valid range of PlayerCars array
+                if (carId >= 0 && carId < PlayerCars.Length)
+                {
+                    GameObject CarObj = PlayerCars[carId];
 
-                return CarObj;
+                    // Assign the components
+                    Car = CarObj.GetComponent<RCC_CarControllerV3>();
+                    car = CarObj.GetComponent<CarData>();
+
+                    return CarObj;
+                }
+                else
+                {
+                    return null;
+
+                    Debug.LogError("CarId is out of bounds of the PlayerCars array.");
+                }
+
+
             }
             else
             {
+                Debug.LogError("Failed to parse CarId as an integer.");
                 return null;
 
-                Debug.LogError("CarId is out of bounds of the PlayerCars array.");
             }
-
-
         }
-        else
-        {
-            Debug.LogError("Failed to parse CarId as an integer.");
-            return null;
-
-        }
+     
 
 
     }
