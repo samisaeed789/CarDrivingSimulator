@@ -121,7 +121,7 @@ public class MMManager : MonoBehaviour
 
     private void Start()
     {
-
+        ValStorage.SetCoins(10000);
         SetCoins();
         Time.timeScale = 1f;
      

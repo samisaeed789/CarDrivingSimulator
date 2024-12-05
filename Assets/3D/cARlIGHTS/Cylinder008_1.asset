@@ -1,0 +1,167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!43 &4300000
+Mesh:
+  serializedVersion: 11
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Cylinder008
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 42
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 28
+    localAABB:
+      m_Center: {x: 5.9604645E-08, y: 0.4168472, z: -1.5196918}
+      m_Extent: {x: 0.6805171, y: 0.4769527, z: 1.540605}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: []
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: []
+  m_MeshCompression: 2
+  m_IsReadable: 0
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer:
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 0
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 0
+    _typelessdata:
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 84
+      m_Range: 3.9540968
+      m_Start: -3.0602968
+      m_Data: a7a9cce6b83c4bc10fc64ac6b6c3ffc97cc7e4b72bf83914e4b72bf83914b6c3ffc97cc78cc8ffc97cc75ed42bf839145ed42bf839148cc8ffc97cc7f7ca0fc64ac69be2cce6b83c9be2cce6b83cf7ca0fc64ac68cc83dc259c55ed4d5cda37c5ed4d5cda37c8cc83dc259c5b6c33dc259c5e4b7d5cda37ce4b7d5cda37cb6c33dc259c54bc10fc64ac6a7a9cce6b83c129affff0000419babc5759401f1abc5759430f2ffff0000
+      m_BitSize: 16
+    m_UV:
+      m_NumItems: 56
+      m_Range: 1.9867802
+      m_Start: -0.04409052
+      m_Data: 18599bf89ed63e9cb541526e98dff8c4363e93b9a15262989ff9b2063ea0c1a46268785ffab876be9649c86652fb7fc8a2ddb0686febff0aca19f496063d9295a152c82302009600002a216f4b
+      m_BitSize: 11
+    m_Normals:
+      m_NumItems: 56
+      m_Range: 1.875689
+      m_Start: -0.91453314
+      m_Data: 37ec00aa5dfc6fff6fff5dfc9bfc8aff8aff9bfcf9aac1ecc1ecf9aac50ae121e121c50a330a17211721330a00aa37ec7cfb7cfb7cfb7cfb
+      m_BitSize: 8
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data:
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data:
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 28
+      m_Data: ffbfc10f
+      m_BitSize: 1
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data:
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data:
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data:
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 42
+      m_Data: 200820062986988392426ab1e6987b304a2827ad96da8bb3c67a03
+      m_BitSize: 5
+    m_UVInfo: 5
+  m_LocalAABB:
+    m_Center: {x: 5.9604645E-08, y: 0.4168472, z: -1.5196918}
+    m_Extent: {x: 0.6805774, y: 0.47701302, z: 1.5406653}
+  m_MeshUsageFlags: 0
+  m_CookingOptions: 30
+  m_BakedConvexCollisionMesh:
+  m_BakedTriangleCollisionMesh:
+  m_MeshMetrics[0]: 11.460857
+  m_MeshMetrics[1]: 1
+  m_MeshOptimizationFlags: -1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path:
