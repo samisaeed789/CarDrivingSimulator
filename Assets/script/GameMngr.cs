@@ -35,7 +35,7 @@ public class GameMngr : MonoBehaviour
     public static GameMngr instance;
     MySoundManager soundmgr;
 
-
+    [SerializeField] GameObject Env;
 
     [Header("Panels")]
     public GameObject Complete;
@@ -58,6 +58,8 @@ public class GameMngr : MonoBehaviour
     public GameObject CSAppreciate;
     public GameObject Discourage;
     public GameObject MusicOff;
+    public GameObject Belt;
+    public GameObject Beltbtn;
     public GameObject seatBeltoffbtn;
     public RCC_UIController Brake;
     public GameObject IgnitBtn;
@@ -160,7 +162,7 @@ public class GameMngr : MonoBehaviour
         if (instance == null)
             instance = this;
 
-
+        Env.SetActive(true);
 
     }
 
@@ -404,7 +406,6 @@ public class GameMngr : MonoBehaviour
 
     public void ToggleSeatBelt()
     {
-
         if (soundmgr)
             soundmgr.PlayButtonClickSound(1f);
         if (seatBeltoffbtn != null)
@@ -412,6 +413,14 @@ public class GameMngr : MonoBehaviour
             // Toggle the active state of the child
             seatBeltoffbtn.SetActive(!seatBeltoffbtn.activeSelf);
         }
+        Belt.SetActive(true);
+        Beltbtn.SetActive(false);
+        Invoke(nameof(delayoff),1.05f);
+    }
+
+    void delayoff() 
+    {
+        Belt.SetActive(false);
     }
     public void ToggleHeadlight()
     {
@@ -501,6 +510,11 @@ public class GameMngr : MonoBehaviour
         Complete.SetActive(true);
         SetCoinsinPanel();
         car.gameObject.SetActive(false);
+
+        if (AdsManager.instance)
+            AdsManager.instance.showAdMobRectangleBannerBottomLeft();
+
+        //  hideAdmobBottomLeftBanner();
 
     }
 
@@ -1103,8 +1117,6 @@ public class GameMngr : MonoBehaviour
 
         public void Pause()
         {
-                 
-
                 if (soundmgr)
                     soundmgr.PauseSounds();
 
@@ -1112,10 +1124,13 @@ public class GameMngr : MonoBehaviour
                 if (soundmgr)
                     soundmgr.PlayButtonClickSound(1f);
 
-                 CarSound(false);
-
-                Time.timeScale = 0f;
+                CarSound(false);
                 PausePnl.SetActive(true);
+
+                if (AdsManager.instance)
+                    AdsManager.instance.showAdMobRectangleBannerBottomLeft();
+        
+                Time.timeScale = 0f;
         }
 
         public void Resume()
@@ -1123,7 +1138,9 @@ public class GameMngr : MonoBehaviour
             if (soundmgr)
                 soundmgr.ResumeSounds();
 
-            CarSound(true);
+             CarSound(true);
+             if (AdsManager.instance)
+                AdsManager.instance.hideAdmobBottomLeftBanner();
             Time.timeScale = 1f;
             PausePnl.SetActive(false);
         }
@@ -1148,6 +1165,11 @@ public class GameMngr : MonoBehaviour
 
         IEnumerator LoadAsyncScene(string sceneName)
         {
+            
+            if(AdsManager.instance)
+                AdsManager.instance.showAdMobRectangleBannerBottomLeft();
+
+
             float timer = 0f;
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
             asyncLoad.allowSceneActivation = false;
@@ -1174,15 +1196,16 @@ public class GameMngr : MonoBehaviour
                 yield return null;
             }
             sphere.enabled = false;
+
+            if (AdsManager.instance)
+                AdsManager.instance.hideAdmobBottomLeftBanner();
             yield return new WaitForSeconds(0.1f);
             asyncLoad.allowSceneActivation = true;
         }
     }
 
 
+//set waypoint 
+//set new mm bgm and complete bgm
 
-
-// add headlights
-//car sound off on complete 
-//indi sound off on complete
 

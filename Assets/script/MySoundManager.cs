@@ -54,6 +54,10 @@ public class MySoundManager : MonoBehaviour {
     public AudioClip PlayEngine;
     public AudioClip Collect;
     public AudioClip CollectCoin;
+    public AudioClip Beep;
+    public AudioClip Revv;
+    public AudioClip Revv1;
+    public AudioClip Unlock;
 
 
   
@@ -262,11 +266,23 @@ public class MySoundManager : MonoBehaviour {
 
 	public void PlayButtonClickSound(float val)
 	{
-		//soundValue = val;
-		//Effectsource.volume = soundValue;
+		
 		Effectsource.PlayOneShot(click);
 	}
+	public void PlayBeepSound()
+	{
+		Effectsource.PlayOneShot(Beep);
+	}
+	public void PlayRevvSound()
+	{
+		Effectsource.PlayOneShot(Revv);
+	}
 	
+	public void PlayRevv1Sound()
+	{
+		Effectsource.PlayOneShot(Revv1);
+	}
+
 	public void PlayCPSound(float val)
 	{
 		soundValue = val;
@@ -377,6 +393,11 @@ public class MySoundManager : MonoBehaviour {
 		bool play = GameMngr.instance.IsIndsiactive();
 		
 		playindiSound(play);
+		
+	}
+	public void CarUnlock() 
+	{
+		Effectsource.PlayOneShot(Unlock);
 		
 	}
 

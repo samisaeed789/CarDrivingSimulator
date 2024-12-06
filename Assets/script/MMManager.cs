@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -123,6 +122,10 @@ public class MMManager : MonoBehaviour
         ValStorage.SetCoins(10000);
         SetCoins();
         Time.timeScale = 1f;
+
+
+        if (AdsManager.instance )
+            AdsManager.instance.showAdmobAdpativeBannerTop();
     }
 
     void CheckUnlocked()
@@ -158,6 +161,7 @@ public class MMManager : MonoBehaviour
         if (S == "ModeSel")
         {
             PanelActivity(ModeSel: true);
+           
         }
         if (S == "LvlSel")
         {
@@ -167,11 +171,19 @@ public class MMManager : MonoBehaviour
         }
         if (S == "Exit")
         {
+
+            if (AdsManager.instance)
+                AdsManager.instance.showAdMobRectangleBannerBottomLeft();
+
             PanelActivity(ExitPnl: true);
         }
         if (S == "MM")
         {
             PanelActivity(MM: true);
+
+            if(AdsManager.instance)
+                AdsManager.instance.hideAdmobBottomLeftBanner();
+
         }
         if (S == "Garage")
         {
@@ -212,6 +224,10 @@ public class MMManager : MonoBehaviour
         CarsCont.SetActive(false);
         PanelActivity(IsLoading: true);
 
+        if(AdsManager.instance)
+            AdsManager.instance.showAdMobRectangleBannerBottomLeft();
+
+
         ValStorage.SetCar(garage.GetCurrCarId());
         StartCoroutine(LoadAsyncScene("Gameplay"));
     }
@@ -248,6 +264,10 @@ public class MMManager : MonoBehaviour
             yield return null;
         }
         sphere.enabled = false;
+        
+        if(AdsManager.instance)
+           AdsManager.instance.hideAdmobBottomLeftBanner();
+
         yield return new WaitForSeconds(0.1f);
         asyncLoad.allowSceneActivation = true;
     }
@@ -319,6 +339,7 @@ public class MMManager : MonoBehaviour
             else
             {
                 exitPanel.SetActive(false);
+               
             }
         }
 
