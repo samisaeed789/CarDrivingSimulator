@@ -117,14 +117,12 @@ public class MMManager : MonoBehaviour
 
     }
 
-
-
     private void Start()
     {
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
         ValStorage.SetCoins(10000);
         SetCoins();
         Time.timeScale = 1f;
-     
     }
 
     void CheckUnlocked()

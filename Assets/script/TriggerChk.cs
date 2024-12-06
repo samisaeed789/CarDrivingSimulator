@@ -67,6 +67,7 @@ public class TriggerChk : MonoBehaviour
 
             if (TrafficSignal)
             {
+                Debug.LogError("entered");
                 isInTrigger = true;  // Player entered the trigger
                 timer = 0f;  // Reset the timer
             }
@@ -143,12 +144,8 @@ public class TriggerChk : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
-                //if (timer < 4)
-                //{
-                //     GameMngr.instance.DiscourageCoinDeduct("You Should Follow Signal Rule");  // Call the warning method if the player exits early
-                //}
-                //isInTrigger = false;  // Reset trigger state
-                Debug.Log("gm.isgreenenabled    "+gm.IsGreenEnabled);
+                gm.EnableRed();
+
                 if (gm.IsGreenEnabled) 
                 {
                     gm.AppreciateCoinAdd("You Followed Traffic Signal Rule");

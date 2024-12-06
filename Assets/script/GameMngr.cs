@@ -58,10 +58,12 @@ public class GameMngr : MonoBehaviour
     public GameObject CSAppreciate;
     public GameObject Discourage;
     public GameObject MusicOff;
+    public GameObject seatBeltoffbtn;
     public RCC_UIController Brake;
     public GameObject IgnitBtn;
     public Image loadingBar;
     public Animator sphere;
+    public GameObject headLightActvbtn;
 
 
     [Header("Levels")]
@@ -93,6 +95,7 @@ public class GameMngr : MonoBehaviour
     [SerializeField] GameObject Conftti;
     [SerializeField] ParticleSystem CollectbleCash;
     [SerializeField] ParticleSystem CollectbleCoin;
+    [SerializeField] GameObject headLight;
 
 
 
@@ -138,6 +141,7 @@ public class GameMngr : MonoBehaviour
     [HideInInspector] public bool IsStayinginLane;
     [HideInInspector] public float LaneTimer;
     [HideInInspector] public bool HasPedestriansCrossed;
+                             bool stopAnimation = false;
     private AsyncOperation async;
 
 
@@ -162,6 +166,8 @@ public class GameMngr : MonoBehaviour
 
     IEnumerator Start()
     {
+
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
         RCC_Settings.Instance.dontUseAnyParticleEffects = true;
         trafficSpawner.gameObject.SetActive(false);
         UpdateTimerText();
@@ -205,6 +211,7 @@ public class GameMngr : MonoBehaviour
         lvlcs[currentlvl - 1].Levls.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         CSBlckPnl.SetActive(false);
+        CSAppreciate.SetActive(false);
         trafficSpawner.gameObject.SetActive(true);
         Line.gameObject.SetActive(true);
     }
@@ -274,6 +281,8 @@ public class GameMngr : MonoBehaviour
 
         lvlstats = levelStats;
         GameObject CarObj = SetCar();
+        if(car.headLight!=null)
+            headLight = car.headLight;
         CarObj.SetActive(true);
 
         OnCarSet?.Invoke(CarObj.GetComponent<RCC_CarControllerV3>());  // Invoke the event when car is set
@@ -304,7 +313,22 @@ public class GameMngr : MonoBehaviour
 
         IsStayinginLane = lvlstats.IsStayinLane;
 
+       
+          
+       
+
+
+        OffGameObj();
         SetPosLineRenderer();
+    }
+
+    void OffGameObj() 
+    {
+        GameObject[] Arr = lvlstats.ToOff;
+        foreach (GameObject g in Arr) 
+        {
+            g.SetActive(false);
+        }
     }
     int currind = 0;
     void SetPosLineRenderer()
@@ -350,27 +374,22 @@ public class GameMngr : MonoBehaviour
 
     public void PlayStopMusic()
     {
-        Debug.Log("MusicOff active state: " + MusicOff.activeSelf);
 
         // If the MusicOff button is active (meaning music is currently off)
         if (MusicOff.activeSelf)
         {
-            Debug.Log("Turning music on...");
             MusicOff.SetActive(false);  // Hide the "Music Off" button
             if (soundmgr)
             {
                 soundmgr.SetBGM(true);  // Start playing background music
-                Debug.Log("Music is now ON");
             }
         }
         else
         {
-            Debug.Log("Turning music off...");
             MusicOff.SetActive(true);  // Show the "Music Off" button
             if (soundmgr)
             {
                 soundmgr.SetBGM(false);  // Stop playing background music
-                Debug.Log("Music is now OFF");
             }
         }
     }
@@ -380,10 +399,36 @@ public class GameMngr : MonoBehaviour
         if (soundmgr)
         {
             soundmgr.SetBGM(true);  // Start playing background music
-            Debug.Log("Music is now ON");
         }
     }
 
+    public void ToggleSeatBelt()
+    {
+
+        if (soundmgr)
+            soundmgr.PlayButtonClickSound(1f);
+        if (seatBeltoffbtn != null)
+        {
+            // Toggle the active state of the child
+            seatBeltoffbtn.SetActive(!seatBeltoffbtn.activeSelf);
+        }
+    }
+    public void ToggleHeadlight()
+    {
+
+        if (soundmgr)
+            soundmgr.PlayButtonClickSound(1f);
+        if (headLight != null)
+        {
+            // Toggle the active state of the headlight
+            headLight.SetActive(!headLight.activeSelf);
+        }
+
+        if (headLightActvbtn != null) 
+        {
+            headLightActvbtn.SetActive(!headLight.activeSelf);
+        }
+    }
     public void OnButtonPressed()
     {
 
@@ -488,7 +533,7 @@ public class GameMngr : MonoBehaviour
         int coinsPerSecond = totalCoins / duration;
 
         // Loop until the animation reaches the total coins
-        while (elapsedTime < duration)
+        while (elapsedTime < duration  && !stopAnimation)
         {
             elapsedTime += Time.deltaTime; // Accumulate elapsed time
             currentCoins = Mathf.FloorToInt(coinsPerSecond * elapsedTime); // Increment coins
@@ -510,7 +555,10 @@ public class GameMngr : MonoBehaviour
             soundmgr.StopcoinSound();
 
     }
-
+    public void StopCoinAnimation()
+    {
+        stopAnimation = true;
+    }
     private int CalculateTotalCoins()
     {
         int coinsFromTime = Mathf.FloorToInt(elapsedTime * 2);
@@ -540,7 +588,7 @@ public class GameMngr : MonoBehaviour
         Loading.SetActive(true);
         LoadBar.SetActive(true);
 
-
+        StopCoinAnimation();
         int currentLevelIndex = ValStorage.selLevel;
 
         if (currentLevelIndex < lvlcs.Length)
@@ -593,10 +641,12 @@ public class GameMngr : MonoBehaviour
 
     public void ChangeControl()
     {
-        int currentind = ValStorage.GetControls();
+
         if (soundmgr)
             soundmgr.PlayButtonClickSound(1f);
-        // Increment the index, loop back if needed
+
+        int currentind = ValStorage.GetControls();
+      
         currentind = (currentind + 1) % 3;
         Controls.SetMobileController(currentind);
         ValStorage.SetControls(currentind);
@@ -659,6 +709,8 @@ public class GameMngr : MonoBehaviour
 
     public void IndiLft()
     {
+        if (soundmgr)
+            soundmgr.PlayButtonClickSound(1f);
         // Check if the right indicator is active, and deactivate it if necessary
         if (RightIndActv.activeSelf)
         {
@@ -689,6 +741,9 @@ public class GameMngr : MonoBehaviour
 
     public void IndiRight()
     {
+
+        if (soundmgr)
+            soundmgr.PlayButtonClickSound(1f);
         // Check if the left indicator is active, and deactivate it if necessary
         if (LeftIndActv.activeSelf)
         {
@@ -733,6 +788,15 @@ public class GameMngr : MonoBehaviour
         StartCoroutine(delayenablegreen());
 
 
+    }
+    
+    public void EnableRed()
+    {
+        if (greenred[1] != null)
+            greenred[1].SetActive(false);
+        
+        if (greenred[0] != null)
+            greenred[0].SetActive(true);
     }
 
     IEnumerator delayenablegreen()
@@ -1026,38 +1090,36 @@ public class GameMngr : MonoBehaviour
         }
         void CarSound(bool IsActive)
         {
-
             Transform child = Car.transform.Find("All Audio Sources");
-
-
             if (child != null)
             {
                 child.gameObject.SetActive(IsActive);
-
             }
             else
             {
-
-
                 Debug.LogError("Object not found!");
             }
         }
 
         public void Pause()
         {
-            if (soundmgr)
-                soundmgr.PauseSounds();
+                 
 
-            CarSound(false);
+                if (soundmgr)
+                    soundmgr.PauseSounds();
 
 
-            Time.timeScale = 0f;
-            PausePnl.SetActive(true);
+                if (soundmgr)
+                    soundmgr.PlayButtonClickSound(1f);
+
+                 CarSound(false);
+
+                Time.timeScale = 0f;
+                PausePnl.SetActive(true);
         }
 
         public void Resume()
         {
-
             if (soundmgr)
                 soundmgr.ResumeSounds();
 
@@ -1071,8 +1133,8 @@ public class GameMngr : MonoBehaviour
             Time.timeScale = 1f;
             Loading.SetActive(true);
             LoadBar.SetActive(true);
+            StopCoinAnimation();
             StartCoroutine(LoadAsyncScene("GamePlay"));
-
         }
 
         public void Home()
@@ -1080,11 +1142,9 @@ public class GameMngr : MonoBehaviour
             Time.timeScale = 1f;
             Loading.SetActive(true);
             LoadBar.SetActive(true);
+            StopCoinAnimation();
             StartCoroutine(LoadAsyncScene("MM"));
         }
-
-
-
 
         IEnumerator LoadAsyncScene(string sceneName)
         {

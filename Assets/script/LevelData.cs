@@ -13,6 +13,7 @@ public class LevelData : MonoBehaviour
     
     public GameObject[] greenred;
     public Transform[] LineRendPos;
+    public GameObject[] ToOff;
 
 
 

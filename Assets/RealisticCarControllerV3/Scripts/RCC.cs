@@ -155,7 +155,8 @@ public class RCC {
     /// Changes the camera mode.
     /// </summary>
     public static void ChangeCamera() {
-
+        if(MySoundManager.instance)
+            MySoundManager.instance.PlayButtonClickSound(1f);
         RCC_SceneManager.Instance.ChangeCamera();
 
     }

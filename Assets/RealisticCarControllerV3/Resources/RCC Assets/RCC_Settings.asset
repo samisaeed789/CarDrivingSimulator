@@ -516,7 +516,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   headLights: {fileID: 0}
-  brakeLights: {fileID: 0}
+  brakeLights: {fileID: 136378, guid: 40648ef4ebef26d4c9cc0663c2f08e5e, type: 3}
   reverseLights: {fileID: 0}
   indicatorLights: {fileID: 0}
   lightTrailers: {fileID: 0}
