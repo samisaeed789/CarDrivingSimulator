@@ -172,7 +172,7 @@ public class GameMngr : MonoBehaviour
 
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         RCC_Settings.Instance.dontUseAnyParticleEffects = true;
-        trafficSpawner.gameObject.SetActive(false);
+        //trafficSpawner.gameObject.SetActive(false);
         UpdateTimerText();
         CinematicCam = Cam.transform.parent.parent.gameObject.GetComponent<RCC_CameraCarSelection>();
         soundmgr = MySoundManager.instance;
@@ -201,22 +201,22 @@ public class GameMngr : MonoBehaviour
         }
 
 
-        float CSLength = lvlcs[currentlvl - 1].CsTime;
-        lvlcs[currentlvl - 1].Cs.gameObject.SetActive(true);
-        CSAppreciate.transform.GetChild(0).gameObject.GetComponent<Text>().text = lvlcs[currentlvl - 1].Appreciatetxt.ToString();
-        CSObjtxt.fullText = lvlcs[currentlvl - 1].CSObjtxt;
-        CsCam.gameObject.SetActive(true);
-        yield return new WaitForSeconds(CSLength);
-        lvlcs[currentlvl - 1].Cs.gameObject.SetActive(false);
+        //float CSLength = lvlcs[currentlvl - 1].CsTime;
+        //lvlcs[currentlvl - 1].Cs.gameObject.SetActive(true);
+        //CSAppreciate.transform.GetChild(0).gameObject.GetComponent<Text>().text = lvlcs[currentlvl - 1].Appreciatetxt.ToString();
+        //CSObjtxt.fullText = lvlcs[currentlvl - 1].CSObjtxt;
+        //CsCam.gameObject.SetActive(true);
+        //yield return new WaitForSeconds(CSLength);
+        //lvlcs[currentlvl - 1].Cs.gameObject.SetActive(false);
         Cam.transform.parent.parent.gameObject.SetActive(true);
-        CsCam.gameObject.SetActive(false);
+        //CsCam.gameObject.SetActive(false);
         IgnitBtn.SetActive(true);
         lvlcs[currentlvl - 1].Levls.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
         CSBlckPnl.SetActive(false);
-        CSAppreciate.SetActive(false);
+        //CSAppreciate.SetActive(false);
+        //Line.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
         trafficSpawner.gameObject.SetActive(true);
-        Line.gameObject.SetActive(true);
     }
 
 

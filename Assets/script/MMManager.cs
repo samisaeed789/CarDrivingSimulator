@@ -89,8 +89,12 @@ public class MMManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("UnlockedLevels") == 0)
         {
-           PlayerPrefs.SetInt("UnlockedLevels", 7);
+           PlayerPrefs.SetInt("UnlockedLevels", 1);
         }
+
+        if(ValStorage.GetCoins()<=0)
+            ValStorage.SetCoins(150);
+       
         CheckUnlocked();
 
         soundmng = MySoundManager.instance;

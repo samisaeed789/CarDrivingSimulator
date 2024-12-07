@@ -95,7 +95,10 @@ namespace RGSK
                 // Object is outside the frustum, so skip rendering
                 // You can log something or simply avoid the reflection processing
             }
-         
+
+
+            
+
             reflectionCamera.transform.position = oldpos;
             GL.invertCulling = false;
             Material[] materials = rend.sharedMaterials;

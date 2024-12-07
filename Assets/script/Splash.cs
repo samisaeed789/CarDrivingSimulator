@@ -38,6 +38,7 @@ public class Splash : MonoBehaviour
     void PlayNextScene()
     {
         soundmgr.StopRevv5Sound();
+        soundmgr.StopRunningCar();
         loadingPnl.SetActive(true);
         StartCoroutine(LoadAsyncScene("MM"));
     }

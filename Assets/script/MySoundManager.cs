@@ -418,6 +418,10 @@ public class MySoundManager : MonoBehaviour {
         BGM.clip = bgm;
         BGM.Play();
     }
+	public void StopRunningCar() 
+	{
+		BGM.Stop();
+	}
 
 	
 }
