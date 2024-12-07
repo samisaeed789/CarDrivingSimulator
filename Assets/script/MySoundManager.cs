@@ -57,6 +57,7 @@ public class MySoundManager : MonoBehaviour {
     public AudioClip Beep;
     public AudioClip Revv;
     public AudioClip Revv1;
+    public AudioClip Revv5;
     public AudioClip Unlock;
 
 
@@ -282,6 +283,17 @@ public class MySoundManager : MonoBehaviour {
 	{
 		Effectsource.PlayOneShot(Revv1);
 	}
+	public void PlayRevv5Sound()
+	{
+		Effectsource.clip = Revv5;
+		Effectsource.loop = true;
+		Effectsource.Play();
+	}
+	public void StopRevv5Sound()
+	{
+		Effectsource.Stop();
+		
+	}
 
 	public void PlayCPSound(float val)
 	{
@@ -401,5 +413,11 @@ public class MySoundManager : MonoBehaviour {
 		
 	}
 
+	public void PlayRunningCar() 
+	{
+        BGM.clip = bgm;
+        BGM.Play();
+    }
 
+	
 }

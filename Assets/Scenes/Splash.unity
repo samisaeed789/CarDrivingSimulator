@@ -1792,7 +1792,7 @@ MonoBehaviour:
   Effectsource: {fileID: 0}
   ss: {fileID: 0}
   mm: {fileID: 0}
-  bgm: {fileID: 0}
+  bgm: {fileID: 8300000, guid: 741fe6118c3d0f242bd071735ed0c719, type: 3}
   Indi: {fileID: 0}
   Horn: {fileID: 0}
   Excellent: {fileID: 0}
@@ -1818,6 +1818,7 @@ MonoBehaviour:
   Beep: {fileID: 8300000, guid: 3093dd9f48428404ab175bae3a41a1a8, type: 3}
   Revv: {fileID: 8300000, guid: 645fa18b77ea0fc4da522382a0447161, type: 3}
   Revv1: {fileID: 8300000, guid: 09397c89470e45f47b396d5bf8fb915d, type: 3}
+  Revv5: {fileID: 8300000, guid: 7079eab2eeaa425448524689c9e39c22, type: 3}
   Unlock: {fileID: 8300000, guid: 399ec296f6f53f04b9e648d5eaf8b320, type: 3}
   levelcompleted: 0
   levelfailed: 0
@@ -1835,7 +1836,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

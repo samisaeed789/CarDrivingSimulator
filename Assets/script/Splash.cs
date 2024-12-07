@@ -30,12 +30,14 @@ public class Splash : MonoBehaviour
     {
 
         MeterStart.enabled = true;
+        soundmgr.PlayRunningCar();
         gameobjbtn.SetActive(false);
 
     }
 
     void PlayNextScene()
     {
+        soundmgr.StopRevv5Sound();
         loadingPnl.SetActive(true);
         StartCoroutine(LoadAsyncScene("MM"));
     }
@@ -96,5 +98,10 @@ public class Splash : MonoBehaviour
     {
         if (soundmgr != null)
             soundmgr.PlayRevv1Sound();
+    }
+    void Revv5()
+    {
+        if (soundmgr != null)
+            soundmgr.PlayRevv5Sound();
     }
 }

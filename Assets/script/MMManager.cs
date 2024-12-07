@@ -89,7 +89,7 @@ public class MMManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("UnlockedLevels") == 0)
         {
-           PlayerPrefs.SetInt("UnlockedLevels", 1);
+           PlayerPrefs.SetInt("UnlockedLevels", 7);
         }
         CheckUnlocked();
 
@@ -119,9 +119,10 @@ public class MMManager : MonoBehaviour
     private void Start()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        ValStorage.SetCoins(10000);
         SetCoins();
         Time.timeScale = 1f;
+
+       
 
 
         if (AdsManager.instance )

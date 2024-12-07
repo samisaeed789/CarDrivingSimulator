@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using WaypointsFree;
-using UnityEngine.Audio;
+using System.Diagnostics;
 
 
 
@@ -63,6 +63,7 @@ public class GameMngr : MonoBehaviour
     public GameObject seatBeltoffbtn;
     public RCC_UIController Brake;
     public GameObject IgnitBtn;
+    public GameObject NxtBtnSccs;
     public Image loadingBar;
     public Animator sphere;
     public GameObject headLightActvbtn;
@@ -261,14 +262,14 @@ public class GameMngr : MonoBehaviour
                 {
                     return null;
 
-                    Debug.LogError("CarId is out of bounds of the PlayerCars array.");
+                    UnityEngine.Debug.LogError("CarId is out of bounds of the PlayerCars array.");
                 }
 
 
             }
             else
             {
-                Debug.LogError("Failed to parse CarId as an integer.");
+                UnityEngine.Debug.LogError("Failed to parse CarId as an integer.");
                 return null;
 
             }
@@ -310,18 +311,20 @@ public class GameMngr : MonoBehaviour
             Array.Copy(levelStats.greenred, greenred, levelStats.greenred.Length);
         }
 
-        if (lvlstats.IsDisabledTraffic)
-            trafficSpawner.DisableAllCars();
+       
 
         IsStayinginLane = lvlstats.IsStayinLane;
 
        
-          
-       
-
-
         OffGameObj();
-        SetPosLineRenderer();
+        StartCoroutine(delaytrafficoff());
+    }
+
+    IEnumerator delaytrafficoff() 
+    {
+        yield return new WaitForSeconds(1f);
+        if (lvlstats.IsDisabledTraffic)
+            trafficSpawner.DisableAllCars();
     }
 
     void OffGameObj() 
@@ -408,11 +411,7 @@ public class GameMngr : MonoBehaviour
     {
         if (soundmgr)
             soundmgr.PlayButtonClickSound(1f);
-        if (seatBeltoffbtn != null)
-        {
-            // Toggle the active state of the child
-            seatBeltoffbtn.SetActive(!seatBeltoffbtn.activeSelf);
-        }
+     
         Belt.SetActive(true);
         Beltbtn.SetActive(false);
         Invoke(nameof(delayoff),1.05f);
@@ -514,7 +513,6 @@ public class GameMngr : MonoBehaviour
         if (AdsManager.instance)
             AdsManager.instance.showAdMobRectangleBannerBottomLeft();
 
-        //  hideAdmobBottomLeftBanner();
 
     }
 
@@ -588,12 +586,18 @@ public class GameMngr : MonoBehaviour
 
     void UnlckNxtLvl()
     {
+
         int currlvl = ValStorage.selLevel;
         int unlockdlvls = ValStorage.GetUnlockedLevels();
 
         if (currlvl == unlockdlvls)
         {
             ValStorage.SetUnlockedLevels(unlockdlvls + 1);
+        }
+
+        if (currlvl == 7) 
+        {
+            NxtBtnSccs.SetActive(false);
         }
     }
 
@@ -907,7 +911,7 @@ public class GameMngr : MonoBehaviour
 
         if (Car != null)
         {
-            Line.SetPosition(0, Car.transform.position);
+           // Line.SetPosition(0, Car.transform.position);
         }
     }
 
@@ -1111,7 +1115,7 @@ public class GameMngr : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Object not found!");
+                UnityEngine.Debug.LogError("Object not found!");
             }
         }
 
@@ -1138,12 +1142,36 @@ public class GameMngr : MonoBehaviour
             if (soundmgr)
                 soundmgr.ResumeSounds();
 
+                CheckMusis();
+
              CarSound(true);
              if (AdsManager.instance)
                 AdsManager.instance.hideAdmobBottomLeftBanner();
             Time.timeScale = 1f;
             PausePnl.SetActive(false);
         }
+
+        void CheckMusis() 
+        {
+        if (MusicOff.activeSelf)
+        {
+           
+            if (soundmgr)
+            {
+                soundmgr.SetBGM(false);  // Start playing background music
+            }
+        }
+        else
+        {
+          
+            if (soundmgr)
+            {
+                soundmgr.SetBGM(true);  // Stop playing background music
+            }
+        }
+    
+        }
+
 
         public void Restart()
         {
