@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using GoogleMobileAds.Api;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class AdsManager : MonoBehaviour
 {
     public static AdsManager instance;
@@ -1771,7 +1772,12 @@ public class AdsManager : MonoBehaviour
 
                 videoAD.Show((Reward reward) =>
                 {
-                    // TODO: Reward the user.
+                    if (SceneManager.GetActiveScene().name == "MM") 
+                    {
+                        Debug.Log("asdasd");
+                        if (MMManager.Instance)
+                            MMManager.Instance.GrantReward("300 Coins");
+                    }
                 });
 
             }

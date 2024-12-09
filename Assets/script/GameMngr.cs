@@ -1121,7 +1121,11 @@ public class GameMngr : MonoBehaviour
 
         public void Pause()
         {
-                if (soundmgr)
+
+        if (AdsManager.instance)
+            AdsManager.instance.showAdmobInterstitial();
+
+        if (soundmgr)
                     soundmgr.PauseSounds();
 
 
@@ -1175,7 +1179,12 @@ public class GameMngr : MonoBehaviour
 
         public void Restart()
         {
-            Time.timeScale = 1f;
+
+        if (AdsManager.instance)
+            AdsManager.instance.showAdmobInterstitial();
+
+
+        Time.timeScale = 1f;
             Loading.SetActive(true);
             LoadBar.SetActive(true);
             StopCoinAnimation();
@@ -1184,7 +1193,11 @@ public class GameMngr : MonoBehaviour
 
         public void Home()
         {
-            Time.timeScale = 1f;
+
+        if (AdsManager.instance)
+            AdsManager.instance.showAdmobInterstitial();
+
+        Time.timeScale = 1f;
             Loading.SetActive(true);
             LoadBar.SetActive(true);
             StopCoinAnimation();

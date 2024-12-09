@@ -170,6 +170,8 @@ public class MMManager : MonoBehaviour
         }
         if (S == "LvlSel")
         {
+
+
             Disablehildren();
             PanelActivity(LvlSel: true);
 
@@ -204,6 +206,11 @@ public class MMManager : MonoBehaviour
     }
     public void SelMode(string Mode)
     {
+
+        if (AdsManager.instance)
+            AdsManager.instance.showAdmobInterstitial();
+
+
         ValStorage.modeSel = Mode;
         BackBtn("LvlSel");
     }
@@ -211,6 +218,9 @@ public class MMManager : MonoBehaviour
 
     public void SelLevel(int i)
     {
+        if (AdsManager.instance)
+            AdsManager.instance.showAdmobInterstitial();
+
         ValStorage.selLevel = i;
         CarsCont.SetActive(true);
         BackBtn("Garage");
@@ -358,6 +368,20 @@ public class MMManager : MonoBehaviour
         SettingsPanel.SetActive(State);
     }
 
+    public void RewardCoins() 
+    {
+        if (AdsManager.instance)
+            AdsManager.instance.ShowAdmobRewardedVideoAd();
+    }
+
+    public void GrantReward(string Reward) 
+    {
+        if(Reward=="300 Coins") 
+        {
+            ValStorage.SetCoins(ValStorage.GetCoins()+300);
+            SetCoins();
+        }
+    }
 
 
 
