@@ -67,7 +67,6 @@ public class TriggerChk : MonoBehaviour
 
             if (TrafficSignal)
             {
-                Debug.LogError("entered");
                 isInTrigger = true;  // Player entered the trigger
                 timer = 0f;  // Reset the timer
             }

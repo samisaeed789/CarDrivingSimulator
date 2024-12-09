@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace RGSK 
 {
-    
+
     [ExecuteInEditMode]
     public class Reflection : MonoBehaviour
     {
@@ -97,7 +97,7 @@ namespace RGSK
             }
 
 
-            
+
 
             reflectionCamera.transform.position = oldpos;
             GL.invertCulling = false;
@@ -250,5 +250,33 @@ namespace RGSK
             reflectionMat.m32 = 0F;
             reflectionMat.m33 = 1F;
         }
+
+        public void SetRefQuality(int i)
+        {
+            switch (i)
+            {
+                case 1:
+                    reflectionQuality = ReflectionQuality.Low;
+                    break;
+
+                case 2:
+                    reflectionQuality = ReflectionQuality.Medium;
+                    break;
+
+                case 3:
+                    reflectionQuality = ReflectionQuality.High;
+                    break;
+
+                default:
+                    Debug.LogWarning("Invalid reflection quality value. Setting to default (Low).");
+                    reflectionQuality = ReflectionQuality.Low;
+                    break;
+            }
+
+        }
     }
-}
+    
+    }
+
+   
+   

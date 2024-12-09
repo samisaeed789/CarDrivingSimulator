@@ -179,7 +179,7 @@ public class GameMngr : MonoBehaviour
         SetButtonTransparency(ValStorage.GetTransparency());
         Controls.SetMobileController(ValStorage.GetControls());
         yield return new WaitForSeconds(2); // fixed delay
-        Loading.SetActive(false);
+       
 
         if (soundmgr)
             soundmgr.SetBGM(true);
@@ -217,6 +217,7 @@ public class GameMngr : MonoBehaviour
         //Line.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         trafficSpawner.gameObject.SetActive(true);
+        Loading.SetActive(false);
     }
 
 
@@ -336,21 +337,7 @@ public class GameMngr : MonoBehaviour
         }
     }
     int currind = 0;
-    void SetPosLineRenderer()
-    {
-
-
-        int lineLength = lvlstats.LineRendPos.Length;
-
-        Line.positionCount = lineLength;
-
-        // Store the original positions of the LineRenderer (excluding the first position)
-        for (int i = 1; i < lineLength; i++)
-        {
-            Transform pos = lvlstats.LineRendPos[i];
-            Line.SetPosition(i, pos.position);
-        }
-    }
+   
 
     #endregion
 
@@ -606,6 +593,9 @@ public class GameMngr : MonoBehaviour
         Loading.SetActive(true);
         LoadBar.SetActive(true);
 
+       // Firebase.Analytics.FirebaseAnalytics.LogEvent("Next_Level" + ValStorage.selLevel);
+
+
         StopCoinAnimation();
         int currentLevelIndex = ValStorage.selLevel;
 
@@ -825,9 +815,7 @@ public class GameMngr : MonoBehaviour
 
 
         IsGreenEnabled = true;
-        //        yield return new WaitForSeconds(0.3f);
-
-        //AppreciateCoinAdd("You Followed Traffic Signal Rule");
+      
     }
 
 
@@ -900,18 +888,12 @@ public class GameMngr : MonoBehaviour
 
         if (IsStayinginLane && Car.speed >= 10f)
         {
-            LaneTimer += Time.fixedDeltaTime;
-            if (LaneTimer >= 25f)
+            LaneTimer += Time.deltaTime;
+            if (LaneTimer >= 15f)
             {
                 AppreciateCoinAdd("You Followed Lane Rule");
                 LaneTimer = 0f;
             }
-        }
-
-
-        if (Car != null)
-        {
-           // Line.SetPosition(0, Car.transform.position);
         }
     }
 
@@ -1125,6 +1107,9 @@ public class GameMngr : MonoBehaviour
         if (AdsManager.instance)
             AdsManager.instance.showAdmobInterstitial();
 
+       // Firebase.Analytics.FirebaseAnalytics.LogEvent("Pause_Level"+ValStorage.selLevel);
+
+
         if (soundmgr)
                     soundmgr.PauseSounds();
 
@@ -1146,7 +1131,10 @@ public class GameMngr : MonoBehaviour
             if (soundmgr)
                 soundmgr.ResumeSounds();
 
-                CheckMusis();
+       // Firebase.Analytics.FirebaseAnalytics.LogEvent("Resume_Level" + ValStorage.selLevel);
+
+
+        CheckMusis();
 
              CarSound(true);
              if (AdsManager.instance)
@@ -1182,6 +1170,8 @@ public class GameMngr : MonoBehaviour
 
         if (AdsManager.instance)
             AdsManager.instance.showAdmobInterstitial();
+       
+       // Firebase.Analytics.FirebaseAnalytics.LogEvent("Restart_Level" + ValStorage.selLevel);
 
 
         Time.timeScale = 1f;
@@ -1196,6 +1186,9 @@ public class GameMngr : MonoBehaviour
 
         if (AdsManager.instance)
             AdsManager.instance.showAdmobInterstitial();
+
+       // Firebase.Analytics.FirebaseAnalytics.LogEvent("Home" + ValStorage.selLevel);
+
 
         Time.timeScale = 1f;
             Loading.SetActive(true);

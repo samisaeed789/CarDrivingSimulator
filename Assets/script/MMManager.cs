@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class MMManager : MonoBehaviour
 {
     public static MMManager Instance;
@@ -51,7 +52,7 @@ public class MMManager : MonoBehaviour
     private float transparencyChangeAmount = 0.1f; // A
     [SerializeField] private Text transparencyChange; // A
 
-
+    [SerializeField] RGSK.Reflection reflection;
 
 
 
@@ -126,7 +127,9 @@ public class MMManager : MonoBehaviour
         SetCoins();
         Time.timeScale = 1f;
 
-       
+        
+       //  Firebase.Analytics.FirebaseAnalytics.LogEvent("Start_MM");
+        
 
 
         if (AdsManager.instance )
@@ -221,11 +224,15 @@ public class MMManager : MonoBehaviour
         if (AdsManager.instance)
             AdsManager.instance.showAdmobInterstitial();
 
+       
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("Selected_Level" +i);
+
+        
+
         ValStorage.selLevel = i;
         CarsCont.SetActive(true);
         BackBtn("Garage");
     }
-
 
     public void OnVolumeChanged(float value)
     {
@@ -244,6 +251,7 @@ public class MMManager : MonoBehaviour
 
 
         ValStorage.SetCar(garage.GetCurrCarId());
+        //Firebase.Analytics.FirebaseAnalytics.LogEvent("Selected_Vehicle" + garage.GetCurrCarId());
         StartCoroutine(LoadAsyncScene("Gameplay"));
     }
 
@@ -439,16 +447,20 @@ public class MMManager : MonoBehaviour
     {
         if (s == "High")
         {
+            reflection.SetRefQuality(3);
             GrphicsActivity(isHigh: true);
+
         }
 
         if (s == "Med")
         {
+            reflection.SetRefQuality(2);
             GrphicsActivity(isMed: true);
         }
 
         if (s == "Low")
         {
+            reflection.SetRefQuality(1);
             GrphicsActivity(isLow: true);
         }
         if (MySoundManager.instance)
