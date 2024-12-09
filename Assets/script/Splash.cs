@@ -24,15 +24,12 @@ public class Splash : MonoBehaviour
 
         if (soundmgr != null)
             soundmgr.CarUnlock();
-
     }
     public void EngineStart()
     {
-
         MeterStart.enabled = true;
         soundmgr.PlayRunningCar();
         gameobjbtn.SetActive(false);
-
     }
 
     void PlayNextScene()

@@ -497,8 +497,8 @@ public class GameMngr : MonoBehaviour
         SetCoinsinPanel();
         car.gameObject.SetActive(false);
 
-        if (AdsManager.instance)
-            AdsManager.instance.showAdMobRectangleBannerBottomLeft();
+        //if (AdsManager.instance)
+        //    AdsManager.instance.showAdMobRectangleBannerBottomLeft();
 
 
     }
@@ -1104,8 +1104,8 @@ public class GameMngr : MonoBehaviour
         public void Pause()
         {
 
-        if (AdsManager.instance)
-            AdsManager.instance.showAdmobInterstitial();
+        //if (AdsManager.instance)
+        //    AdsManager.instance.showAdmobInterstitial();
 
        // Firebase.Analytics.FirebaseAnalytics.LogEvent("Pause_Level"+ValStorage.selLevel);
 
@@ -1120,8 +1120,8 @@ public class GameMngr : MonoBehaviour
                 CarSound(false);
                 PausePnl.SetActive(true);
 
-                if (AdsManager.instance)
-                    AdsManager.instance.showAdMobRectangleBannerBottomLeft();
+                //if (AdsManager.instance)
+                //    AdsManager.instance.showAdMobRectangleBannerBottomLeft();
         
                 Time.timeScale = 0f;
         }
@@ -1137,8 +1137,8 @@ public class GameMngr : MonoBehaviour
         CheckMusis();
 
              CarSound(true);
-             if (AdsManager.instance)
-                AdsManager.instance.hideAdmobBottomLeftBanner();
+             //if (AdsManager.instance)
+             //   AdsManager.instance.hideAdmobBottomLeftBanner();
             Time.timeScale = 1f;
             PausePnl.SetActive(false);
         }
@@ -1168,8 +1168,8 @@ public class GameMngr : MonoBehaviour
         public void Restart()
         {
 
-        if (AdsManager.instance)
-            AdsManager.instance.showAdmobInterstitial();
+        //if (AdsManager.instance)
+        //    AdsManager.instance.showAdmobInterstitial();
        
        // Firebase.Analytics.FirebaseAnalytics.LogEvent("Restart_Level" + ValStorage.selLevel);
 
@@ -1184,8 +1184,8 @@ public class GameMngr : MonoBehaviour
         public void Home()
         {
 
-        if (AdsManager.instance)
-            AdsManager.instance.showAdmobInterstitial();
+        //if (AdsManager.instance)
+        //    AdsManager.instance.showAdmobInterstitial();
 
        // Firebase.Analytics.FirebaseAnalytics.LogEvent("Home" + ValStorage.selLevel);
 
@@ -1200,8 +1200,8 @@ public class GameMngr : MonoBehaviour
         IEnumerator LoadAsyncScene(string sceneName)
         {
             
-            if(AdsManager.instance)
-                AdsManager.instance.showAdMobRectangleBannerBottomLeft();
+            //if(AdsManager.instance)
+            //    AdsManager.instance.showAdMobRectangleBannerBottomLeft();
 
 
             float timer = 0f;
@@ -1231,8 +1231,8 @@ public class GameMngr : MonoBehaviour
             }
             sphere.enabled = false;
 
-            if (AdsManager.instance)
-                AdsManager.instance.hideAdmobBottomLeftBanner();
+            //if (AdsManager.instance)
+            //    AdsManager.instance.hideAdmobBottomLeftBanner();
             yield return new WaitForSeconds(0.1f);
             asyncLoad.allowSceneActivation = true;
         }

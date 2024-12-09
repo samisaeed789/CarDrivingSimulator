@@ -132,8 +132,8 @@ public class MMManager : MonoBehaviour
         
 
 
-        if (AdsManager.instance )
-            AdsManager.instance.showAdmobAdpativeBannerTop();
+        //if (AdsManager.instance )
+        //    AdsManager.instance.showAdmobAdpativeBannerTop();
     }
 
     void CheckUnlocked()
@@ -182,8 +182,8 @@ public class MMManager : MonoBehaviour
         if (S == "Exit")
         {
 
-            if (AdsManager.instance)
-                AdsManager.instance.showAdMobRectangleBannerBottomLeft();
+            //if (AdsManager.instance)
+            //    AdsManager.instance.showAdMobRectangleBannerBottomLeft();
 
             PanelActivity(ExitPnl: true);
         }
@@ -191,8 +191,8 @@ public class MMManager : MonoBehaviour
         {
             PanelActivity(MM: true);
 
-            if(AdsManager.instance)
-                AdsManager.instance.hideAdmobBottomLeftBanner();
+            //if(AdsManager.instance)
+            //    AdsManager.instance.hideAdmobBottomLeftBanner();
 
         }
         if (S == "Garage")
@@ -210,8 +210,8 @@ public class MMManager : MonoBehaviour
     public void SelMode(string Mode)
     {
 
-        if (AdsManager.instance)
-            AdsManager.instance.showAdmobInterstitial();
+        //if (AdsManager.instance)
+        //    AdsManager.instance.showAdmobInterstitial();
 
 
         ValStorage.modeSel = Mode;
@@ -221,8 +221,8 @@ public class MMManager : MonoBehaviour
 
     public void SelLevel(int i)
     {
-        if (AdsManager.instance)
-            AdsManager.instance.showAdmobInterstitial();
+        //if (AdsManager.instance)
+        //    AdsManager.instance.showAdmobInterstitial();
 
        
         //Firebase.Analytics.FirebaseAnalytics.LogEvent("Selected_Level" +i);
@@ -288,8 +288,8 @@ public class MMManager : MonoBehaviour
         }
         sphere.enabled = false;
         
-        if(AdsManager.instance)
-           AdsManager.instance.hideAdmobBottomLeftBanner();
+        //if(AdsManager.instance)
+        //   AdsManager.instance.hideAdmobBottomLeftBanner();
 
         yield return new WaitForSeconds(0.1f);
         asyncLoad.allowSceneActivation = true;
@@ -378,8 +378,8 @@ public class MMManager : MonoBehaviour
 
     public void RewardCoins() 
     {
-        if (AdsManager.instance)
-            AdsManager.instance.ShowAdmobRewardedVideoAd();
+        //if (AdsManager.instance)
+        //    AdsManager.instance.ShowAdmobRewardedVideoAd();
     }
 
     public void GrantReward(string Reward) 
