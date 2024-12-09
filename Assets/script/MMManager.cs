@@ -391,6 +391,15 @@ public class MMManager : MonoBehaviour
         }
     }
 
+    public void PrivacyPolicy() 
+    {
+        Application.OpenURL("https://privacypolicyforgamesfact.blogspot.com/2023/09/privacy-policy-for-games-fact.html");
+    } 
+    
+    public void MoreGames() 
+    {
+        Application.OpenURL("https://play.google.com/store/apps/developer?id=Games+Fact");
+    }
 
 
     #region Settings

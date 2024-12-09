@@ -263,7 +263,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/Admin/Desktop/keystore/factgames.keystore
+  AndroidKeystoreName: '{dedicated}: Downloads/factgames.keystore'
   AndroidKeyaliasName: factgames
   AndroidEnableArmv9SecurityFeatures: 0
   AndroidBuildApkPerCpuArchitecture: 0
