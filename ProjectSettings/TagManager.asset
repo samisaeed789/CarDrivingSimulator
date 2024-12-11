@@ -8,6 +8,9 @@ TagManager:
   - SaveCheckpoint
   - CheckPoint
   - Parking
+  - Hurdle
+  - ParkingArrow
+  - OtherParking
   layers:
   - Default
   - TransparentFX
