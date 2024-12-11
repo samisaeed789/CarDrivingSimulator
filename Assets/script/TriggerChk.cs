@@ -164,7 +164,7 @@ public class TriggerChk : MonoBehaviour
             }
             else
             {
-                gm.AppreciateCoinAdd("You Should Follow Speed Limit Rule");
+                gm.DiscourageCoinDeduct("You Should Follow Speed Limit Rule"); 
 
             }
         }
@@ -183,8 +183,6 @@ public class TriggerChk : MonoBehaviour
             }
         }
     }
-
-
     private void OnDisable()
     {
         GameMngr.instance.OnCarSet -= HandleCarSet;
