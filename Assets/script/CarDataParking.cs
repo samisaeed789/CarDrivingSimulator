@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class CarDataParking : MonoBehaviour
 {
-    public GameObject Emoji;
-    public ParticleSystem Smoke;
+   
 }

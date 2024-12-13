@@ -14,12 +14,15 @@ public class Collectable : MonoBehaviour
         {
             if (Coins) 
             {
-                GameMngr.instance.CollectablePlay(isCoin:true);
+                GameMngr.instance?.CollectablePlay(isCoin: true);
+
+                ParkingGm.instance?.CollectablePlay(isCoin: true);
 
             }
             if (Cash) 
             {
-                GameMngr.instance.CollectablePlay(isCash: true);
+                GameMngr.instance?.CollectablePlay(isCash: true);
+                ParkingGm.instance?.CollectablePlay(isCash: true);
             }
             this.transform.parent.gameObject.SetActive(false);
 

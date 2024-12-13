@@ -5,8 +5,6 @@ using UnityEngine;
 public class ObstacleColl : MonoBehaviour
 {
 
-    //CarDataParking carData;
-    //GameObject emoji;
 
 
     int collisionCount;
@@ -14,11 +12,17 @@ public class ObstacleColl : MonoBehaviour
     public ParticleSystem Smoke;
     Rigidbody rb;
     RCC_CarControllerV3 Car;
+    ParkingGm gm;
+
+    bool hasCollided;
+
+    public GameObject Taillights;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         Car = GetComponent<RCC_CarControllerV3>();
+        gm = ParkingGm.instance;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -31,9 +35,14 @@ public class ObstacleColl : MonoBehaviour
             Obstacle obstacle = collision.gameObject.GetComponent<Obstacle>();
             if (obstacle != null)
             {
-                obstacle.HitEffect();
-                StartCoroutine(PlayAngryEmoji()); 
-                CheckCollisions();
+                if (!hasCollided)
+                {
+                    obstacle.HitEffect();
+                    StartCoroutine(PlayAngryEmoji());
+                    gm.Collided();
+                    CheckCollisions();
+                    hasCollided = true;
+                }
                
             }
             else
@@ -46,10 +55,19 @@ public class ObstacleColl : MonoBehaviour
 
     void CheckCollisions() 
     {
-        collisionCount++;
-        if (collisionCount >= 4) 
+       
+            collisionCount++;
+            if (collisionCount >= 4)
+            {
+                CarWreckedPlay();
+            }
+        
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Hurdle"))
         {
-            CarWreckedPlay();
+            hasCollided = false;
         }
     }
 

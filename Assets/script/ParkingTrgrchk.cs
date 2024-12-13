@@ -8,7 +8,7 @@ public class ParkingTrgrchk : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player")) 
         {
-            
+            ParkingGm.instance.CarFinalPark();
         }
     }
 }
