@@ -92,8 +92,8 @@ public class ParkingGm : MonoBehaviour
         GasBtn.pressing = false;
         BrakeBtn.pressing = true;
         yield return new WaitForSeconds(0.4f);
-        BrakeBtn.pressing = false;
-        yield return new WaitForSeconds(0.5f);
+        //BrakeBtn.pressing = false;
+        yield return new WaitForSeconds(1f);
         StartCoroutine(SetLevel());
     }
     void SetPositionBackward()
@@ -108,6 +108,7 @@ public class ParkingGm : MonoBehaviour
         rbCar.position = currentPosition;
 
     }
+
     IEnumerator SetLevel() 
     {
         yield return new WaitForSeconds(1.5f);
@@ -118,6 +119,7 @@ public class ParkingGm : MonoBehaviour
         yield return new WaitForSeconds(2f);
         rccCam.cameraMode = RCC_Camera.CameraMode.TPS;
         rbCar.isKinematic = false;
+        BrakeBtn.pressing = false;
         Ignition.SetActive(true);
     }
    
