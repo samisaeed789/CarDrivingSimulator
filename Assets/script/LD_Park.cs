@@ -6,7 +6,9 @@ public class LD_Park : MonoBehaviour
 {
     
     public Transform SpawnPoint;
+    public Transform SpawnPointJeep;
     public GameObject[] OnObjets;
+    public GameObject DanceChar;
     public ParticleSystem[] Confetti;
     void Start()
     {

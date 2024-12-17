@@ -10,7 +10,10 @@ public static class ValStorage
 
     public static float timerforlane;
 
-   public static int GetCoins() 
+    public static int selLevelParking;
+
+
+    public static int GetCoins() 
    {
       return  PlayerPrefs.GetInt("Coins");
    }

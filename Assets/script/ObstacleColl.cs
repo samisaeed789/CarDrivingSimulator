@@ -55,13 +55,12 @@ public class ObstacleColl : MonoBehaviour
 
     void CheckCollisions() 
     {
-       
             collisionCount++;
             if (collisionCount >= 4)
             {
                 CarWreckedPlay();
+                gm.FailLevel();
             }
-        
     }
     private void OnCollisionExit(Collision collision)
     {
@@ -77,6 +76,8 @@ public class ObstacleColl : MonoBehaviour
         Car.canControl = false;
         Smoke.Play();
     }
+
+
     IEnumerator PlayAngryEmoji() 
     {
         Emoji.SetActive(true);
