@@ -51,6 +51,7 @@ public class MySoundManager : MonoBehaviour {
     public AudioClip Applaud;
     public AudioClip GreatJob;
     public AudioClip Splash;
+    public AudioClip Hit;
     public AudioClip PlayEngine;
     public AudioClip Collect;
     public AudioClip CollectCoin;
@@ -131,15 +132,12 @@ public class MySoundManager : MonoBehaviour {
 		}
 	}
 
-	public void PlayLevelFailSound(bool check, float val)
+	public void PlayLevelFailSound()
 	{
-		if (check) {
-			musicValue = val;
-			BGM.volume = musicValue;
-			BGM.PlayOneShot(fail);
-		} else {
-			BGM.Pause ();
-		}
+		
+			Effectsource.PlayOneShot(fail);
+			BGM.Pause();
+		
 	}
 
 	public void SetSelectionScreenMusic (bool check, float val)
@@ -217,6 +215,10 @@ public class MySoundManager : MonoBehaviour {
 	public void PlayEngineSound()
 	{
 		Effectsource.PlayOneShot(PlayEngine);
+	} 
+	public void PlayHitSound()
+	{
+		Effectsource.PlayOneShot(Hit);
 	} 
 	
 	public void PlayUIPopSound(float val)
@@ -402,10 +404,11 @@ public class MySoundManager : MonoBehaviour {
 	{
 		SetBGM(true);
 
-		bool play = GameMngr.instance.IsIndsiactive();
-		
-		playindiSound(play);
-		
+        if (GameMngr.instance) 
+		{
+			bool play = GameMngr.instance.IsIndsiactive();
+			playindiSound(play);
+		}
 	}
 	public void CarUnlock() 
 	{

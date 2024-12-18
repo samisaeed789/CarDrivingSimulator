@@ -29,10 +29,20 @@ public static class ValStorage
 
        return PlayerPrefs.GetString("SelectedCar");
     }
+    
+    public static void SetCarNumber(int val)
+    {
+        PlayerPrefs.SetInt("SelectedCarNumber", val);
+    }
+    
+    public static int GetCarNumber()
+    {
+
+       return PlayerPrefs.GetInt("SelectedCarNumber");
+    }
 
     public static void SetCoins(int coin)
     {
-
         PlayerPrefs.SetInt("Coins",coin);
     }
 
@@ -107,6 +117,15 @@ public static class ValStorage
     public static int GetUnlockedLevels()
     {
        return PlayerPrefs.GetInt("UnlockedLevels", 0);
+    }
+
+    public static void SetUnlockedLevelsParking(int val)
+    {
+        PlayerPrefs.SetInt("UnlockedLevelsParking", val);
+    }
+    public static int GetUnlockedLevelsParking()
+    {
+       return PlayerPrefs.GetInt("UnlockedLevelsParking", 0);
     } 
     
    

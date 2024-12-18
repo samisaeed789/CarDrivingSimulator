@@ -10,6 +10,7 @@ public class MMManager : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject modeSelectionPanel;
     public GameObject levelSelectionPanel;
+    public GameObject levelSelectionParkingPanel;
     public GameObject loadingScreenPanel;
     public GameObject exitPanel;
     public GameObject SettingsPanel;
@@ -68,6 +69,7 @@ public class MMManager : MonoBehaviour
 
     [Header("OtherClasses")]
     public Button[] LvlCards;
+    public Button[] LvlCardsParking;
 
 
     private AsyncOperation async;
@@ -89,9 +91,14 @@ public class MMManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("UnlockedLevels") == 0)
         {
-           PlayerPrefs.SetInt("UnlockedLevels", 7);
+           PlayerPrefs.SetInt("UnlockedLevels", 1);
+        }
+        if (ValStorage.GetUnlockedLevelsParking() == 0)
+        {
+            ValStorage.SetUnlockedLevelsParking(1);
         }
         CheckUnlocked();
+        CheckUnlockedParking();
 
         soundmng = MySoundManager.instance;
 
@@ -156,6 +163,34 @@ public class MMManager : MonoBehaviour
             }
         }
     }
+    
+    void CheckUnlockedParking()
+    {
+        int numUnlockedLevels = ValStorage.GetUnlockedLevelsParking();
+        // Loop through all the level buttons in your UI
+        for (int i = 1; i <= LvlCardsParking.Length; i++)
+        {
+            // Get a reference to the button
+            Button levelButton = LvlCardsParking[i - 1];
+
+            if (levelButton != null)
+            {
+                // If this level is unlocked, make the button interactable
+                if (i <= numUnlockedLevels)
+                {
+                    levelButton.interactable = true;
+                    levelButton.transform.GetChild(1).gameObject.SetActive(false);
+
+                }
+                else
+                {
+                    // If this level is locked, make the button not interactable
+                    levelButton.interactable = false;
+                    levelButton.transform.GetChild(1).gameObject.SetActive(true);
+                }
+            }
+        }
+    }
 
     public void BackBtn(string S)
     {
@@ -168,6 +203,12 @@ public class MMManager : MonoBehaviour
         {
             Disablehildren();
             PanelActivity(LvlSel: true);
+
+        }
+        if (S == "LvlSelParking")
+        {
+            Disablehildren();
+            PanelActivity(LvlSelParking: true);
 
         }
         if (S == "Exit")
@@ -201,13 +242,28 @@ public class MMManager : MonoBehaviour
     public void SelMode(string Mode)
     {
         ValStorage.modeSel = Mode;
-        BackBtn("LvlSel");
+
+        if (Mode == "DrivingMode") 
+        {
+            BackBtn("LvlSel");
+        }
+        else if(Mode == "ParkingMode")
+        {
+            BackBtn("LvlSelParking");
+        }
     }
 
 
     public void SelLevel(int i)
     {
         ValStorage.selLevel = i;
+        CarsCont.SetActive(true);
+        BackBtn("Garage");
+    }
+    
+    public void SelLevelParking(int i)
+    {
+        ValStorage.selLevelParking = i;
         CarsCont.SetActive(true);
         BackBtn("Garage");
     }
@@ -229,8 +285,15 @@ public class MMManager : MonoBehaviour
             AdsManager.instance.showAdMobRectangleBannerBottomLeft();
 
 
-        ValStorage.SetCar(garage.GetCurrCarId());
-        StartCoroutine(LoadAsyncScene("Gameplay"));
+        ValStorage.SetCarNumber(garage.GetCurrCarNumber());
+
+        if(ValStorage.modeSel=="DrivingMode")
+            StartCoroutine(LoadAsyncScene("Gameplay"));
+
+        else
+            StartCoroutine(LoadAsyncScene("ParkingMode"));
+
+
     }
 
 
@@ -253,13 +316,12 @@ public class MMManager : MonoBehaviour
             }
             else
             {
-                // Once the timer reaches 5 seconds, start loading the scene
-                // Ensure the progress bar stays at 100% before activation
+                
                 loadingBar.fillAmount = 1f;
                 prcnttxt.text = "100%";
 
                 Debug.Log("allow");
-                // Allow the scene to activate
+               
                 asyncLoad.allowSceneActivation = true;
             }
             yield return null;
@@ -274,7 +336,7 @@ public class MMManager : MonoBehaviour
     }
    
 
-    public void PanelActivity(bool MM = false, bool ModeSel = false, bool LvlSel = false, bool ExitPnl = false, bool SettingsPnl = false, bool Garage = false, bool IsLoading = false)
+    public void PanelActivity(bool MM = false, bool ModeSel = false, bool LvlSel = false, bool LvlSelParking = false, bool ExitPnl = false, bool SettingsPnl = false, bool Garage = false, bool IsLoading = false)
     {
 
         if (mainMenuPanel)
@@ -290,6 +352,11 @@ public class MMManager : MonoBehaviour
         if (levelSelectionPanel)
         {
             levelSelectionPanel.SetActive(LvlSel);
+        }
+        
+        if (levelSelectionParkingPanel)
+        {
+            levelSelectionParkingPanel.SetActive(LvlSelParking);
         }
 
         if (exitPanel)
@@ -684,13 +751,12 @@ public class MMManager : MonoBehaviour
     }
 
 
-
+    
 
     private bool IsLowEndDevice()
     {
-        int totalRam = SystemInfo.systemMemorySize; // in MB
+        int totalRam = SystemInfo.systemMemorySize;
 
-        // Simple checks based on CPU, RAM, and GPU (You can refine these thresholds)
         if (totalRam <= 3000 )
         {
             return true;
@@ -701,6 +767,32 @@ public class MMManager : MonoBehaviour
         }
     }
 
+    public void WatchAd() 
+    {
+        if (AdsManager.instance)
+        {
+            if (AdsManager.instance.rewardedInterstitialAD != null)
+            {
+                AdsManager.instance.OnWathcVideo.RemoveAllListeners();
+                AdsManager.instance.OnWathcVideo.AddListener(Delaywatchvid);
+                AdsManager.instance.ShowAdmobRewardedInterstitial();
+            }
+
+
+        }
+    }
+    void Delaywatchvid() 
+    {
+        Invoke(nameof(GrantCoins),0.2f);
+    }
+
+    public void GrantCoins() 
+    {
+        int alreadycoins=ValStorage.GetCoins();
+        ValStorage.SetCoins(alreadycoins+300);
+        SetCoins();
+    }
+    
     #endregion
 }
 

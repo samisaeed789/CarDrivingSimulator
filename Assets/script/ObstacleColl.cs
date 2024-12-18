@@ -10,6 +10,7 @@ public class ObstacleColl : MonoBehaviour
     int collisionCount;
     public GameObject Emoji;
     public ParticleSystem Smoke;
+    public GameObject Headlight;
     Rigidbody rb;
     RCC_CarControllerV3 Car;
     ParkingGm gm;
@@ -55,6 +56,7 @@ public class ObstacleColl : MonoBehaviour
 
     void CheckCollisions() 
     {
+            gm.PlayHIT();
             collisionCount++;
             if (collisionCount >= 4)
             {

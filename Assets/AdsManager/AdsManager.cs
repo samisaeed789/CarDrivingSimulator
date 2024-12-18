@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using GoogleMobileAds.Api;
 using UnityEngine.UI;
+using UnityEngine.Events;
 public class AdsManager : MonoBehaviour
 {
     public static AdsManager instance;
-
+    public UnityEvent OnWathcVideo;
     private BannerView bannerViewTop, bannerViewBottom, bannerViewTopLeft, bannerViewTopRight;
     private BannerView bannerViewBottomLeft, bannerViewBottomRight, bannerViewCenter;
     private BannerView bannerViewRectangleTop, bannerViewRectangleBottom, bannerViewRectangleTopLeft, bannerViewRectangleTopRight;
@@ -33,7 +34,7 @@ public class AdsManager : MonoBehaviour
     private bool bannerViewSmartTopShowing, bannerViewSmartBottomShowing;
 
     private InterstitialAd interstitialAd0, interstitialAd1, interstitialAd2, interstitialAd3, interstitialAd4;
-    private RewardedInterstitialAd rewardedInterstitialAD;
+    public RewardedInterstitialAd rewardedInterstitialAD;
     private RewardedAd videoAD;
     private AppOpenAd thisAppOpenAd;
     [SerializeField]
@@ -86,12 +87,13 @@ public class AdsManager : MonoBehaviour
     }   
     void OnInitializationComp()
     {
+        loadAdmobRewardedInterstitial();
         Invoke("LoadVideoAD", 5f);
         tryToLoadAllInterstitials();
-        Invoke("loadAdmobRewardedInterstitial", 6f);
+        //Invoke("loadAdmobRewardedInterstitial", 6f);
         if (showAppOpenAd)
             LoadAppOpenAd();
-      //  UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+       // UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
     }
     bool wentToBackground;  
     
@@ -1393,7 +1395,7 @@ public class AdsManager : MonoBehaviour
     #endregion
 
     #region RewardedInterstitials
-    void loadAdmobRewardedInterstitial()
+   public void loadAdmobRewardedInterstitial()
     {
         if (StopShowingAdsOnLowEndDevices && deviceRam < minRamSize)
             return;
@@ -1404,7 +1406,7 @@ public class AdsManager : MonoBehaviour
             rewardedInterstitialAD = null;
         }
 
-        RewardedInterstitialAd.Load(ShowTestAds ? "ca-app-pub-3940256099942544/5354046379" : admobRewardedInterstitialID, CreateAdRequest(),
+        RewardedInterstitialAd.Load(ShowTestAds ? "ca-app-pub-5770035071370331/8533846856" : admobRewardedInterstitialID, CreateAdRequest(),
           (RewardedInterstitialAd ad, LoadAdError error) =>
           {
               if (error != null || ad == null)
@@ -1457,6 +1459,7 @@ public class AdsManager : MonoBehaviour
             {
                 rewardedInterstitialAD.Show((Reward reward) =>
                 {
+                    OnWathcVideo.Invoke();
                     // TODO: Reward the user.            
                 });
             }

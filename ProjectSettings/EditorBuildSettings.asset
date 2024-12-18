@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Gameplay.unity
     guid: 38f1df9a22a586d459706a18bd5b2f73
+  - enabled: 1
+    path: Assets/Scenes/ParkingMode.unity
+    guid: 0354f471a91899d418c7e62af9d89b57
   m_configObjects: {}

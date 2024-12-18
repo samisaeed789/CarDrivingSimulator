@@ -67,6 +67,8 @@ public class GameMngr : MonoBehaviour
     public Image loadingBar;
     public Animator sphere;
     public GameObject headLightActvbtn;
+    [SerializeField] GameObject UIBlocker;
+
 
 
     [Header("Levels")]
@@ -169,13 +171,13 @@ public class GameMngr : MonoBehaviour
 
     IEnumerator Start()
     {
-
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         RCC_Settings.Instance.dontUseAnyParticleEffects = true;
         trafficSpawner.gameObject.SetActive(false);
         UpdateTimerText();
         CinematicCam = Cam.transform.parent.parent.gameObject.GetComponent<RCC_CameraCarSelection>();
         soundmgr = MySoundManager.instance;
+        UpdateVolume();
         SetButtonTransparency(ValStorage.GetTransparency());
         Controls.SetMobileController(ValStorage.GetControls());
         yield return new WaitForSeconds(2); // fixed delay
@@ -283,7 +285,11 @@ public class GameMngr : MonoBehaviour
     {
 
         lvlstats = levelStats;
-        GameObject CarObj = SetCar();
+        int SelCar = ValStorage.GetCarNumber();
+        GameObject CarObj = PlayerCars[SelCar-1];
+
+        Car = CarObj.GetComponent<RCC_CarControllerV3>();
+        car = CarObj.GetComponent<CarData>();
         if(car.headLight!=null)
             headLight = car.headLight;
         CarObj.SetActive(true);
@@ -474,6 +480,8 @@ public class GameMngr : MonoBehaviour
         trafficSpawner.DisableAllCars();
         StartDance();
         ControllerBtns.alpha = 0f;
+        ControllerBtns.interactable = false;
+        UIBlocker.SetActive(true);
         CinematicCam.enabled = true;
         Conftti.SetActive(true);
         BlckPnl.SetActive(true);
@@ -527,6 +535,10 @@ public class GameMngr : MonoBehaviour
         CoinsEarnedlvltxt.text = 500.ToString();// CoinsEarnedInLvl.ToString();
 
         StartCoroutine(CounterAnimation(CalculateTotalCoins()));
+
+        int alreadycoins = ValStorage.GetCoins();
+        int totalcoins = alreadycoins + CalculateTotalCoins();
+        ValStorage.SetCoins(totalcoins);
     }
 
     private IEnumerator CounterAnimation(int totalCoins)
@@ -615,7 +627,9 @@ public class GameMngr : MonoBehaviour
             StartCoroutine(LoadAsyncScene("GamePlay"));
         }
     }
-    #endregion
+
+   
+   
 
 
     #region startlvl
@@ -648,8 +662,10 @@ public class GameMngr : MonoBehaviour
     private void OnEnableUI()
     {
         ControllerBtns.alpha = 1;
-        ControllerBtns.gameObject.GetComponent<UIAnimator>().PlayAnimation(AnimSetupType.Intro);
+        ControllerBtns.interactable = true;
+        UIBlocker.SetActive(false);
 
+        ControllerBtns.gameObject.GetComponent<UIAnimator>().PlayAnimation(AnimSetupType.Intro);
     }
 
 
@@ -1068,6 +1084,10 @@ public class GameMngr : MonoBehaviour
             if (lvlstats.Filler)
             {
                 ControllerBtns.alpha = 0f;
+                ControllerBtns.interactable = false;
+                UIBlocker.SetActive(true);
+
+
                 GameObject filer = lvlstats.Filler;
                 filer.SetActive(true);
                 StartCoroutine(FillImageOverTime(filer.transform.GetChild(0).gameObject.GetComponent<Image>()));
@@ -1103,7 +1123,12 @@ public class GameMngr : MonoBehaviour
             lvlstats.Cam.SetActive(false);
             Car.GetComponent<Rigidbody>().isKinematic = false;
             ControllerBtns.alpha = 1f;
-            yield return new WaitForSeconds(1f);
+            ControllerBtns.interactable = true;
+            UIBlocker.SetActive(false);
+
+
+
+        yield return new WaitForSeconds(1f);
             AppreciateCoinAdd("You Stopped At Police CheckPoint");
         }
         void CarSound(bool IsActive)
@@ -1230,10 +1255,26 @@ public class GameMngr : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             asyncLoad.allowSceneActivation = true;
         }
+
+
+     private void UpdateVolume()
+    {
+        // Set the volume for music and sound effects
+        if (soundmgr) 
+        {
+            soundmgr.BGM.volume = ValStorage.GetMVolume(); // Music volume
+            soundmgr.Effectsource.volume = ValStorage.GetSVolume(); // Sound effect volume
+        }
+
+        // Update the fill bars for both music and sound
     }
+
+   
+}
 
 
 //set waypoint 
 //set new mm bgm and complete bgm
 
 
+#endregion

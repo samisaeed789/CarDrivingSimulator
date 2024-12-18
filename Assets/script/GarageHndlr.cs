@@ -18,6 +18,7 @@ public class GarageHndlr : MonoBehaviour
         public float Handling;
         public float Durabilty;
         public int carPrice;
+        public int CarNumber;
     }
 
 
@@ -194,5 +195,10 @@ public class GarageHndlr : MonoBehaviour
     {
         Car currCar = GetCurrCar();
         return currCar.carID;
+    }
+    public int GetCurrCarNumber()
+    {
+        Car currCar = GetCurrCar();
+        return currCar.CarNumber;
     }
 }
