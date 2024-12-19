@@ -2,6 +2,8 @@
 using GoogleMobileAds.Api;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+
 public class AdsManager : MonoBehaviour
 {
     public static AdsManager instance;
@@ -75,7 +77,7 @@ public class AdsManager : MonoBehaviour
     {
         if (StopShowingAdsOnLowEndDevices) {
             if (deviceRam < minRamSize) {
-                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+                //UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
                 return;
             }
         }
@@ -1810,4 +1812,24 @@ public class AdsManager : MonoBehaviour
         return false;
     }
     #endregion
+
+
+   
+    public void DelaygrantCoins()
+    {
+        Invoke(nameof(GrantCoins), 0.2f);
+    }
+
+    public void GrantCoins()
+    {
+        int alreadycoins = ValStorage.GetCoins();
+        ValStorage.SetCoins(alreadycoins + 300);
+
+        if (SceneManager.GetActiveScene().name == "MM")
+        {
+            MMManager.Instance.SetCoins();
+        }
+
+
+    }
 }

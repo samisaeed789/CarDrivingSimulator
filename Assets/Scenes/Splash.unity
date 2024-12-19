@@ -635,17 +635,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346208283}
-  m_LocalRotation: {x: 0, y: 0, z: 0.66340405, w: 0.7482614}
+  m_LocalRotation: {x: 0, y: 0, z: 0.6917652, w: 0.7221226}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2147152467}
   m_Father: {fileID: 1043400940}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30.3}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 87.54}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 23.5, y: -48.844383}
+  m_AnchoredPosition: {x: 9.501831, y: -43.375793}
   m_SizeDelta: {x: 75.5889, y: 75.5889}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &350170610
@@ -1343,6 +1343,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838219731}
   m_CullTransparentMesh: 1
+--- !u!114 &849471729 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
+  m_PrefabInstance: {fileID: 1400694390}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ad0301a5145fe48a0094eede104dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &973297269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1812,6 +1823,7 @@ MonoBehaviour:
   Applaud: {fileID: 0}
   GreatJob: {fileID: 0}
   Splash: {fileID: 0}
+  Hit: {fileID: 0}
   PlayEngine: {fileID: 8300000, guid: 418e0619b278be4458bce3d463ad00fb, type: 3}
   Collect: {fileID: 0}
   CollectCoin: {fileID: 0}
@@ -2237,8 +2249,40 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
+      propertyPath: ShowTestAds
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
       propertyPath: showAppOpenAd
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
+      propertyPath: OnWathcVideo.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
+      propertyPath: OnWathcVideo.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
+      propertyPath: OnWathcVideo.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 849471729}
+    - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
+      propertyPath: OnWathcVideo.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
+      propertyPath: OnWathcVideo.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DelaygrantCoins
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
+      propertyPath: OnWathcVideo.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AdsManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
+      propertyPath: OnWathcVideo.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -254,7 +254,6 @@ public class ParkingGm : MonoBehaviour
     {
         rbCar.isKinematic = true;
         canvas.alpha = 0f;
-        canvas.interactable = false;
         UIBlocker.SetActive(true);
 
         foreach (ParticleSystem particle in lvlconfti) 
@@ -312,7 +311,6 @@ public class ParkingGm : MonoBehaviour
     void OnShakeComplete() 
     {
         canvas.alpha = 1f;
-        canvas.interactable = true;
         UIBlocker.SetActive(false);
 
         canvas.gameObject.GetComponent<UIAnimator>().PlayAnimation(AnimSetupType.Intro);
@@ -383,7 +381,6 @@ public class ParkingGm : MonoBehaviour
 
         CarSound(false);
         canvas.alpha = 0f;
-        canvas.interactable = false;
         UIBlocker.SetActive(true);
         StartCoroutine(FailPanel());
     }
@@ -729,7 +726,7 @@ public class ParkingGm : MonoBehaviour
             if (timer < 5f)
             {
                 timer += Time.deltaTime;
-                float progress = Mathf.Clamp01(timer / 5f);  // Progress from 0 to 1 based on timer
+                float progress = Mathf.Clamp01(timer / 5f);  
                 loadingBar.fillAmount = progress;
                 percentageText.text = $"{Mathf.RoundToInt(progress * 100)}%";
             }
@@ -761,36 +758,30 @@ public class ParkingGm : MonoBehaviour
 
     private void UpdateVolume()
     {
-        // Set the volume for music and sound effects
         if (soundManager) 
         {
             soundManager.BGM.volume = ValStorage.GetMVolume(); // Music volume
             soundManager.Effectsource.volume = ValStorage.GetSVolume(); // Sound effect volume
         }
 
-        // Update the fill bars for both music and sound
     }
 
     public void SetButtonTransparency(int transval)
     {
-        // Clamp the setting value between 1 and 5 to ensure it stays in the valid range
         transval = Mathf.Clamp(transval, 1, 5);
 
-        // Calculate the alpha value: 1 -> 0.1 (slightly visible), 5 -> 1 (fully opaque)
         float alpha = Mathf.Lerp(0.2f, 1f, (transval - 1) / 4f);
 
 
         foreach (Image UI in UIgp)
         {
-            // Image buttonImage = UI.GetComponent<Image>();
             Color buttonColor = UI.color;
             buttonColor.a = alpha;  // Set alpha based on the calculation
             UI.color = buttonColor;
         }
-
     }
 
-    
+   
 }
 
 

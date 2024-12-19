@@ -480,7 +480,6 @@ public class GameMngr : MonoBehaviour
         trafficSpawner.DisableAllCars();
         StartDance();
         ControllerBtns.alpha = 0f;
-        ControllerBtns.interactable = false;
         UIBlocker.SetActive(true);
         CinematicCam.enabled = true;
         Conftti.SetActive(true);
@@ -662,7 +661,6 @@ public class GameMngr : MonoBehaviour
     private void OnEnableUI()
     {
         ControllerBtns.alpha = 1;
-        ControllerBtns.interactable = true;
         UIBlocker.SetActive(false);
 
         ControllerBtns.gameObject.GetComponent<UIAnimator>().PlayAnimation(AnimSetupType.Intro);
@@ -1084,7 +1082,6 @@ public class GameMngr : MonoBehaviour
             if (lvlstats.Filler)
             {
                 ControllerBtns.alpha = 0f;
-                ControllerBtns.interactable = false;
                 UIBlocker.SetActive(true);
 
 
@@ -1123,7 +1120,6 @@ public class GameMngr : MonoBehaviour
             lvlstats.Cam.SetActive(false);
             Car.GetComponent<Rigidbody>().isKinematic = false;
             ControllerBtns.alpha = 1f;
-            ControllerBtns.interactable = true;
             UIBlocker.SetActive(false);
 
 

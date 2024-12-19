@@ -100,6 +100,11 @@ public class MMManager : MonoBehaviour
         CheckUnlocked();
         CheckUnlockedParking();
 
+        if (ValStorage.GetCoins() < 0) 
+        {
+            ValStorage.SetCoins(0);
+        }
+
         soundmng = MySoundManager.instance;
 
         //values for stngs
@@ -122,7 +127,10 @@ public class MMManager : MonoBehaviour
 
 
     }
-
+    //private void OnEnable()
+    //{
+    //   AdsManager.instance?.OnWathcVideo.AddListener(Delaywatchvid);
+    //}
     private void Start()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -773,12 +781,8 @@ public class MMManager : MonoBehaviour
         {
             if (AdsManager.instance.rewardedInterstitialAD != null)
             {
-                AdsManager.instance.OnWathcVideo.RemoveAllListeners();
-                AdsManager.instance.OnWathcVideo.AddListener(Delaywatchvid);
                 AdsManager.instance.ShowAdmobRewardedInterstitial();
             }
-
-
         }
     }
     void Delaywatchvid() 
@@ -791,6 +795,7 @@ public class MMManager : MonoBehaviour
         int alreadycoins=ValStorage.GetCoins();
         ValStorage.SetCoins(alreadycoins+300);
         SetCoins();
+       
     }
     
     #endregion
