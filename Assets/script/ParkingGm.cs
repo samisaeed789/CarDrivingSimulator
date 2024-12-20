@@ -17,6 +17,7 @@ public class ParkingGm : MonoBehaviour
     [SerializeField] GameObject completePanel;
     [SerializeField] GameObject Loading;
     [SerializeField] GameObject pausePanel;
+    [SerializeField] GameObject envBG;
 
 
 
@@ -181,23 +182,11 @@ public class ParkingGm : MonoBehaviour
     }
     void SetPositionBackward(Vector3 SpawnPoint)
     {
-
-        //Vector3 currentPosition = SpawnPoint.position;// lvldata.SpawnPoint.transform.position;
-
-        //currentPosition.z -= 15f;
-
-        //Car.transform.position = currentPosition;
-
-        //rbCar.position = currentPosition;
-
         Vector3 currentPosition = SpawnPoint;
 
         currentPosition.z -= 15f;
 
-      //  Car.transform.position = currentPosition;
-
         rbCar.position = currentPosition;
-
     }
 
 
@@ -314,6 +303,7 @@ public class ParkingGm : MonoBehaviour
         UIBlocker.SetActive(false);
 
         canvas.gameObject.GetComponent<UIAnimator>().PlayAnimation(AnimSetupType.Intro);
+        envBG.SetActive(true);
     }
 
 

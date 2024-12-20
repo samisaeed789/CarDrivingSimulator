@@ -286,6 +286,8 @@ public class GameMngr : MonoBehaviour
 
         lvlstats = levelStats;
         int SelCar = ValStorage.GetCarNumber();
+        if (Test)
+            SelCar = testcarid;
         GameObject CarObj = PlayerCars[SelCar-1];
 
         Car = CarObj.GetComponent<RCC_CarControllerV3>();

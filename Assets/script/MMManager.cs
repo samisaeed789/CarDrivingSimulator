@@ -81,8 +81,8 @@ public class MMManager : MonoBehaviour
     public static int Levelno;
 
 
-    [Header("Temp")]
-    public bool GiveCoins;
+    //[Header("Temp")]
+    //public bool GiveCoins;
 
     MySoundManager soundmng;
     private void Awake()

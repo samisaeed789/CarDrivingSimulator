@@ -722,7 +722,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 67757512}
   m_OnClick:
     m_PersistentCalls:
@@ -24188,7 +24188,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -856.5146, y: 225}
+  m_AnchoredPosition: {x: -856.5145, y: 225}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1545695013
@@ -35989,7 +35989,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -856.5146, y: 225}
+  m_AnchoredPosition: {x: -856.5145, y: 225}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1654724287
@@ -40318,7 +40318,7 @@ MonoBehaviour:
     Handling: 0.6
     Durabilty: 0.7
     carPrice: 0
-    CarNumber: 0
+    CarNumber: 1
   - carID: 2
     carModel: {fileID: 797781402}
     Speed: 0.1
@@ -40327,7 +40327,7 @@ MonoBehaviour:
     Handling: 0.4
     Durabilty: 0.5
     carPrice: 4000
-    CarNumber: 0
+    CarNumber: 2
   - carID: 3
     carModel: {fileID: 1915609239}
     Speed: 0.5
@@ -40336,7 +40336,7 @@ MonoBehaviour:
     Handling: 0.8
     Durabilty: 0.2
     carPrice: 2000
-    CarNumber: 0
+    CarNumber: 3
   - carID: 4
     carModel: {fileID: 1540009139}
     Speed: 0.5
@@ -40345,7 +40345,7 @@ MonoBehaviour:
     Handling: 0.8
     Durabilty: 0.9
     carPrice: 3000
-    CarNumber: 0
+    CarNumber: 4
   carPriceText: {fileID: 1710093330}
   carPrice: {fileID: 1378987976}
   purchaseButton: {fileID: 559458866}
@@ -44211,7 +44211,7 @@ MonoBehaviour:
   mainMenuPanel: {fileID: 392497636}
   modeSelectionPanel: {fileID: 436973921}
   levelSelectionPanel: {fileID: 450053570}
-  levelSelectionParkingPanel: {fileID: 0}
+  levelSelectionParkingPanel: {fileID: 542826924}
   loadingScreenPanel: {fileID: 1378391684}
   exitPanel: {fileID: 622999419}
   SettingsPanel: {fileID: 1939503466}
@@ -44254,7 +44254,16 @@ MonoBehaviour:
   - {fileID: 1759124377}
   - {fileID: 1156859423}
   - {fileID: 614352958}
-  LvlCardsParking: []
+  LvlCardsParking:
+  - {fileID: 67757511}
+  - {fileID: 2031108531}
+  - {fileID: 885531465}
+  - {fileID: 1736134355}
+  - {fileID: 820339890}
+  - {fileID: 1022602214}
+  - {fileID: 1138434337}
+  - {fileID: 1836251598}
+  - {fileID: 707723804}
   reflection: {fileID: 419777853}
   loadingBar: {fileID: 295916567}
   GiveCoins: 1
