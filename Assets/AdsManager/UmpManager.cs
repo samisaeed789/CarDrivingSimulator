@@ -19,7 +19,7 @@ public class UmpManager : MonoBehaviour
     {
         if (error != null)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+           // UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
             Debug.LogError(error);
             return;
         }

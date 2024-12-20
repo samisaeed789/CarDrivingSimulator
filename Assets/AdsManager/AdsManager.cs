@@ -1829,7 +1829,5 @@ public class AdsManager : MonoBehaviour
         {
             MMManager.Instance.SetCoins();
         }
-
-
     }
 }

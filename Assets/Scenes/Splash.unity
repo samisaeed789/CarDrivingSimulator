@@ -2253,8 +2253,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
+      propertyPath: appOpenAdID
+      value: ca-app-pub-5770035071370331/6104770190
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
       propertyPath: showAppOpenAd
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
+      propertyPath: admobRewardedVideoID
+      value: ca-app-pub-5770035071370331/2437159366
       objectReference: {fileID: 0}
     - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
       propertyPath: admobBannerIds.Array.size
