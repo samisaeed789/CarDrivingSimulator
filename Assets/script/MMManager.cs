@@ -70,6 +70,8 @@ public class MMManager : MonoBehaviour
     [Header("OtherClasses")]
     public Button[] LvlCards;
     public Button[] LvlCardsParking;
+    [SerializeField] RGSK.Reflection reflection;
+
 
 
     private AsyncOperation async;
@@ -486,16 +488,19 @@ public class MMManager : MonoBehaviour
     {
         if (s == "High")
         {
+            reflection.SetRefQuality(3);
             GrphicsActivity(isHigh: true);
         }
 
         if (s == "Med")
         {
+            reflection.SetRefQuality(2);
             GrphicsActivity(isMed: true);
         }
 
         if (s == "Low")
         {
+            reflection.SetRefQuality(1);
             GrphicsActivity(isLow: true);
         }
         if (MySoundManager.instance)
