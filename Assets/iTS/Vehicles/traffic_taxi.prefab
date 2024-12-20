@@ -439,10 +439,10 @@ MonoBehaviour:
   - 1.5
   - 1
   CurrentGear: 0
-  EngineTorque: 80
+  EngineTorque: 150
   MaxEngineRPM: 3000
   MinEngineRPM: 1000
-  maxAcceleration: 5
+  maxAcceleration: 14
   brakeTorque: 150
   brakeLigths: []
   brakeIntensityRate: 0.2
@@ -452,7 +452,7 @@ MonoBehaviour:
   superSimplePhysics: 0
   turnSpeed: 3
   carGrip: 70
-  maxSpeed: 50
+  maxSpeed: 80
   maxSpeedToTurn: 0.2
   crashed: 0
   carCanCrash: 0
