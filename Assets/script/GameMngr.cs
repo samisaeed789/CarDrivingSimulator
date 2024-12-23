@@ -512,8 +512,9 @@ public class GameMngr : MonoBehaviour
 
         Timetxt.text = Mathf.FloorToInt(elapsedTime * 2).ToString();
         CoinsEarnedlvltxt.text = 500.ToString();// CoinsEarnedInLvl.ToString();
-
-        StartCoroutine(CounterAnimation(CalculateTotalCoins()));
+        int totalCoins = CalculateTotalCoins();
+        ValStorage.SetCoins(totalCoins);
+        StartCoroutine(CounterAnimation(totalCoins));
     }
 
     private IEnumerator CounterAnimation(int totalCoins)

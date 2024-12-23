@@ -107,7 +107,6 @@ public class MMManager : MonoBehaviour
 
         if (!PlayerPrefs.HasKey("GQuality"))
         {
-            Debug.LogError("IsLowEndDevice    " + IsLowEndDevice());
 
 
             if(IsLowEndDevice()==true)
@@ -298,42 +297,34 @@ public class MMManager : MonoBehaviour
 
     public void PanelActivity(bool MM = false, bool ModeSel = false, bool LvlSel = false, bool ExitPnl = false, bool SettingsPnl = false, bool Garage = false, bool IsLoading = false)
     {
-
         if (mainMenuPanel)
         {
             mainMenuPanel.SetActive(MM);
         }
-
         if (modeSelectionPanel)
         {
             modeSelectionPanel.SetActive(ModeSel);
         }
-
         if (levelSelectionPanel)
         {
             levelSelectionPanel.SetActive(LvlSel);
         }
-
         if (exitPanel)
         {
             exitPanel.SetActive(ExitPnl);
         }
-
         if (SettingsPanel)
         {
             SettingsPanel.SetActive(SettingsPnl);
         }
-
         if (GaragePanel)
         {
             GaragePanel.SetActive(Garage);
         }
-
         if (loadingScreenPanel)
         {
             loadingScreenPanel.SetActive(IsLoading);
         }
-
     }
 
 
