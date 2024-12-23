@@ -82,7 +82,7 @@ public class MMManager : MonoBehaviour
 
 
     //[Header("Temp")]
-    //public bool GiveCoins;
+    public bool TestCoins;
 
     MySoundManager soundmng;
     private void Awake()
@@ -116,7 +116,6 @@ public class MMManager : MonoBehaviour
 
         if (!PlayerPrefs.HasKey("GQuality"))
         {
-            Debug.LogError("IsLowEndDevice    " + IsLowEndDevice());
 
 
             if(IsLowEndDevice()==true)
@@ -136,11 +135,15 @@ public class MMManager : MonoBehaviour
     private void Start()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        if (TestCoins)
+        {
+            ValStorage.SetCoins(10000);
+        }
         SetCoins();
         Time.timeScale = 1f;
 
-       
 
+       
 
         if (AdsManager.instance )
             AdsManager.instance.showAdmobAdpativeBannerTop();
