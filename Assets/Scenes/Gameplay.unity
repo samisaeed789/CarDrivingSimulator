@@ -47201,6 +47201,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3838862017703393012, guid: 6eeb0bf094d3761468b09d8c475f3cf9, type: 3}
   m_PrefabInstance: {fileID: 440361062}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &440588792 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3349847878493028226, guid: a95b0ff58e32efd4895a037b118fe107, type: 3}
+  m_PrefabInstance: {fileID: 1358029138}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &441707991
 GameObject:
   m_ObjectHideFlags: 0
@@ -50871,7 +50876,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +50
+  m_Text: +15
 --- !u!222 &468436738
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -82863,7 +82868,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1136531868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -88734,7 +88739,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: -50
+  m_Text: -15
 --- !u!222 &1257322235
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -102232,8 +102237,8 @@ MonoBehaviour:
   Timetxt: {fileID: 1914290653}
   percentageText: {fileID: 1752834092}
   Test: 0
-  levelnumber: 6
-  testcarid: 0
+  levelnumber: 2
+  testcarid: 2
   greenred: []
   IsCorrectLane: 0
   IsWrongLane: 0
@@ -153587,7 +153592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   BrakeLight: []
-  headLight: {fileID: 0}
+  headLight: {fileID: 440588792}
 --- !u!1 &919132148770740386
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,8 @@ public class FinalPark : MonoBehaviour
     public Transform targetpoint;
     public float lerpDuration = 2.0f;
 
+    bool hasTriggered;
+
 
 
    
@@ -53,10 +55,11 @@ public class FinalPark : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) 
+        if (other.CompareTag("Player") && !hasTriggered) 
         {
             StartCoroutine(MoveCarSmoothly());
             GameMngr.instance.Celeb();
+            hasTriggered = true;
         }
     }
 

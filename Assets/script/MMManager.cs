@@ -123,6 +123,10 @@ public class MMManager : MonoBehaviour
     private void Start()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        if (GiveCoins) 
+        {
+            ValStorage.SetCoins(1000);
+        }
         SetCoins();
         Time.timeScale = 1f;
 

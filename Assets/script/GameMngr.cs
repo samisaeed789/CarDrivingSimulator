@@ -446,9 +446,12 @@ public class GameMngr : MonoBehaviour
 
     #region Complete
 
+    bool once;
 
     public void Celeb()
     {
+
+
         if (soundmgr)
         {
             soundmgr.PlayCompleteSound(true);
@@ -499,8 +502,6 @@ public class GameMngr : MonoBehaviour
 
         //if (AdsManager.instance)
         //    AdsManager.instance.showAdMobRectangleBannerBottomLeft();
-
-
     }
 
 
@@ -511,10 +512,16 @@ public class GameMngr : MonoBehaviour
 
 
         Timetxt.text = Mathf.FloorToInt(elapsedTime * 2).ToString();
-        CoinsEarnedlvltxt.text = 500.ToString();// CoinsEarnedInLvl.ToString();
-        int totalCoins = CalculateTotalCoins();
-        ValStorage.SetCoins(totalCoins);
-        StartCoroutine(CounterAnimation(totalCoins));
+        CoinsEarnedlvltxt.text = 500.ToString();
+
+        StartCoroutine(CounterAnimation(CalculateTotalCoins()));
+      
+        
+        int alreadycoins = ValStorage.GetCoins();
+        int totalcoins = alreadycoins + CalculateTotalCoins();
+        ValStorage.SetCoins(totalcoins);
+        once = true;
+
     }
 
     private IEnumerator CounterAnimation(int totalCoins)
@@ -833,7 +840,7 @@ public class GameMngr : MonoBehaviour
         yield return new WaitForSeconds(delay); // Wait for the specified delay
 
         Appreciate.SetActive(true);
-        AddCoins(50);
+        AddCoins(15);
         CoinsEarnedInLvl = CoinsEarnedInLvl + 50;
 
         if (soundmgr)

@@ -6,7 +6,7 @@
   <files />
   <settings>
     <setting name="androidAbis" value="arm64-v8a,armeabi-v7a" />
-    <setting name="bundleId" value="com.GamesFact.USCarDriving2024CarGames" />
+    <setting name="bundleId" value="com.gf.car.simulator.game.carparking.us.car.driving.games" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />
     <setting name="gradlePropertiesTemplateEnabled" value="True" />
