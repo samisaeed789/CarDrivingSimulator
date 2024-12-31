@@ -44234,6 +44234,7 @@ MonoBehaviour:
   - {fileID: 707723804}
   reflection: {fileID: 419777853}
   loadingBar: {fileID: 295916567}
+  TestCoins: 0
 --- !u!1 &2087589930
 GameObject:
   m_ObjectHideFlags: 0
