@@ -4276,9 +4276,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2a3a2878ca0347849a6db74b7ae78924, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0aae13a5587b3634b94eacca28d06dfc, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6342,7 +6342,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -594.1749, y: 8}
+  m_AnchoredPosition: {x: -283.0009, y: 8}
   m_SizeDelta: {x: 501, y: 620}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &392963781
@@ -6854,7 +6854,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 415027141}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2084883760}
+        m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
+        m_MethodName: MoreGames
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &415027141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9890,8 +9902,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2084883760}
         m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
-        m_MethodName: BackBtn
-        m_Mode: 5
+        m_MethodName: StartBtn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -23096,7 +23108,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -41.174927, y: 10}
+  m_AnchoredPosition: {x: 270, y: 10}
   m_SizeDelta: {x: 501, y: 620}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1529290966
@@ -23511,7 +23523,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 85
+  m_Text: 0
 --- !u!222 &1557436230
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26765,9 +26777,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2a3a2878ca0347849a6db74b7ae78924, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0aae13a5587b3634b94eacca28d06dfc, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -26893,9 +26905,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2a3a2878ca0347849a6db74b7ae78924, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0aae13a5587b3634b94eacca28d06dfc, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -27977,81 +27989,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1349367196675851296, guid: 49c4b26482632ba4c914eaca8ca2eb1b, type: 3}
   m_PrefabInstance: {fileID: 1731217337}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1733369266
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1733369267}
-  - component: {fileID: 1733369269}
-  - component: {fileID: 1733369268}
-  m_Layer: 5
-  m_Name: DrivingMode (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1733369267
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733369266}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2097374809}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 510.82507, y: 11}
-  m_SizeDelta: {x: 501, y: 620}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1733369268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733369266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 10bbbca732f2dc64c84a290018915c73, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1733369269
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733369266}
-  m_CullTransparentMesh: 1
 --- !u!1 &1733850238
 GameObject:
   m_ObjectHideFlags: 0
@@ -28070,7 +28007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1733850239
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31337,7 +31274,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1915881865}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2084883760}
+        m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
+        m_MethodName: PP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1915881865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32612,7 +32561,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2005492177}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2084883760}
+        m_TargetAssemblyTypeName: MMManager, Assembly-CSharp
+        m_MethodName: RateUs
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2005492177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34597,10 +34558,9 @@ GameObject:
   - component: {fileID: 2097374810}
   - component: {fileID: 2097374817}
   - component: {fileID: 2097374812}
-  - component: {fileID: 2097374814}
-  - component: {fileID: 2097374815}
-  - component: {fileID: 2097374816}
   - component: {fileID: 2097374813}
+  - component: {fileID: 2097374819}
+  - component: {fileID: 2097374818}
   m_Layer: 5
   m_Name: Cntrpnl
   m_TagString: Untagged
@@ -34622,7 +34582,6 @@ RectTransform:
   m_Children:
   - {fileID: 392963780}
   - {fileID: 1529290965}
-  - {fileID: 1733369267}
   - {fileID: 1813351188}
   m_Father: {fileID: 436973922}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -34820,7 +34779,7 @@ MonoBehaviour:
       - m_targetObjects:
         - {fileID: 392963779}
         m_animationSteps:
-        - {fileID: 2097374814}
+        - {fileID: 2097374819}
         m_targetStepIndexes: 01000000
         m_uiAnimatorSubModule: {fileID: 0}
         m_startDelay: 0
@@ -34828,15 +34787,7 @@ MonoBehaviour:
       - m_targetObjects:
         - {fileID: 1529290964}
         m_animationSteps:
-        - {fileID: 2097374815}
-        m_targetStepIndexes: 01000000
-        m_uiAnimatorSubModule: {fileID: 0}
-        m_startDelay: 0
-        m_inspectorToggleState: 1
-      - m_targetObjects:
-        - {fileID: 1733369266}
-        m_animationSteps:
-        - {fileID: 2097374816}
+        - {fileID: 2097374818}
         m_targetStepIndexes: 01000000
         m_uiAnimatorSubModule: {fileID: 0}
         m_startDelay: 0
@@ -34872,7 +34823,7 @@ MonoBehaviour:
     m_onFinishedAction:
       m_PersistentCalls:
         m_Calls: []
-  m_timer: 1.2296653
+  m_timer: 1.038563
   m_currentAnimSetupIndex: 0
   m_audioSourceContainer: {fileID: 1813351188}
   m_audioSources:
@@ -34882,98 +34833,22 @@ MonoBehaviour:
   m_playLoopAnimInfinitely: 1
   m_numLoopIterations: 0
   m_showExtraSettings: 0
---- !u!114 &2097374814
+--- !u!114 &2097374817
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097374808}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d7ce344bdbf44c759e49900e2c1f754, type: 3}
+  m_Script: {fileID: 40306178, guid: aa0b1eebb5db27a419fa4564bbe5c9c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_delay:
-    m_type: 1
-    m_offsettingEnabled: 0
-    m_from: 0.5
-    m_to: 0
-    m_masterValues: []
-    m_numTargets: 1
-  m_duration:
-    m_type: 1
-    m_offsettingEnabled: 0
-    m_from: 0.3
-    m_to: 1
-    m_masterValues:
-    - 1
-    m_numTargets: 1
-  m_easing: 6
-  m_audioClipDatas:
-  - m_editorFoldoutState: 1
-    m_clip: {fileID: 8300000, guid: 0aae13a5587b3634b94eacca28d06dfc, type: 3}
-    m_triggerPoint: 0
-    m_delay:
-      m_type: 1
-      m_offsettingEnabled: 0
-      m_from: 0.2
-      m_to: 0
-      m_masterValues:
-      - 0
-      m_numTargets: 1
-    m_offsetTime:
-      m_type: 1
-      m_offsettingEnabled: 0
-      m_from: 0
-      m_to: 0
-      m_masterValues:
-      - 0
-      m_numTargets: 1
-    m_volume:
-      m_type: 1
-      m_offsettingEnabled: 0
-      m_from: 1
-      m_to: 1
-      m_masterValues:
-      - 1
-      m_numTargets: 1
-    m_pitch:
-      m_type: 1
-      m_offsettingEnabled: 0
-      m_from: 1
-      m_to: 1
-      m_masterValues:
-      - 1
-      m_numTargets: 1
-  m_numTargets: 1
-  m_waitForPreviousComplete: 0
-  m_grabbedInitialDefaultStateData: 1
-  m_inspectorToggleState: 1
-  m_position:
-    m_type: 0
-    m_offsettingEnabled: 1
-    m_from: {x: 1235.3651, y: 16, z: 0}
-    m_to: {x: -594.1749, y: 8, z: 0}
-    m_masterValues:
-    - {x: -594.1749, y: 8, z: 0}
-  m_scale:
-    m_type: 1
-    m_offsettingEnabled: 0
-    m_from: {x: 1, y: 1, z: 1}
-    m_to: {x: 1, y: 1, z: 1}
-    m_masterValues:
-    - {x: 1, y: 1, z: 1}
-  m_rotation:
-    m_type: 1
-    m_offsettingEnabled: 0
-    m_from: {x: -0, y: 0, z: 0}
-    m_to: {x: -0, y: 0, z: 0}
-    m_masterValues:
-    - {x: -0, y: 0, z: 0}
-  m_targetTransforms:
-  - {fileID: 392963780}
---- !u!114 &2097374815
+  preset: 0
+  onEnableBehaviour: 1
+  onDisableBehaviour: 2
+--- !u!114 &2097374818
 MonoBehaviour:
   m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
@@ -35044,10 +34919,10 @@ MonoBehaviour:
   m_position:
     m_type: 0
     m_offsettingEnabled: 1
-    m_from: {x: 1788.3651, y: 18, z: 0}
-    m_to: {x: -41.174927, y: 10, z: 0}
+    m_from: {x: 1791.31, y: 10, z: 0}
+    m_to: {x: 270, y: 10, z: 0}
     m_masterValues:
-    - {x: -41.174927, y: 10, z: 0}
+    - {x: 270, y: 10, z: 0}
   m_scale:
     m_type: 1
     m_offsettingEnabled: 0
@@ -35064,7 +34939,7 @@ MonoBehaviour:
     - {x: -0, y: 0, z: 0}
   m_targetTransforms:
   - {fileID: 1529290965}
---- !u!114 &2097374816
+--- !u!114 &2097374819
 MonoBehaviour:
   m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
@@ -35079,7 +34954,7 @@ MonoBehaviour:
   m_delay:
     m_type: 1
     m_offsettingEnabled: 0
-    m_from: 0.9
+    m_from: 0.5
     m_to: 0
     m_masterValues: []
     m_numTargets: 1
@@ -35135,10 +35010,10 @@ MonoBehaviour:
   m_position:
     m_type: 0
     m_offsettingEnabled: 1
-    m_from: {x: 2340.3652, y: 19, z: 0}
-    m_to: {x: 510.82507, y: 11, z: 0}
+    m_from: {x: 1238.3092, y: 8, z: 0}
+    m_to: {x: -283.0009, y: 8, z: 0}
     m_masterValues:
-    - {x: 510.82507, y: 11, z: 0}
+    - {x: -283.0009, y: 8, z: 0}
   m_scale:
     m_type: 1
     m_offsettingEnabled: 0
@@ -35154,22 +35029,7 @@ MonoBehaviour:
     m_masterValues:
     - {x: -0, y: 0, z: 0}
   m_targetTransforms:
-  - {fileID: 1733369267}
---- !u!114 &2097374817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097374808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 40306178, guid: aa0b1eebb5db27a419fa4564bbe5c9c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  preset: 0
-  onEnableBehaviour: 1
-  onDisableBehaviour: 2
+  - {fileID: 392963780}
 --- !u!1 &2100087005
 GameObject:
   m_ObjectHideFlags: 0

@@ -128,10 +128,7 @@ public class MMManager : MonoBehaviour
 
 
     }
-    //private void OnEnable()
-    //{
-    //   AdsManager.instance?.OnWathcVideo.AddListener(Delaywatchvid);
-    //}
+    
     private void Start()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -149,6 +146,11 @@ public class MMManager : MonoBehaviour
             AdsManager.instance.showAdmobAdpativeBannerTop();
     }
 
+
+    public void StartBtn()
+    {
+        PanelActivity(ModeSel:true);
+    }
     void CheckUnlocked()
     {
         int numUnlockedLevels = ValStorage.GetUnlockedLevels();
@@ -209,8 +211,11 @@ public class MMManager : MonoBehaviour
     {
         if (S == "ModeSel")
         {
+            if (AdsManager.instance)
+                AdsManager.instance.showAdmobInterstitial();
+
+
             PanelActivity(ModeSel: true);
-           
         }
         if (S == "LvlSel")
         {
@@ -228,9 +233,9 @@ public class MMManager : MonoBehaviour
         {
 
             if (AdsManager.instance)
-                AdsManager.instance.showAdMobRectangleBannerBottomLeft();
+                AdsManager.instance.showAdmobInterstitial();
 
-            PanelActivity(ExitPnl: true);
+            Invoke(nameof(del),0.1f);
         }
         if (S == "MM")
         {
@@ -248,37 +253,53 @@ public class MMManager : MonoBehaviour
         MySoundManager.instance.PlayButtonClickSound(1);
     }
 
+
+    void del() 
+    {
+
+        if (AdsManager.instance)
+            AdsManager.instance.showAdMobRectangleBannerBottomLeft();
+
+        PanelActivity(ExitPnl: true);
+    }
     void Disablehildren()
     {
         CarsCont.SetActive(false);
     }
     public void SelMode(string Mode)
     {
+
+        if (AdsManager.instance)
+            AdsManager.instance.showAdmobInterstitial();
+
         ValStorage.modeSel = Mode;
 
         if (Mode == "DrivingMode") 
         {
-            BackBtn("LvlSel");
+            Disablehildren();
+            PanelActivity(LvlSel: true);
         }
+
         else if(Mode == "ParkingMode")
         {
-            BackBtn("LvlSelParking");
+            Disablehildren();
+            PanelActivity(LvlSelParking: true);
         }
     }
 
-
+  
     public void SelLevel(int i)
     {
         ValStorage.selLevel = i;
         CarsCont.SetActive(true);
-        BackBtn("Garage");
+        PanelActivity(Garage: true);
     }
     
     public void SelLevelParking(int i)
     {
         ValStorage.selLevelParking = i;
         CarsCont.SetActive(true);
-        BackBtn("Garage");
+        PanelActivity(Garage: true);
     }
 
 
@@ -291,25 +312,31 @@ public class MMManager : MonoBehaviour
 
     public void LoadNxtScene()
     {
+
         CarsCont.SetActive(false);
         PanelActivity(IsLoading: true);
+        if (AdsManager.instance)
+            AdsManager.instance.showAdmobInterstitial();
+        Invoke(nameof(delnextscene),0.1f);
+    }
 
-        if(AdsManager.instance)
+
+    void delnextscene() 
+    {
+        
+
+        if (AdsManager.instance)
             AdsManager.instance.showAdMobRectangleBannerBottomLeft();
 
 
         ValStorage.SetCarNumber(garage.GetCurrCarNumber());
 
-        if(ValStorage.modeSel=="DrivingMode")
+        if (ValStorage.modeSel == "DrivingMode")
             StartCoroutine(LoadAsyncScene("Gameplay"));
 
         else
             StartCoroutine(LoadAsyncScene("ParkingMode"));
-
-
     }
-
-
 
 
     IEnumerator LoadAsyncScene(string sceneName)
@@ -323,7 +350,7 @@ public class MMManager : MonoBehaviour
             if (timer < 5f)
             {
                 timer += Time.deltaTime;
-                float progress = Mathf.Clamp01(timer / 5f);  // Progress from 0 to 1 based on timer
+                float progress = Mathf.Clamp01(timer / 5f);  
                 loadingBar.fillAmount = progress;
                 prcnttxt.text = $"{Mathf.RoundToInt(progress * 100)}%";
             }
@@ -766,9 +793,6 @@ public class MMManager : MonoBehaviour
         QualitySettings.SetQualityLevel((int)val, true);
     }
 
-
-    
-
     private bool IsLowEndDevice()
     {
         int totalRam = SystemInfo.systemMemorySize;
@@ -787,26 +811,42 @@ public class MMManager : MonoBehaviour
     {
         if (AdsManager.instance)
         {
-            if (AdsManager.instance.rewardedInterstitialAD != null)
-            {
                 AdsManager.instance.ShowAdmobRewardedInterstitial();
-            }
         }
     }
-    void Delaywatchvid() 
+    public void DelaygrantCoins()
     {
-        Invoke(nameof(GrantCoins),0.2f);
+        Invoke(nameof(GrantCoins), 0.2f);
     }
 
-    public void GrantCoins() 
+    public void GrantCoins()
     {
-        int alreadycoins=ValStorage.GetCoins();
-        ValStorage.SetCoins(alreadycoins+300);
+        int alreadycoins = ValStorage.GetCoins();
+        ValStorage.SetCoins(alreadycoins + 300);
+
         SetCoins();
-       
+    }
+
+    #endregion
+
+
+
+
+    public void RateUs() 
+    {
+        Application.OpenURL("https://play.google.com/store/apps/details?id=com.gf.car.simulator.game.carparking.us.car.driving.games");
+    }
+    public void PP() 
+    {
+        Application.OpenURL("https://privacypolicyforgamesfact.blogspot.com/2023/09/privacy-policy-for-games-fact.html");
     }
     
-    #endregion
+    public void MoreGames() 
+    {
+        Application.OpenURL("https://play.google.com/store/apps/developer?id=Games+Fact");
+    }
+
+    
 }
 
     

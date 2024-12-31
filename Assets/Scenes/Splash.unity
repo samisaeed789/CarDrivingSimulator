@@ -2250,7 +2250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
       propertyPath: ShowTestAds
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
       propertyPath: appOpenAdID
@@ -2262,11 +2262,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
       propertyPath: admobRewardedVideoID
-      value: ca-app-pub-5770035071370331/2437159366
+      value: ca-app-pub-5770035071370331/1938190245
       objectReference: {fileID: 0}
     - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
       propertyPath: admobBannerIds.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
+      propertyPath: admobRewardedInterstitialID
+      value: ca-app-pub-5770035071370331/1938190245
       objectReference: {fileID: 0}
     - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
       propertyPath: admobBannerIds.Array.data[0]
@@ -2290,7 +2294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
       propertyPath: OnWathcVideo.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8602725290566705819, guid: 1da0756c28258534f8334a57116f3935, type: 3}
       propertyPath: OnWathcVideo.m_PersistentCalls.m_Calls.Array.data[0].m_Mode

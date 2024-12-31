@@ -380,8 +380,27 @@ public class ParkingGm : MonoBehaviour
         yield return new WaitForSeconds(3f);
         emojiPanel.SetActive(true);
         yield return new WaitForSeconds(4f);
-        failPanel.SetActive(true);
+
+        if (AdsManager.instance)
+            AdsManager.instance.showAdmobInterstitial();
+
+
+
+        Invoke(nameof(delFail),0.2f);
+
+       
     }
+
+
+    void delFail()
+    {
+        failPanel.SetActive(true);
+
+
+        if (AdsManager.instance)
+            AdsManager.instance.showAdMobRectangleBannerBottomLeft();
+    }
+
     IEnumerator CompletePanel() 
     {
         
@@ -394,6 +413,16 @@ public class ParkingGm : MonoBehaviour
             CarSound(false);
         }
 
+        if (AdsManager.instance)
+            AdsManager.instance.showAdmobInterstitial();
+
+
+        Invoke(nameof(delComp), 0.2f);
+        
+
+    }
+    void delComp() 
+    {
         completePanel.SetActive(true);
 
         SetCoinsinPanel();
@@ -401,7 +430,6 @@ public class ParkingGm : MonoBehaviour
 
         if (AdsManager.instance)
             AdsManager.instance.showAdMobRectangleBannerBottomLeft();
-
     }
     void UnlckNxtLvl()
     {
@@ -483,9 +511,19 @@ public class ParkingGm : MonoBehaviour
         StopCoinAnimation();
         Loading.SetActive(true);
         LoadBar.SetActive(true);
-        StartCoroutine(LoadAsyncScene("ParkingMode"));
+
+        if (AdsManager.instance)
+            AdsManager.instance.showAdmobInterstitial();
+
+        Invoke(nameof(delrestart), 0.2f);
     }
 
+
+    void delrestart() 
+    {
+        StartCoroutine(LoadAsyncScene("ParkingMode"));
+
+    }
     public void Home()
     {
         Time.timeScale = 1f;
@@ -566,6 +604,12 @@ public class ParkingGm : MonoBehaviour
             soundManager.PlayButtonClickSound(1f);
 
         CarSound(false);
+
+
+        if (AdsManager.instance)
+            AdsManager.instance.showAdmobInterstitial();
+
+
         pausePanel.SetActive(true);
 
         if (AdsManager.instance)

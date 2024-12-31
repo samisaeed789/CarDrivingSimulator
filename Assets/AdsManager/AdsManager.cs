@@ -1408,7 +1408,7 @@ public class AdsManager : MonoBehaviour
             rewardedInterstitialAD = null;
         }
 
-        RewardedInterstitialAd.Load(ShowTestAds ? "ca-app-pub-5770035071370331/8533846856" : admobRewardedInterstitialID, CreateAdRequest(),
+        RewardedInterstitialAd.Load(ShowTestAds ? "ca-app-pub-5770035071370331/1938190245" : admobRewardedInterstitialID, CreateAdRequest(),
           (RewardedInterstitialAd ad, LoadAdError error) =>
           {
               if (error != null || ad == null)
@@ -1462,7 +1462,16 @@ public class AdsManager : MonoBehaviour
                 rewardedInterstitialAD.Show((Reward reward) =>
                 {
                     OnWathcVideo.Invoke();
-                    // TODO: Reward the user.            
+                    // TODO: Reward the user.
+
+                    if (SceneManager.GetActiveScene().name == "MM")
+                    {
+                        MMManager.Instance.DelaygrantCoins();
+                    }
+
+
+
+
                 });
             }
             else
@@ -1685,7 +1694,7 @@ public class AdsManager : MonoBehaviour
             videoAD = null;
         }
 
-        RewardedAd.Load(ShowTestAds ? "ca-app-pub-3940256099942544/5224354917" : admobRewardedVideoID, CreateAdRequest(),
+        RewardedAd.Load(ShowTestAds ? "ca-app-pub-5770035071370331/1938190245" : admobRewardedVideoID, CreateAdRequest(),
           (RewardedAd ad, LoadAdError error) =>
           {
               if (error != null || ad == null)
@@ -1695,8 +1704,6 @@ public class AdsManager : MonoBehaviour
               videoAD = ad;
               RegisterRewardedVideoEventHandlers(ad);
           });
-
-
     }
     private void RegisterRewardedVideoEventHandlers(RewardedAd ad)
     {
@@ -1815,19 +1822,19 @@ public class AdsManager : MonoBehaviour
 
 
    
-    public void DelaygrantCoins()
-    {
-        Invoke(nameof(GrantCoins), 0.2f);
-    }
+    //public void DelaygrantCoins()
+    //{
+    //    Invoke(nameof(GrantCoins), 0.2f);
+    //}
 
-    public void GrantCoins()
-    {
-        int alreadycoins = ValStorage.GetCoins();
-        ValStorage.SetCoins(alreadycoins + 300);
+    //public void GrantCoins()
+    //{
+    //    int alreadycoins = ValStorage.GetCoins();
+    //    ValStorage.SetCoins(alreadycoins + 300);
 
-        if (SceneManager.GetActiveScene().name == "MM")
-        {
-            MMManager.Instance.SetCoins();
-        }
-    }
+    //    if (SceneManager.GetActiveScene().name == "MM")
+    //    {
+    //        MMManager.Instance.SetCoins();
+    //    }
+    //}
 }

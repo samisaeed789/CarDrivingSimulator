@@ -171,6 +171,10 @@ public class GameMngr : MonoBehaviour
 
     IEnumerator Start()
     {
+
+        if (AdsManager.instance)
+            AdsManager.instance.showAdmobAdpativeBannerTop();
+
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         RCC_Settings.Instance.dontUseAnyParticleEffects = true;
         trafficSpawner.gameObject.SetActive(false);
@@ -180,7 +184,7 @@ public class GameMngr : MonoBehaviour
         UpdateVolume();
         SetButtonTransparency(ValStorage.GetTransparency());
         Controls.SetMobileController(ValStorage.GetControls());
-        yield return new WaitForSeconds(2); // fixed delay
+        yield return new WaitForSeconds(2); 
         Loading.SetActive(false);
 
         if (soundmgr)
@@ -511,8 +515,19 @@ public class GameMngr : MonoBehaviour
         UnlckNxtLvl();
 
         yield return new WaitForSeconds(10f);
+        
         if (soundmgr)
             soundmgr.PlayCompleteSound(false);
+
+        if (AdsManager.instance)
+            AdsManager.instance.showAdmobInterstitial();
+
+        Invoke(nameof(delayComp), 0.2f);
+
+    }
+
+    void delayComp() 
+    {
 
         BlckPnl.SetActive(false);
         Complete.SetActive(true);
@@ -521,10 +536,7 @@ public class GameMngr : MonoBehaviour
 
         if (AdsManager.instance)
             AdsManager.instance.showAdMobRectangleBannerBottomLeft();
-
-
     }
-
 
     void SetCoinsinPanel()
     {
@@ -1156,8 +1168,15 @@ public class GameMngr : MonoBehaviour
 
                 if (AdsManager.instance)
                     AdsManager.instance.showAdMobRectangleBannerBottomLeft();
-        
-                Time.timeScale = 0f;
+
+                if (AdsManager.instance)
+                    AdsManager.instance.showAdmobInterstitial();
+
+
+
+
+
+        Time.timeScale = 0f;
         }
 
         public void Resume()
@@ -1198,11 +1217,19 @@ public class GameMngr : MonoBehaviour
 
         public void Restart()
         {
+          
+
             Time.timeScale = 1f;
             Loading.SetActive(true);
             LoadBar.SetActive(true);
             StopCoinAnimation();
-            StartCoroutine(LoadAsyncScene("GamePlay"));
+       
+        if (AdsManager.instance)
+            AdsManager.instance.showAdmobInterstitial();
+
+
+            Invoke("restartdelay",0.5f);
+
         }
 
         public void Home()
@@ -1214,9 +1241,14 @@ public class GameMngr : MonoBehaviour
             StartCoroutine(LoadAsyncScene("MM"));
         }
 
+        void restartdelay() 
+        {
+            StartCoroutine(LoadAsyncScene("GamePlay"));
+
+        }
         IEnumerator LoadAsyncScene(string sceneName)
         {
-            
+          
             if(AdsManager.instance)
                 AdsManager.instance.showAdMobRectangleBannerBottomLeft();
 
@@ -1236,8 +1268,7 @@ public class GameMngr : MonoBehaviour
                 }
                 else
                 {
-                    // Once the timer reaches 5 seconds, start loading the scene
-                    // Ensure the progress bar stays at 100% before activation
+                
                     loadingBar.fillAmount = 1f;
                     percentageText.text = "100%";
 
@@ -1257,22 +1288,19 @@ public class GameMngr : MonoBehaviour
 
      private void UpdateVolume()
     {
-        // Set the volume for music and sound effects
         if (soundmgr) 
         {
             soundmgr.BGM.volume = ValStorage.GetMVolume(); // Music volume
             soundmgr.Effectsource.volume = ValStorage.GetSVolume(); // Sound effect volume
         }
 
-        // Update the fill bars for both music and sound
+     
     }
 
    
 }
 
 
-//set waypoint 
-//set new mm bgm and complete bgm
 
 
 #endregion

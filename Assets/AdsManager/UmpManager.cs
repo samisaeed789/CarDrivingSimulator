@@ -28,7 +28,7 @@ public class UmpManager : MonoBehaviour
             if (formError != null)
             {      
                 Debug.LogError(error);
-                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+               // UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
                 return;
             }
             if (ConsentInformation.CanRequestAds())

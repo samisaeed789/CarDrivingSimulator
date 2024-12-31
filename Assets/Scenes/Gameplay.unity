@@ -100947,7 +100947,7 @@ MonoBehaviour:
   percentageText: {fileID: 1752834092}
   Test: 0
   levelnumber: 1
-  testcarid: 2
+  testcarid: 4
   greenred: []
   IsCorrectLane: 0
   IsWrongLane: 0
@@ -110871,7 +110871,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: b3080162d78cba9468cf598b1c6cb08a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b38b482f40a27b34b8d5f8174c0721bf, type: 2}
+      objectReference: {fileID: 2100000, guid: e1a946d0db99d1b4292f0f93021ba52c, type: 2}
     - target: {fileID: 919132149155446097, guid: b3080162d78cba9468cf598b1c6cb08a, type: 3}
       propertyPath: m_Name
       value: 'car 1 '
@@ -111326,7 +111326,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 20%
+  m_Text: 0%
 --- !u!222 &1752834093
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -138292,7 +138292,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 605, y: 143.53}
+  m_AnchoredPosition: {x: 670, y: 143.53}
   m_SizeDelta: {x: 202.06, y: 182.02}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224671093560052777
