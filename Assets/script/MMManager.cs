@@ -438,7 +438,6 @@ public class MMManager : MonoBehaviour
         {
             cntrl_pnl.SetActive(isControl);
             cntrl_active.SetActive(isControl);
-
         }
     }
 
@@ -538,22 +537,20 @@ public class MMManager : MonoBehaviour
 
     public void AdjustVolume(float changeAmount, bool isMusic)
     {
-        // Determine if it's music volume or sound volume
         if (isMusic)
         {
-            float vol = Mathf.Clamp(ValStorage.GetMVolume() + changeAmount, 0f, 1f); // Adjust and clamp volume for music
+            float vol = Mathf.Clamp(ValStorage.GetMVolume() + changeAmount, 0f, 1f);
             ValStorage.SetMVolume(vol);
         }
         else
         {
-            float soundvol = Mathf.Clamp(ValStorage.GetSVolume() + changeAmount, 0f, 1f); // Adjust and clamp volume for sound effects
+            float soundvol = Mathf.Clamp(ValStorage.GetSVolume() + changeAmount, 0f, 1f); 
             ValStorage.SetSVolume(soundvol);
         }
 
-        UpdateVolume(); // Update both volume and UI
+        UpdateVolume(); 
     }
 
-    // This method updates both music and sound volumes
     private void UpdateVolume()
     {
         // Set the volume for music and sound effects
