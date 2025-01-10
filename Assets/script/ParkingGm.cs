@@ -122,10 +122,6 @@ public class ParkingGm : MonoBehaviour
         CarSel.SetActive(true);
         carController = CarSel.GetComponent<RCC_CarControllerV3>();
 
-
-
-
-
         Levels[currentlvl - 1].gameObject.SetActive(true);
         yield return new WaitForSeconds(0f);
       
